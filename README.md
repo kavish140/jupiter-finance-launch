@@ -1,73 +1,130 @@
-# Welcome to your Lovable project
+# Jupiter Fast Finance - Launch Site
 
-## Project info
+A modern, optimized React + TypeScript + Vite web application for Jupiter Fast Finance, providing home loans, insurance, and investment solutions.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🚀 Quick Start
 
-## How can I edit this code?
+### Prerequisites
+- Node.js 16+ 
+- npm or yarn
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### Installation & Development
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Clone the repository
+git clone https://github.com/kavish140/jupiter-finance-launch.git
+cd jupiter-finance-launch
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Install dependencies
+npm install
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The development server will start at `http://localhost:8080` with hot module replacement enabled.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📦 Build & Deployment
 
-**Use GitHub Codespaces**
+```sh
+# Production build
+npm run build
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Preview production build locally
+npm run preview
 
-## What technologies are used for this project?
+# Run tests
+npm test
 
-This project is built with:
+# Run tests in watch mode
+npm run test:watch
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+# Lint code
+npm run lint
+```
 
-## How can I deploy this project?
+## 🛠 Tech Stack
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+- **Frontend Framework**: React 18.3
+- **Language**: TypeScript 5.8
+- **Build Tool**: Vite 5.4
+- **Styling**: Tailwind CSS 3.4
+- **UI Components**: shadcn-ui (Radix UI)
+- **Forms**: React Hook Form + Zod
+- **State Management**: React Query 5.83
+- **Routing**: React Router 6.30
+- **Testing**: Vitest 3.2
+- **Linting**: ESLint 9.32
 
-## Can I connect a custom domain to my Lovable project?
+## ⚡ Performance Optimizations
 
-Yes, you can!
+This project includes comprehensive performance optimizations:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- **Code Splitting**: Automatic and manual chunk splitting for vendor libraries
+- **Lazy Loading**: Route-based code splitting with React.lazy()
+- **CSS Optimization**: Tailwind CSS tree-shaking and code splitting
+- **Build Optimization**: Terser minification with aggressive compression
+- **HTML Enhancements**: Preconnect, DNS prefetch, and optimized meta tags
+- **TypeScript**: Strict mode with incremental compilation
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+See [OPTIMIZATION.md](./OPTIMIZATION.md) for detailed optimization documentation.
+
+## 📁 Project Structure
+
+```
+src/
+├── components/        # Reusable React components
+│   ├── ui/           # shadcn-ui components
+│   ├── Header.tsx
+│   ├── Footer.tsx
+│   ├── HeroSection.tsx
+│   └── ...
+├── pages/            # Page components
+│   ├── Index.tsx
+│   └── NotFound.tsx
+├── hooks/            # Custom React hooks
+├── lib/              # Utility functions
+├── assets/           # Static assets
+├── App.tsx           # Root component
+├── main.tsx          # Entry point
+└── index.css         # Global styles
+```
+
+## 🔧 Configuration Files
+
+- `vite.config.ts` - Vite build configuration with optimizations
+- `tailwind.config.ts` - Tailwind CSS configuration
+- `tsconfig.json` - TypeScript configuration
+- `eslint.config.js` - ESLint rules and settings
+- `.npmrc` - NPM package management settings
+
+## 🌐 Features
+
+- Modern, responsive design
+- SEO-optimized metadata
+- Social sharing meta tags (OG, Twitter Card)
+- Dark mode support
+- Accessible components (WCAG compliance)
+- Mobile-first approach
+
+## 📱 Contact
+
+- **Phone**: 9757190200
+- **Website**: https://jupiterfastfinance.com
+
+## 📄 License
+
+MIT
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit pull requests.
+
+## 📖 Additional Resources
+
+- [Vite Documentation](https://vitejs.dev)
+- [React Documentation](https://react.dev)
+- [Tailwind CSS Documentation](https://tailwindcss.com)
+- [shadcn-ui Documentation](https://ui.shadcn.com)
+- [TypeScript Documentation](https://www.typescriptlang.org)
+

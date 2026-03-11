@@ -1,5 +1,6 @@
 import { Phone, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -8,6 +9,7 @@ const Header = () => {
     { label: "Home", href: "#home" },
     { label: "Services", href: "#services" },
     { label: "Why Us", href: "#why-us" },
+    { label: "Home Loan", href: "/home_loan", isRoute: true },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -22,15 +24,25 @@ const Header = () => {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {l.label}
-            </a>
-          ))}
+          {navLinks.map((l) =>
+            l.isRoute ? (
+              <Link
+                key={l.href}
+                to={l.href}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <a
+                key={l.href}
+                href={l.href}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {l.label}
+              </a>
+            )
+          )}
         </nav>
 
         <a
@@ -54,16 +66,27 @@ const Header = () => {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden bg-card border-b border-border px-4 pb-4 space-y-3">
-          {navLinks.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setMenuOpen(false)}
-              className="block text-sm font-medium text-muted-foreground hover:text-foreground"
-            >
-              {l.label}
-            </a>
-          ))}
+          {navLinks.map((l) =>
+            l.isRoute ? (
+              <Link
+                key={l.href}
+                to={l.href}
+                onClick={() => setMenuOpen(false)}
+                className="block text-sm font-medium text-muted-foreground hover:text-foreground"
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setMenuOpen(false)}
+                className="block text-sm font-medium text-muted-foreground hover:text-foreground"
+              >
+                {l.label}
+              </a>
+            )
+          )}
           <a
             href="tel:9757190200"
             className="flex items-center gap-2 gradient-gold text-accent-foreground font-semibold px-4 py-2 rounded-lg text-sm w-fit"

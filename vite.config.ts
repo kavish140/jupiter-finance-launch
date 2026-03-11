@@ -2,16 +2,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
-// lovable-tagger is optional — only available in Lovable.dev environment
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let componentTagger: any = null;
-try {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  componentTagger = require("lovable-tagger").componentTagger;
-} catch {
-  // not available in CI / standard installs
-}
-
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   base: "/",
@@ -22,10 +12,7 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [
-    react(),
-    mode === "development" && componentTagger ? componentTagger() : false,
-  ].filter(Boolean),
+  plugins: [react()].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

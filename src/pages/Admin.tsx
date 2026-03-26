@@ -5,7 +5,7 @@ import { Lock, UploadCloud } from "lucide-react";
 type Status = { type: "idle" | "success" | "error"; message: string };
 
 const REPO_OWNER = "kavish140";
-const REPO_NAME = "jupiter-finance-launch-main";
+const REPO_NAME = "jupiter-finance-launch";
 const WORKFLOW_FILE = "youtube_sync.yml";
 
 const Admin = () => {
@@ -54,6 +54,11 @@ const Admin = () => {
 
       if (!response.ok) {
         const message = await response.text();
+        if (response.status === 404) {
+          throw new Error(
+            "GitHub API returned 404. Check repository owner/name and verify your token has access to this repository."
+          );
+        }
         throw new Error(message || "Failed to dispatch workflow");
       }
 

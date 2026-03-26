@@ -4,6 +4,15 @@ on:
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
+    inputs:
+      manual_video_url:
+        description: "Optional YouTube URL to add manually"
+        required: false
+        default: ""
+      manual_video_title:
+        description: "Optional manual title override"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -31,6 +40,14 @@ jobs:
           YOUTUBE_CHANNEL_HANDLE: "@JuptierFinance8654"
           YOUTUBE_CHANNEL_ID: ${{ vars.YOUTUBE_CHANNEL_ID }}
         run: python scripts/fetch_videos.py
+
+      - name: Add manual video from admin dispatch
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.manual_video_url != '' }}
+        run: |
+          printf "%s" "${{ inputs.manual_video_url }}" > manual_video_url.txt
+          printf "%s" "${{ inputs.manual_video_title }}" > manual_video_title.txt
+          python scripts/add_manual_video.py
+          rm -f manual_video_url.txt manual_video_title.txt
 
       - name: Commit and push videos.json
         run: |

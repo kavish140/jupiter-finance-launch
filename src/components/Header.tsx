@@ -10,6 +10,7 @@ const Header = () => {
     { label: "Services", href: "#services" },
     { label: "Why Us", href: "#why-us" },
     { label: "Videos", href: "#videos" },
+    { label: "Posts", href: "#posts" },
     { label: "EMI Calculator", href: "#emi-calculator" },
     { label: "Home Loan", href: "/home_loan", isRoute: true },
     { label: "Contact", href: "#contact" },

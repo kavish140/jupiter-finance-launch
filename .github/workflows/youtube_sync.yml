@@ -5,12 +5,40 @@ on:
     - cron: "0 0 * * *"
   workflow_dispatch:
     inputs:
+      operation:
+        description: "Action to execute"
+        required: false
+        default: "add_video"
       manual_video_url:
         description: "Optional YouTube URL to add manually"
         required: false
         default: ""
       manual_video_title:
         description: "Optional manual title override"
+        required: false
+        default: ""
+      remove_video_id:
+        description: "Video ID to remove"
+        required: false
+        default: ""
+      post_title:
+        description: "Post title"
+        required: false
+        default: ""
+      post_excerpt:
+        description: "Post excerpt"
+        required: false
+        default: ""
+      post_content:
+        description: "Post content"
+        required: false
+        default: ""
+      post_category:
+        description: "Post category"
+        required: false
+        default: "General"
+      remove_post_id:
+        description: "Post ID to remove"
         required: false
         default: ""
 
@@ -32,11 +60,11 @@ jobs:
           python-version: "3.12"
 
       - name: Install Python dependencies
-        if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.manual_video_url == '') }}
+        if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.operation == 'sync_latest') }}
         run: python -m pip install --upgrade pip google-api-python-client
 
       - name: Fetch latest videos
-        if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.manual_video_url == '') }}
+        if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.operation == 'sync_latest') }}
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           YOUTUBE_CHANNEL_HANDLE: "@JuptierFinance8654"
@@ -44,22 +72,46 @@ jobs:
         run: python scripts/fetch_videos.py
 
       - name: Add manual video from admin dispatch
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.manual_video_url != '' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.operation == 'add_video' && inputs.manual_video_url != '' }}
         run: |
           printf "%s" "${{ inputs.manual_video_url }}" > manual_video_url.txt
           printf "%s" "${{ inputs.manual_video_title }}" > manual_video_title.txt
           python scripts/add_manual_video.py
           rm -f manual_video_url.txt manual_video_title.txt
 
-      - name: Commit and push videos.json
+      - name: Remove video from admin dispatch
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.operation == 'remove_video' && inputs.remove_video_id != '' }}
         run: |
-          if git diff --quiet -- src/data/videos.json; then
-            echo "No changes detected in src/data/videos.json"
+          printf "%s" "${{ inputs.remove_video_id }}" > remove_video_id.txt
+          python scripts/remove_video.py
+          rm -f remove_video_id.txt
+
+      - name: Add post from admin dispatch
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.operation == 'add_post' && inputs.post_title != '' }}
+        run: |
+          printf "%s" "${{ inputs.post_title }}" > post_title.txt
+          printf "%s" "${{ inputs.post_excerpt }}" > post_excerpt.txt
+          printf "%s" "${{ inputs.post_content }}" > post_content.txt
+          printf "%s" "${{ inputs.post_category }}" > post_category.txt
+          python scripts/add_post.py
+          rm -f post_title.txt post_excerpt.txt post_content.txt post_category.txt
+
+      - name: Remove post from admin dispatch
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.operation == 'remove_post' && inputs.remove_post_id != '' }}
+        run: |
+          printf "%s" "${{ inputs.remove_post_id }}" > remove_post_id.txt
+          python scripts/remove_post.py
+          rm -f remove_post_id.txt
+
+      - name: Commit and push content updates
+        run: |
+          if git diff --quiet -- src/data/videos.json src/data/posts.json; then
+            echo "No content changes detected"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/videos.json
-          git commit -m "chore: sync latest YouTube videos"
+          git add src/data/videos.json src/data/posts.json
+          git commit -m "chore: update site content"
           git push origin HEAD:main

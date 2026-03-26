@@ -1,6 +1,8 @@
 import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { Lock, UploadCloud } from "lucide-react";
+import { Lock, UploadCloud, Trash2, Newspaper } from "lucide-react";
+import videos from "@/data/videos.json";
+import posts from "@/data/posts.json";
 
 type Status = { type: "idle" | "success" | "error"; message: string };
 
@@ -8,14 +10,62 @@ const REPO_OWNER = "kavish140";
 const REPO_NAME = "jupiter-finance-launch";
 const WORKFLOW_FILE = "youtube_sync.yml";
 
+interface VideoItem {
+  videoId: string;
+  title: string;
+}
+
+interface PostItem {
+  id: string;
+  title: string;
+  category?: string;
+}
+
 const Admin = () => {
   const [token, setToken] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [videoTitle, setVideoTitle] = useState("");
+  const [postTitle, setPostTitle] = useState("");
+  const [postExcerpt, setPostExcerpt] = useState("");
+  const [postContent, setPostContent] = useState("");
+  const [postCategory, setPostCategory] = useState("General");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<Status>({ type: "idle", message: "" });
+  const currentVideos = videos as VideoItem[];
+  const currentPosts = posts as PostItem[];
 
-  const handleSubmit = async (e: FormEvent) => {
+  const dispatchWorkflow = async (inputs: Record<string, string>, successMessage: string) => {
+    const response = await fetch(
+      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/${WORKFLOW_FILE}/dispatches`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/vnd.github+json",
+          Authorization: `Bearer ${token.trim()}`,
+          "X-GitHub-Api-Version": "2022-11-28",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ref: "main",
+          inputs,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const message = await response.text();
+      if (response.status === 404) {
+        throw new Error(
+          "GitHub API returned 404. Check repository owner/name and verify your token has access to this repository."
+        );
+      }
+      throw new Error(message || "Failed to dispatch workflow");
+    }
+
+    setStatus({ type: "success", message: successMessage });
+  };
+
+  const handleAddVideo = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!token.trim()) {
@@ -32,46 +82,115 @@ const Admin = () => {
     setStatus({ type: "idle", message: "" });
 
     try {
-      const response = await fetch(
-        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/${WORKFLOW_FILE}/dispatches`,
+      await dispatchWorkflow(
         {
-          method: "POST",
-          headers: {
-            Accept: "application/vnd.github+json",
-            Authorization: `Bearer ${token.trim()}`,
-            "X-GitHub-Api-Version": "2022-11-28",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ref: "main",
-            inputs: {
-              manual_video_url: videoUrl.trim(),
-              manual_video_title: videoTitle.trim(),
-            },
-          }),
-        }
+          operation: "add_video",
+          manual_video_url: videoUrl.trim(),
+          manual_video_title: videoTitle.trim(),
+        },
+        "Video submitted. GitHub Action started, and site videos will refresh after workflow + deploy complete."
       );
-
-      if (!response.ok) {
-        const message = await response.text();
-        if (response.status === 404) {
-          throw new Error(
-            "GitHub API returned 404. Check repository owner/name and verify your token has access to this repository."
-          );
-        }
-        throw new Error(message || "Failed to dispatch workflow");
-      }
-
-      setStatus({
-        type: "success",
-        message: "Video submitted. GitHub Action started, and site videos will refresh after workflow + deploy complete.",
-      });
       setVideoUrl("");
       setVideoTitle("");
     } catch (error) {
       setStatus({
         type: "error",
         message: error instanceof Error ? error.message : "Something went wrong while triggering workflow.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddPost = async (e: FormEvent) => {
+    e.preventDefault();
+
+    if (!token.trim()) {
+      setStatus({ type: "error", message: "GitHub token is required." });
+      return;
+    }
+
+    if (!postTitle.trim()) {
+      setStatus({ type: "error", message: "Post title is required." });
+      return;
+    }
+
+    setLoading(true);
+    setStatus({ type: "idle", message: "" });
+
+    try {
+      await dispatchWorkflow(
+        {
+          operation: "add_post",
+          post_title: postTitle.trim(),
+          post_excerpt: postExcerpt.trim(),
+          post_content: postContent.trim(),
+          post_category: postCategory.trim() || "General",
+        },
+        "Post submitted. GitHub Action started, and posts will refresh after workflow + deploy complete."
+      );
+      setPostTitle("");
+      setPostExcerpt("");
+      setPostContent("");
+      setPostCategory("General");
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message: error instanceof Error ? error.message : "Something went wrong while triggering workflow.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRemoveVideo = async (videoId: string) => {
+    if (!token.trim()) {
+      setStatus({ type: "error", message: "GitHub token is required to remove videos." });
+      return;
+    }
+
+    setLoading(true);
+    setStatus({ type: "idle", message: "" });
+
+    try {
+      await dispatchWorkflow(
+        {
+          operation: "remove_video",
+          remove_video_id: videoId,
+        },
+        "Video removal requested. Refresh admin after deploy to verify the updated list."
+      );
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message: error instanceof Error ? error.message : "Unable to remove video.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRemovePost = async (postId: string) => {
+    if (!token.trim()) {
+      setStatus({ type: "error", message: "GitHub token is required to remove posts." });
+      return;
+    }
+
+    setLoading(true);
+    setStatus({ type: "idle", message: "" });
+
+    try {
+      await dispatchWorkflow(
+        {
+          operation: "remove_post",
+          remove_post_id: postId,
+        },
+        "Post removal requested. Refresh admin after deploy to verify the updated list."
+      );
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message: error instanceof Error ? error.message : "Unable to remove post.",
       });
     } finally {
       setLoading(false);
@@ -85,33 +204,34 @@ const Admin = () => {
           <Link to="/" className="text-sm font-semibold text-gold hover:text-primary transition-colors">
             Back to Home
           </Link>
-          <h1 className="mt-3 text-3xl md:text-5xl font-display font-bold">Owner Video Admin</h1>
+          <h1 className="mt-3 text-3xl md:text-5xl font-display font-bold">Owner Content Admin</h1>
           <p className="mt-3 text-muted-foreground">
-            Submit a YouTube URL to update site videos globally by triggering the GitHub Action.
+            Manage videos and posts with one panel. Every action triggers a GitHub workflow and auto-deploy cycle.
           </p>
         </div>
 
-        <div className="rounded-2xl border border-border bg-card shadow-card p-6 md:p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <label htmlFor="token" className="text-sm font-semibold flex items-center gap-2">
-                <Lock className="w-4 h-4 text-gold" />
-                GitHub Personal Access Token
-              </label>
-              <input
-                id="token"
-                type="password"
-                value={token}
-                onChange={(e) => setToken(e.target.value)}
-                placeholder="ghp_..."
-                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-                autoComplete="off"
-              />
-              <p className="text-xs text-muted-foreground">
-                Token needs Actions write permission and repository access.
-              </p>
-            </div>
+        <div className="rounded-2xl border border-border bg-card shadow-card p-6 md:p-8 space-y-8">
+          <div className="space-y-2">
+            <label htmlFor="token" className="text-sm font-semibold flex items-center gap-2">
+              <Lock className="w-4 h-4 text-gold" />
+              GitHub Personal Access Token
+            </label>
+            <input
+              id="token"
+              type="password"
+              value={token}
+              onChange={(e) => setToken(e.target.value)}
+              placeholder="ghp_..."
+              className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+              autoComplete="off"
+            />
+            <p className="text-xs text-muted-foreground">
+              Token needs Actions write permission and repository access.
+            </p>
+          </div>
 
+          <form onSubmit={handleAddVideo} className="space-y-5 border border-border rounded-xl p-5">
+            <h2 className="text-xl font-display font-bold">Add Video</h2>
             <div className="space-y-2">
               <label htmlFor="video-url" className="text-sm font-semibold">YouTube Video URL</label>
               <input
@@ -140,21 +260,136 @@ const Admin = () => {
               className="w-full gradient-gold text-accent-foreground font-semibold py-3 rounded-lg flex items-center justify-center gap-2 disabled:opacity-60"
             >
               <UploadCloud className="w-5 h-5" />
-              {loading ? "Submitting..." : "Push Video To Site"}
+              {loading ? "Submitting..." : "Add Video"}
             </button>
-
-            {status.message && (
-              <p
-                className={`text-sm rounded-lg p-3 border ${
-                  status.type === "success"
-                    ? "border-success/30 bg-success/10 text-foreground"
-                    : "border-destructive/40 bg-destructive/10 text-foreground"
-                }`}
-              >
-                {status.message}
-              </p>
-            )}
           </form>
+
+          <div className="space-y-4 border border-border rounded-xl p-5">
+            <h2 className="text-xl font-display font-bold">Remove Video</h2>
+            {currentVideos.length === 0 ? (
+              <p className="text-sm text-muted-foreground">No videos available to remove.</p>
+            ) : (
+              <div className="space-y-3">
+                {currentVideos.map((video) => (
+                  <div key={video.videoId} className="flex items-center justify-between gap-4 bg-background rounded-lg px-4 py-3 border border-border">
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{video.title}</p>
+                      <p className="text-xs text-muted-foreground">ID: {video.videoId}</p>
+                    </div>
+                    <button
+                      type="button"
+                      disabled={loading}
+                      onClick={() => handleRemoveVideo(video.videoId)}
+                      className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-destructive/40 text-sm text-foreground hover:bg-destructive/10 disabled:opacity-60"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <form onSubmit={handleAddPost} className="space-y-5 border border-border rounded-xl p-5">
+            <h2 className="text-xl font-display font-bold flex items-center gap-2">
+              <Newspaper className="w-5 h-5 text-gold" />
+              Add Post
+            </h2>
+            <div className="space-y-2">
+              <label htmlFor="post-title" className="text-sm font-semibold">Post Title</label>
+              <input
+                id="post-title"
+                value={postTitle}
+                onChange={(e) => setPostTitle(e.target.value)}
+                placeholder="How to improve home loan eligibility"
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="post-category" className="text-sm font-semibold">Category</label>
+              <input
+                id="post-category"
+                value={postCategory}
+                onChange={(e) => setPostCategory(e.target.value)}
+                placeholder="Home Loan"
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="post-excerpt" className="text-sm font-semibold">Excerpt</label>
+              <textarea
+                id="post-excerpt"
+                rows={2}
+                value={postExcerpt}
+                onChange={(e) => setPostExcerpt(e.target.value)}
+                placeholder="Short summary for homepage cards"
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold resize-none"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="post-content" className="text-sm font-semibold">Full Content</label>
+              <textarea
+                id="post-content"
+                rows={5}
+                value={postContent}
+                onChange={(e) => setPostContent(e.target.value)}
+                placeholder="Detailed post content"
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold resize-y"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full gradient-gold text-accent-foreground font-semibold py-3 rounded-lg flex items-center justify-center gap-2 disabled:opacity-60"
+            >
+              <UploadCloud className="w-5 h-5" />
+              {loading ? "Submitting..." : "Add Post"}
+            </button>
+          </form>
+
+          <div className="space-y-4 border border-border rounded-xl p-5">
+            <h2 className="text-xl font-display font-bold">Remove Post</h2>
+            {currentPosts.length === 0 ? (
+              <p className="text-sm text-muted-foreground">No posts available to remove.</p>
+            ) : (
+              <div className="space-y-3">
+                {currentPosts.map((post) => (
+                  <div key={post.id} className="flex items-center justify-between gap-4 bg-background rounded-lg px-4 py-3 border border-border">
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{post.title}</p>
+                      <p className="text-xs text-muted-foreground">{post.category || "General"}</p>
+                    </div>
+                    <button
+                      type="button"
+                      disabled={loading}
+                      onClick={() => handleRemovePost(post.id)}
+                      className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-destructive/40 text-sm text-foreground hover:bg-destructive/10 disabled:opacity-60"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {status.message && (
+            <p
+              className={`text-sm rounded-lg p-3 border ${
+                status.type === "success"
+                  ? "border-success/30 bg-success/10 text-foreground"
+                  : "border-destructive/40 bg-destructive/10 text-foreground"
+              }`}
+            >
+              {status.message}
+            </p>
+          )}
         </div>
       </div>
     </div>

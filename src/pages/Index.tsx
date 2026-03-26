@@ -4,6 +4,7 @@ import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import VideoGallery from "@/components/VideoGallery";
 import EMICalculator from "@/components/EMICalculator";
+import PostSection from "@/components/PostSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -15,10 +16,11 @@ const Index = () => {
       <StructuredData />
       <Header />
       <HeroSection />
-      <ServicesSection />
-      <WhyChooseUs />
       <VideoGallery />
       <EMICalculator />
+      <PostSection />
+      <ServicesSection />
+      <WhyChooseUs />
       <ContactSection />
       <Footer />
       <WhatsAppButton />

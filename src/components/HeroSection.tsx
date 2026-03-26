@@ -5,7 +5,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden"
+      className="relative min-h-[72vh] flex items-center justify-center overflow-hidden"
     >
       {/* Background */}
       <img
@@ -15,7 +15,7 @@ const HeroSection = () => {
       />
       <div className="absolute inset-0 gradient-navy opacity-80" />
 
-      <div className="relative z-10 container mx-auto px-4 text-center py-32">
+      <div className="relative z-10 container mx-auto px-4 text-center py-24 md:py-28">
         <p className="text-sm md:text-base font-semibold tracking-widest uppercase text-gold mb-4 animate-fade-in-up">
           Trusted Financial Partner
         </p>

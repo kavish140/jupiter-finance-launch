@@ -30,6 +30,8 @@ Create a `.env.local` file for local development when needed:
 
 ```sh
 VITE_ADMIN_PAGE_PASSWORD=your-admin-page-password
+# optional alternate key (same value)
+VITE_ADMIN_CREDENTIALS=your-admin-page-password
 ```
 
 `VITE_ADMIN_PAGE_PASSWORD` is required to unlock the `/admin` page in the browser.

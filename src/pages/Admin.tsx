@@ -11,7 +11,10 @@ const REPO_OWNER = "kavish140";
 const REPO_NAME = "jupiter-finance-launch";
 const WORKFLOW_FILE = "youtube_sync.yml";
 const ADMIN_SESSION_KEY = "jff_admin_unlocked";
-const ADMIN_PAGE_PASSWORD = import.meta.env.VITE_ADMIN_PAGE_PASSWORD?.trim() ?? "";
+const ADMIN_PAGE_PASSWORD =
+  import.meta.env.VITE_ADMIN_PAGE_PASSWORD?.trim() ??
+  import.meta.env.VITE_ADMIN_CREDENTIALS?.trim() ??
+  "";
 
 interface VideoItem {
   videoId: string;
@@ -63,7 +66,9 @@ const Admin = () => {
     e.preventDefault();
 
     if (!ADMIN_PAGE_PASSWORD) {
-      setUnlockError("Admin password is not configured. Set VITE_ADMIN_PAGE_PASSWORD in your environment.");
+      setUnlockError(
+        "Admin password is not configured. Set VITE_ADMIN_PAGE_PASSWORD (or VITE_ADMIN_CREDENTIALS) in your environment."
+      );
       return;
     }
 

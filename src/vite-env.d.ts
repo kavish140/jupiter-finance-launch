@@ -4,6 +4,7 @@ import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
 interface ImportMetaEnv {
 	readonly VITE_ADMIN_PAGE_PASSWORD?: string;
+	readonly VITE_ADMIN_CREDENTIALS?: string;
 }
 
 interface ImportMeta {

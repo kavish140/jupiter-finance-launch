@@ -1,6 +1,6 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { Lock, UploadCloud, Trash2, Newspaper } from "lucide-react";
+import { ShieldCheck, Lock, UploadCloud, Trash2, Newspaper } from "lucide-react";
 import videos from "@/data/videos.json";
 import posts from "@/data/posts.json";
 
@@ -9,8 +9,6 @@ type Status = { type: "idle" | "success" | "error"; message: string };
 const REPO_OWNER = "kavish140";
 const REPO_NAME = "jupiter-finance-launch";
 const WORKFLOW_FILE = "youtube_sync.yml";
-const ADMIN_ACCESS_KEY = "jupiter_admin_access";
-const ADMIN_PASSWORD = "H/Wc?y+!_/bmH;S%km[hjYyRI0a8zSC?Gt9_b_01sIu1j<|2lTsfRk4`dfP(nC{Q/Ti18C=/z)|f#KN-l$qzF{T&Xls4pD51LkoaD8}09ZgMX|bbn<L5Aa=MYrF/erZ8";
 
 interface VideoItem {
   videoId: string;
@@ -31,40 +29,21 @@ const Admin = () => {
   const [postExcerpt, setPostExcerpt] = useState("");
   const [postContent, setPostContent] = useState("");
   const [postCategory, setPostCategory] = useState("General");
-  const [adminPasswordInput, setAdminPasswordInput] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [adminCredentials, setAdminCredentials] = useState("");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<Status>({ type: "idle", message: "" });
   const currentVideos = videos as VideoItem[];
   const currentPosts = posts as PostItem[];
 
-  useEffect(() => {
-    if (sessionStorage.getItem(ADMIN_ACCESS_KEY) === "true") {
-      setIsAuthenticated(true);
-    }
-  }, []);
-
-  const handleUnlock = (e: FormEvent) => {
-    e.preventDefault();
-
-    if (adminPasswordInput === ADMIN_PASSWORD) {
-      sessionStorage.setItem(ADMIN_ACCESS_KEY, "true");
-      setIsAuthenticated(true);
-      setAdminPasswordInput("");
-      setStatus({ type: "idle", message: "" });
-      return;
-    }
-
-    setStatus({ type: "error", message: "Incorrect admin password." });
-  };
-
-  const handleLockPage = () => {
-    sessionStorage.removeItem(ADMIN_ACCESS_KEY);
-    setIsAuthenticated(false);
-    setStatus({ type: "idle", message: "" });
-  };
-
   const dispatchWorkflow = async (inputs: Record<string, string>, successMessage: string) => {
+    if (!token.trim()) {
+      throw new Error("GitHub token is required.");
+    }
+
+    if (!adminCredentials.trim()) {
+      throw new Error("Admin password is required.");
+    }
+
     const response = await fetch(
       `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/${WORKFLOW_FILE}/dispatches`,
       {
@@ -77,7 +56,10 @@ const Admin = () => {
         },
         body: JSON.stringify({
           ref: "main",
-          inputs,
+          inputs: {
+            admin_credentials: adminCredentials.trim(),
+            ...inputs,
+          },
         }),
       }
     );
@@ -97,11 +79,6 @@ const Admin = () => {
 
   const handleAddVideo = async (e: FormEvent) => {
     e.preventDefault();
-
-    if (!token.trim()) {
-      setStatus({ type: "error", message: "GitHub token is required." });
-      return;
-    }
 
     if (!videoUrl.trim()) {
       setStatus({ type: "error", message: "YouTube URL is required." });
@@ -134,11 +111,6 @@ const Admin = () => {
 
   const handleAddPost = async (e: FormEvent) => {
     e.preventDefault();
-
-    if (!token.trim()) {
-      setStatus({ type: "error", message: "GitHub token is required." });
-      return;
-    }
 
     if (!postTitle.trim()) {
       setStatus({ type: "error", message: "Post title is required." });
@@ -174,11 +146,6 @@ const Admin = () => {
   };
 
   const handleRemoveVideo = async (videoId: string) => {
-    if (!token.trim()) {
-      setStatus({ type: "error", message: "GitHub token is required to remove videos." });
-      return;
-    }
-
     setLoading(true);
     setStatus({ type: "idle", message: "" });
 
@@ -201,11 +168,6 @@ const Admin = () => {
   };
 
   const handleRemovePost = async (postId: string) => {
-    if (!token.trim()) {
-      setStatus({ type: "error", message: "GitHub token is required to remove posts." });
-      return;
-    }
-
     setLoading(true);
     setStatus({ type: "idle", message: "" });
 
@@ -230,245 +192,215 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-background text-foreground py-12 px-4">
       <div className="max-w-3xl mx-auto">
-        <div className="mb-8 flex items-start justify-between gap-4">
+        <div className="mb-8">
           <div>
             <Link to="/" className="text-sm font-semibold text-gold hover:text-primary transition-colors">
               Back to Home
             </Link>
             <h1 className="mt-3 text-3xl md:text-5xl font-display font-bold">Owner Content Admin</h1>
             <p className="mt-3 text-muted-foreground">
-              Manage videos and posts with one panel. Every action triggers a GitHub workflow and auto-deploy cycle.
+              Manage videos and posts with one panel. Password validation now happens in GitHub Actions using your repository secret.
+            </p>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-border bg-card shadow-card p-6 md:p-8 space-y-8">
+          <div className="space-y-2">
+            <label htmlFor="token" className="text-sm font-semibold flex items-center gap-2">
+              <Lock className="w-4 h-4 text-gold" />
+              GitHub Personal Access Token
+            </label>
+            <input
+              id="token"
+              type="password"
+              value={token}
+              onChange={(e) => setToken(e.target.value)}
+              placeholder="ghp_..."
+              className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+              autoComplete="off"
+            />
+            <p className="text-xs text-muted-foreground">
+              Token needs Actions write permission and repository access.
             </p>
           </div>
 
-          {isAuthenticated && (
-            <button
-              type="button"
-              onClick={handleLockPage}
-              className="shrink-0 px-4 py-2 rounded-lg border border-border text-sm font-semibold hover:bg-muted transition-colors"
-            >
-              Lock Admin
-            </button>
-          )}
-        </div>
-
-        {!isAuthenticated ? (
-          <div className="rounded-2xl border border-border bg-card shadow-card p-6 md:p-8">
-            <form onSubmit={handleUnlock} className="space-y-5">
-              <div className="space-y-2">
-                <label htmlFor="admin-password" className="text-sm font-semibold flex items-center gap-2">
-                  <Lock className="w-4 h-4 text-gold" />
-                  Admin Password
-                </label>
-                <input
-                  id="admin-password"
-                  type="password"
-                  value={adminPasswordInput}
-                  onChange={(e) => setAdminPasswordInput(e.target.value)}
-                  placeholder="Enter admin password"
-                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-                  autoComplete="off"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full gradient-gold text-accent-foreground font-semibold py-3 rounded-lg flex items-center justify-center gap-2"
-              >
-                <Lock className="w-5 h-5" />
-                Unlock Admin
-              </button>
-
-              {status.message && (
-                <p className="text-sm rounded-lg p-3 border border-destructive/40 bg-destructive/10 text-foreground">
-                  {status.message}
-                </p>
-              )}
-            </form>
+          <div className="space-y-2">
+            <label htmlFor="admin-credentials" className="text-sm font-semibold flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-gold" />
+              Admin Password (validated by GitHub Secret)
+            </label>
+            <input
+              id="admin-credentials"
+              type="password"
+              value={adminCredentials}
+              onChange={(e) => setAdminCredentials(e.target.value)}
+              placeholder="Enter admin password"
+              className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+              autoComplete="off"
+            />
           </div>
-        ) : (
-          <div className="rounded-2xl border border-border bg-card shadow-card p-6 md:p-8 space-y-8">
+
+          <form onSubmit={handleAddVideo} className="space-y-5 border border-border rounded-xl p-5">
+            <h2 className="text-xl font-display font-bold">Add Video</h2>
             <div className="space-y-2">
-              <label htmlFor="token" className="text-sm font-semibold flex items-center gap-2">
-                <Lock className="w-4 h-4 text-gold" />
-                GitHub Personal Access Token
-              </label>
+              <label htmlFor="video-url" className="text-sm font-semibold">YouTube Video URL</label>
               <input
-                id="token"
-                type="password"
-                value={token}
-                onChange={(e) => setToken(e.target.value)}
-                placeholder="ghp_..."
+                id="video-url"
+                value={videoUrl}
+                onChange={(e) => setVideoUrl(e.target.value)}
+                placeholder="https://www.youtube.com/watch?v=..."
                 className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-                autoComplete="off"
               />
-              <p className="text-xs text-muted-foreground">
-                Token needs Actions write permission and repository access.
-              </p>
             </div>
 
-            <form onSubmit={handleAddVideo} className="space-y-5 border border-border rounded-xl p-5">
-              <h2 className="text-xl font-display font-bold">Add Video</h2>
-              <div className="space-y-2">
-                <label htmlFor="video-url" className="text-sm font-semibold">YouTube Video URL</label>
-                <input
-                  id="video-url"
-                  value={videoUrl}
-                  onChange={(e) => setVideoUrl(e.target.value)}
-                  placeholder="https://www.youtube.com/watch?v=..."
-                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-                />
-              </div>
+            <div className="space-y-2">
+              <label htmlFor="video-title" className="text-sm font-semibold">Override Title (optional)</label>
+              <input
+                id="video-title"
+                value={videoTitle}
+                onChange={(e) => setVideoTitle(e.target.value)}
+                placeholder="Loan tips for first-time home buyers"
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+              />
+            </div>
 
-              <div className="space-y-2">
-                <label htmlFor="video-title" className="text-sm font-semibold">Override Title (optional)</label>
-                <input
-                  id="video-title"
-                  value={videoTitle}
-                  onChange={(e) => setVideoTitle(e.target.value)}
-                  placeholder="Loan tips for first-time home buyers"
-                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-                />
-              </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full gradient-gold text-accent-foreground font-semibold py-3 rounded-lg flex items-center justify-center gap-2 disabled:opacity-60"
+            >
+              <UploadCloud className="w-5 h-5" />
+              {loading ? "Submitting..." : "Add Video"}
+            </button>
+          </form>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full gradient-gold text-accent-foreground font-semibold py-3 rounded-lg flex items-center justify-center gap-2 disabled:opacity-60"
-              >
-                <UploadCloud className="w-5 h-5" />
-                {loading ? "Submitting..." : "Add Video"}
-              </button>
-            </form>
-
-            <div className="space-y-4 border border-border rounded-xl p-5">
-              <h2 className="text-xl font-display font-bold">Remove Video</h2>
-              {currentVideos.length === 0 ? (
-                <p className="text-sm text-muted-foreground">No videos available to remove.</p>
-              ) : (
-                <div className="space-y-3">
-                  {currentVideos.map((video) => (
-                    <div key={video.videoId} className="flex items-center justify-between gap-4 bg-background rounded-lg px-4 py-3 border border-border">
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">{video.title}</p>
-                        <p className="text-xs text-muted-foreground">ID: {video.videoId}</p>
-                      </div>
-                      <button
-                        type="button"
-                        disabled={loading}
-                        onClick={() => handleRemoveVideo(video.videoId)}
-                        className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-destructive/40 text-sm text-foreground hover:bg-destructive/10 disabled:opacity-60"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                        Remove
-                      </button>
+          <div className="space-y-4 border border-border rounded-xl p-5">
+            <h2 className="text-xl font-display font-bold">Remove Video</h2>
+            {currentVideos.length === 0 ? (
+              <p className="text-sm text-muted-foreground">No videos available to remove.</p>
+            ) : (
+              <div className="space-y-3">
+                {currentVideos.map((video) => (
+                  <div key={video.videoId} className="flex items-center justify-between gap-4 bg-background rounded-lg px-4 py-3 border border-border">
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{video.title}</p>
+                      <p className="text-xs text-muted-foreground">ID: {video.videoId}</p>
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <form onSubmit={handleAddPost} className="space-y-5 border border-border rounded-xl p-5">
-              <h2 className="text-xl font-display font-bold flex items-center gap-2">
-                <Newspaper className="w-5 h-5 text-gold" />
-                Add Post
-              </h2>
-              <div className="space-y-2">
-                <label htmlFor="post-title" className="text-sm font-semibold">Post Title</label>
-                <input
-                  id="post-title"
-                  value={postTitle}
-                  onChange={(e) => setPostTitle(e.target.value)}
-                  placeholder="How to improve home loan eligibility"
-                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-                />
+                    <button
+                      type="button"
+                      disabled={loading}
+                      onClick={() => handleRemoveVideo(video.videoId)}
+                      className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-destructive/40 text-sm text-foreground hover:bg-destructive/10 disabled:opacity-60"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                      Remove
+                    </button>
+                  </div>
+                ))}
               </div>
-
-              <div className="space-y-2">
-                <label htmlFor="post-category" className="text-sm font-semibold">Category</label>
-                <input
-                  id="post-category"
-                  value={postCategory}
-                  onChange={(e) => setPostCategory(e.target.value)}
-                  placeholder="Home Loan"
-                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="post-excerpt" className="text-sm font-semibold">Excerpt</label>
-                <textarea
-                  id="post-excerpt"
-                  rows={2}
-                  value={postExcerpt}
-                  onChange={(e) => setPostExcerpt(e.target.value)}
-                  placeholder="Short summary for homepage cards"
-                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold resize-none"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="post-content" className="text-sm font-semibold">Full Content</label>
-                <textarea
-                  id="post-content"
-                  rows={5}
-                  value={postContent}
-                  onChange={(e) => setPostContent(e.target.value)}
-                  placeholder="Detailed post content"
-                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold resize-y"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full gradient-gold text-accent-foreground font-semibold py-3 rounded-lg flex items-center justify-center gap-2 disabled:opacity-60"
-              >
-                <UploadCloud className="w-5 h-5" />
-                {loading ? "Submitting..." : "Add Post"}
-              </button>
-            </form>
-
-            <div className="space-y-4 border border-border rounded-xl p-5">
-              <h2 className="text-xl font-display font-bold">Remove Post</h2>
-              {currentPosts.length === 0 ? (
-                <p className="text-sm text-muted-foreground">No posts available to remove.</p>
-              ) : (
-                <div className="space-y-3">
-                  {currentPosts.map((post) => (
-                    <div key={post.id} className="flex items-center justify-between gap-4 bg-background rounded-lg px-4 py-3 border border-border">
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">{post.title}</p>
-                        <p className="text-xs text-muted-foreground">{post.category || "General"}</p>
-                      </div>
-                      <button
-                        type="button"
-                        disabled={loading}
-                        onClick={() => handleRemovePost(post.id)}
-                        className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-destructive/40 text-sm text-foreground hover:bg-destructive/10 disabled:opacity-60"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                        Remove
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {status.message && (
-              <p
-                className={`text-sm rounded-lg p-3 border ${
-                  status.type === "success"
-                    ? "border-success/30 bg-success/10 text-foreground"
-                    : "border-destructive/40 bg-destructive/10 text-foreground"
-                }`}
-              >
-                {status.message}
-              </p>
             )}
           </div>
-        )}
+
+          <form onSubmit={handleAddPost} className="space-y-5 border border-border rounded-xl p-5">
+            <h2 className="text-xl font-display font-bold flex items-center gap-2">
+              <Newspaper className="w-5 h-5 text-gold" />
+              Add Post
+            </h2>
+            <div className="space-y-2">
+              <label htmlFor="post-title" className="text-sm font-semibold">Post Title</label>
+              <input
+                id="post-title"
+                value={postTitle}
+                onChange={(e) => setPostTitle(e.target.value)}
+                placeholder="How to improve home loan eligibility"
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="post-category" className="text-sm font-semibold">Category</label>
+              <input
+                id="post-category"
+                value={postCategory}
+                onChange={(e) => setPostCategory(e.target.value)}
+                placeholder="Home Loan"
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="post-excerpt" className="text-sm font-semibold">Excerpt</label>
+              <textarea
+                id="post-excerpt"
+                rows={2}
+                value={postExcerpt}
+                onChange={(e) => setPostExcerpt(e.target.value)}
+                placeholder="Short summary for homepage cards"
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold resize-none"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="post-content" className="text-sm font-semibold">Full Content</label>
+              <textarea
+                id="post-content"
+                rows={5}
+                value={postContent}
+                onChange={(e) => setPostContent(e.target.value)}
+                placeholder="Detailed post content"
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold resize-y"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full gradient-gold text-accent-foreground font-semibold py-3 rounded-lg flex items-center justify-center gap-2 disabled:opacity-60"
+            >
+              <UploadCloud className="w-5 h-5" />
+              {loading ? "Submitting..." : "Add Post"}
+            </button>
+          </form>
+
+          <div className="space-y-4 border border-border rounded-xl p-5">
+            <h2 className="text-xl font-display font-bold">Remove Post</h2>
+            {currentPosts.length === 0 ? (
+              <p className="text-sm text-muted-foreground">No posts available to remove.</p>
+            ) : (
+              <div className="space-y-3">
+                {currentPosts.map((post) => (
+                  <div key={post.id} className="flex items-center justify-between gap-4 bg-background rounded-lg px-4 py-3 border border-border">
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{post.title}</p>
+                      <p className="text-xs text-muted-foreground">{post.category || "General"}</p>
+                    </div>
+                    <button
+                      type="button"
+                      disabled={loading}
+                      onClick={() => handleRemovePost(post.id)}
+                      className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-destructive/40 text-sm text-foreground hover:bg-destructive/10 disabled:opacity-60"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {status.message && (
+            <p
+              className={`text-sm rounded-lg p-3 border ${
+                status.type === "success"
+                  ? "border-success/30 bg-success/10 text-foreground"
+                  : "border-destructive/40 bg-destructive/10 text-foreground"
+              }`}
+            >
+              {status.message}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

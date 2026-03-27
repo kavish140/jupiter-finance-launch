@@ -5,6 +5,10 @@ on:
     - cron: "0 0 * * *"
   workflow_dispatch:
     inputs:
+      admin_credentials:
+        description: "Admin password for protected operations"
+        required: false
+        default: ""
       operation:
         description: "Action to execute"
         required: false
@@ -53,6 +57,19 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Validate admin credentials
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          if [ -z "${{ inputs.admin_credentials }}" ]; then
+            echo "Missing admin credentials input."
+            exit 1
+          fi
+
+          if [ "${{ inputs.admin_credentials }}" != "${{ secrets.Admin_Credentials }}" ]; then
+            echo "Invalid admin credentials."
+            exit 1
+          fi
 
       - name: Setup Python
         uses: actions/setup-python@v5

@@ -65,21 +65,29 @@ const Admin = () => {
   const handleUnlock = (e: FormEvent) => {
     e.preventDefault();
 
-    if (!ADMIN_PAGE_PASSWORD) {
-      setUnlockError(
-        "Admin password is not configured. Set VITE_ADMIN_PAGE_PASSWORD (or VITE_ADMIN_CREDENTIALS) in your environment."
-      );
+    const enteredPassword = unlockPassword.trim();
+
+    if (!enteredPassword) {
+      setUnlockError("Enter admin password.");
       return;
     }
 
-    if (unlockPassword.trim() !== ADMIN_PAGE_PASSWORD) {
+    if (!ADMIN_PAGE_PASSWORD) {
+      setUnlockError("");
+      setIsUnlocked(true);
+      setAdminCredentials(enteredPassword);
+      setUnlockPassword("");
+      return;
+    }
+
+    if (enteredPassword !== ADMIN_PAGE_PASSWORD) {
       setUnlockError("Incorrect admin password.");
       return;
     }
 
     setUnlockError("");
     setIsUnlocked(true);
-    setAdminCredentials(unlockPassword.trim());
+    setAdminCredentials(enteredPassword);
     setUnlockPassword("");
   };
 

@@ -24,6 +24,16 @@ npm run dev
 
 The development server will start at `http://localhost:8080` with hot module replacement enabled.
 
+### Environment Variables
+
+Create a `.env.local` file for local development when needed:
+
+```sh
+VITE_ADMIN_PAGE_PASSWORD=your-admin-page-password
+```
+
+`VITE_ADMIN_PAGE_PASSWORD` is required to unlock the `/admin` page in the browser.
+
 ## 📦 Build & Deployment
 
 ```sh

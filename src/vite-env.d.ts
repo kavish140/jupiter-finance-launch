@@ -2,6 +2,14 @@
 
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
+interface ImportMetaEnv {
+	readonly VITE_ADMIN_PAGE_PASSWORD?: string;
+}
+
+interface ImportMeta {
+	readonly env: ImportMetaEnv;
+}
+
 declare global {
 	namespace JSX {
 		interface IntrinsicElements {

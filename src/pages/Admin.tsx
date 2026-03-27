@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ShieldCheck, Lock, UploadCloud, Trash2, Newspaper } from "lucide-react";
 import videos from "@/data/videos.json";
@@ -10,6 +10,8 @@ type Status = { type: "idle" | "success" | "error"; message: string };
 const REPO_OWNER = "kavish140";
 const REPO_NAME = "jupiter-finance-launch";
 const WORKFLOW_FILE = "youtube_sync.yml";
+const ADMIN_SESSION_KEY = "jff_admin_unlocked";
+const ADMIN_PAGE_PASSWORD = import.meta.env.VITE_ADMIN_PAGE_PASSWORD?.trim() ?? "";
 
 interface VideoItem {
   videoId: string;
@@ -31,10 +33,57 @@ const Admin = () => {
   const [postContent, setPostContent] = useState("");
   const [postCategory, setPostCategory] = useState("General");
   const [adminCredentials, setAdminCredentials] = useState("");
+  const [unlockPassword, setUnlockPassword] = useState("");
+  const [unlockError, setUnlockError] = useState("");
+  const [isUnlocked, setIsUnlocked] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+    return window.sessionStorage.getItem(ADMIN_SESSION_KEY) === "true";
+  });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<Status>({ type: "idle", message: "" });
   const currentVideos = videos as VideoItem[];
   const currentPosts = posts as PostItem[];
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    if (isUnlocked) {
+      window.sessionStorage.setItem(ADMIN_SESSION_KEY, "true");
+      return;
+    }
+
+    window.sessionStorage.removeItem(ADMIN_SESSION_KEY);
+  }, [isUnlocked]);
+
+  const handleUnlock = (e: FormEvent) => {
+    e.preventDefault();
+
+    if (!ADMIN_PAGE_PASSWORD) {
+      setUnlockError("Admin password is not configured. Set VITE_ADMIN_PAGE_PASSWORD in your environment.");
+      return;
+    }
+
+    if (unlockPassword.trim() !== ADMIN_PAGE_PASSWORD) {
+      setUnlockError("Incorrect admin password.");
+      return;
+    }
+
+    setUnlockError("");
+    setIsUnlocked(true);
+    setAdminCredentials(unlockPassword.trim());
+    setUnlockPassword("");
+  };
+
+  const handleLock = () => {
+    setIsUnlocked(false);
+    setAdminCredentials("");
+    setUnlockPassword("");
+    setStatus({ type: "idle", message: "" });
+  };
 
   const dispatchWorkflow = async (inputs: Record<string, string>, successMessage: string) => {
     if (!token.trim()) {
@@ -190,6 +239,66 @@ const Admin = () => {
     }
   };
 
+  if (!isUnlocked) {
+    return (
+      <div className="min-h-screen bg-background text-foreground py-12 px-4">
+        <SeoMeta
+          title="Admin | Jupiter Fast Finance"
+          description="Private admin panel for Jupiter Fast Finance"
+          keywords="admin"
+          canonicalUrl="https://jupiterfastfinance.com/admin"
+          robots="noindex,nofollow"
+        />
+        <div className="max-w-xl mx-auto">
+          <div className="mb-8">
+            <Link to="/" className="text-sm font-semibold text-gold hover:text-primary transition-colors">
+              Back to Home
+            </Link>
+            <h1 className="mt-3 text-3xl md:text-5xl font-display font-bold">Owner Content Admin</h1>
+            <p className="mt-3 text-muted-foreground">Enter the admin password to unlock this page.</p>
+          </div>
+
+          <form onSubmit={handleUnlock} className="rounded-2xl border border-border bg-card shadow-card p-6 md:p-8 space-y-5">
+            <div className="space-y-2">
+              <label htmlFor="unlock-password" className="text-sm font-semibold flex items-center gap-2">
+                <Lock className="w-4 h-4 text-gold" />
+                Admin Password
+              </label>
+              <input
+                id="unlock-password"
+                type="password"
+                value={unlockPassword}
+                onChange={(e) => {
+                  setUnlockPassword(e.target.value);
+                  if (unlockError) {
+                    setUnlockError("");
+                  }
+                }}
+                placeholder="Enter admin password"
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+                autoComplete="current-password"
+              />
+            </div>
+
+            {unlockError && (
+              <p className="text-sm rounded-lg p-3 border border-destructive/40 bg-destructive/10 text-foreground">
+                {unlockError}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className="w-full gradient-gold text-accent-foreground font-semibold py-3 rounded-lg flex items-center justify-center gap-2"
+            >
+              <ShieldCheck className="w-5 h-5" />
+              Unlock Admin
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground py-12 px-4">
       <SeoMeta
@@ -209,6 +318,14 @@ const Admin = () => {
             <p className="mt-3 text-muted-foreground">
               Manage videos and posts with one panel. Password validation now happens in GitHub Actions using your repository secret.
             </p>
+            <button
+              type="button"
+              onClick={handleLock}
+              className="mt-4 inline-flex items-center gap-2 px-3 py-2 rounded-md border border-border text-sm text-foreground hover:bg-muted"
+            >
+              <Lock className="w-4 h-4" />
+              Lock Admin
+            </button>
           </div>
         </div>
 

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ShieldCheck, Lock, UploadCloud, Trash2, Newspaper } from "lucide-react";
 import videos from "@/data/videos.json";
 import posts from "@/data/posts.json";
+import SeoMeta from "@/components/SeoMeta";
 
 type Status = { type: "idle" | "success" | "error"; message: string };
 
@@ -191,6 +192,13 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground py-12 px-4">
+      <SeoMeta
+        title="Admin | Jupiter Fast Finance"
+        description="Private admin panel for Jupiter Fast Finance"
+        keywords="admin"
+        canonicalUrl="https://jupiterfastfinance.com/admin"
+        robots="noindex,nofollow"
+      />
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <div>

@@ -1,10 +1,18 @@
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import SeoMeta from "@/components/SeoMeta";
 import { Link } from "react-router-dom";
 
 const HomeLoan = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SeoMeta
+        title="Home Loan Services | Jupiter Fast Finance"
+        description="Get expert home loan support from Jupiter Fast Finance. Compare lenders, improve eligibility, and complete disbursal with guidance at every step."
+        keywords="home loan, home loan advisor, mortgage loan india, jupiter fast finance"
+        canonicalUrl="https://jupiterfastfinance.com/home_loan"
+        ogType="article"
+      />
       <header className="border-b border-border bg-card/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="text-2xl font-display font-bold text-primary">

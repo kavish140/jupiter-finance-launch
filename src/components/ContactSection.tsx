@@ -89,7 +89,7 @@ const ContactSection = () => {
               </div>
               <div>
                 <p className="font-semibold text-foreground">Visit Us</p>
-                <p className="text-muted-foreground">Jupiter Fast Finance, India</p>
+                <p className="text-muted-foreground">Serving Mulund, Mumbai, Thane, and nearby suburbs</p>
               </div>
             </div>
           </div>

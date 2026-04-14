@@ -8,6 +8,7 @@ const Header = () => {
   const navLinks = [
     { label: "Home", href: "#home" },
     { label: "Services", href: "#services" },
+    { label: "Mulund & Mumbai", href: "/mulund-mumbai-loans", isRoute: true },
     { label: "Why Us", href: "#why-us" },
     { label: "Videos", href: "#videos" },
     { label: "Posts", href: "#posts" },

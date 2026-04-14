@@ -7,9 +7,9 @@ const HomeLoan = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoMeta
-        title="Home Loan Services | Jupiter Fast Finance"
-        description="Get expert home loan support from Jupiter Fast Finance. Compare lenders, improve eligibility, and complete disbursal with guidance at every step."
-        keywords="home loan, home loan advisor, mortgage loan india, jupiter fast finance"
+        title="Home Loan Services in Mulund & Mumbai | Jupiter Fast Finance"
+        description="Get expert home loan support in Mulund, Mumbai, and nearby suburbs. Compare lenders, improve eligibility, and complete disbursal with guidance at every step."
+        keywords="home loan mulund, home loan mumbai, mortgage loan india, home loan advisor, jupiter fast finance, home loan consultant mulund"
         canonicalUrl="https://jupiterfastfinance.com/home_loan"
         ogType="article"
       />
@@ -34,9 +34,9 @@ const HomeLoan = () => {
             Get the Right Home Loan With Expert Guidance
           </h1>
           <p className="text-muted-foreground max-w-3xl">
-            Looking for a smooth and stress-free home loan process? We help you compare offers from
-            multiple banks and NBFCs, arrange doorstep document collection, and guide you from
-            application to disbursal.
+            Looking for a smooth and stress-free home loan process in Mulund, Mumbai, or nearby
+            suburbs? We help you compare offers from multiple banks and NBFCs, arrange doorstep
+            document collection, and guide you from application to disbursal.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
@@ -74,7 +74,8 @@ const HomeLoan = () => {
             <p className="text-muted-foreground">
               We understand that every customer has a different income profile and repayment
               capacity. Our team evaluates your eligibility, helps improve your application
-              strength, and connects you with lender options that match your goals.
+              strength, and connects you with lender options that match your goals in Mumbai and
+              surrounding areas.
             </p>
             <p className="text-muted-foreground">
               Whether you are buying your first home, transferring an existing loan, or planning
@@ -86,8 +87,9 @@ const HomeLoan = () => {
         <section className="rounded-xl border border-border bg-card p-6 md:p-8 space-y-4">
           <h2 className="text-2xl md:text-3xl font-semibold">गृह ऋण के लिए हमसे क्यों जुड़ें</h2>
           <p className="text-muted-foreground">
-            क्या आप आसान और भरोसेमंद होम लोन प्रक्रिया चाहते हैं? हमारी टीम आपके लिए अलग-अलग बैंक
-            और NBFC के विकल्प तुलना करके सही लोन चुनने में मदद करती है।
+            क्या आप Mulund, Mumbai, या आसपास के इलाकों में आसान और भरोसेमंद होम लोन प्रक्रिया
+            चाहते हैं? हमारी टीम आपके लिए अलग-अलग बैंक और NBFC के विकल्प तुलना करके सही लोन चुनने
+            में मदद करती है।
           </p>
           <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
             <li>डोरस्टेप डॉक्यूमेंट कलेक्शन - आपके घर से दस्तावेज़ लेने की सुविधा।</li>

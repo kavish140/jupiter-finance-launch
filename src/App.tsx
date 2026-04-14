@@ -7,6 +7,7 @@ import { lazy, Suspense } from "react";
 
 const Index = lazy(() => import("./pages/Index"));
 const HomeLoan = lazy(() => import("./pages/HomeLoan"));
+const MulundMumbaiLoans = lazy(() => import("./pages/MulundMumbaiLoans"));
 const Admin = lazy(() => import("./pages/Admin"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -35,6 +36,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/home_loan" element={<HomeLoan />} />
+            <Route path="/mulund-mumbai-loans" element={<MulundMumbaiLoans />} />
             <Route path="/admin" element={<Admin />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

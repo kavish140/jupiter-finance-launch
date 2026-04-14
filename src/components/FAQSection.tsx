@@ -5,19 +5,19 @@ const faqs = [
       "We compare offers from multiple banks and NBFCs, help with documentation, and guide you through eligibility and disbursal so your home loan process is faster and clearer.",
   },
   {
-    question: "Do you provide mutual fund investment guidance?",
+    question: "Do you help customers in Mulund and Mumbai suburbs?",
     answer:
-      "Yes, we help clients choose mutual fund SIP options based on risk profile, goals, and investment horizon with practical guidance for long-term wealth creation.",
+      "Yes, we support customers in Mulund, Mumbai, Thane, Bhandup, Ghatkopar, Powai, and nearby suburbs with home loans, loan against property, and related financial services.",
   },
   {
-    question: "What health insurance support do you provide?",
+    question: "What other financial products do you provide?",
     answer:
-      "We help identify health insurance plans with suitable coverage, premiums, and network hospitals so families can get practical financial protection.",
+      "We also help with health insurance, life insurance, and mutual fund SIP planning so customers can manage protection, savings, and borrowing in one place.",
   },
   {
     question: "Why choose Jupiter Fast Finance for financial services?",
     answer:
-      "Clients choose us for transparent guidance, multiple lender and insurer options, practical advisory support, and end-to-end assistance across loans, insurance, and mutual funds.",
+      "Clients choose us for transparent guidance, multiple lender and insurer options, practical advisory support, and end-to-end assistance across loans, insurance, and mutual funds in the Mumbai region.",
   },
 ];
 
@@ -28,7 +28,7 @@ const FAQSection = () => {
         <div className="text-center mb-12">
           <p className="text-sm font-semibold tracking-widest uppercase text-gold mb-3">Frequently Asked Questions</p>
           <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
-            Home Loan, Mutual Funds And Health Insurance FAQs
+            Home Loan And Loan FAQs for Mulund & Mumbai
           </h2>
         </div>
 

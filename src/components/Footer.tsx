@@ -1,4 +1,5 @@
 import { Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -10,16 +11,18 @@ const Footer = () => {
               Jupiter<span className="text-gradient-gold"> Fast Finance</span>
             </h3>
             <p className="text-primary-foreground/60 text-sm leading-relaxed">
-              Your trusted partner for loans, insurance, and investments. Empowering your financial future.
+              Your trusted partner for loans, insurance, and investments in Mulund, Mumbai, and nearby suburbs.
             </p>
           </div>
 
           <div>
             <h4 className="font-semibold text-primary-foreground mb-3">Quick Links</h4>
             <div className="space-y-2 text-sm">
-              {["Home Loans", "Loan Against Property", "Health Insurance", "Mutual Fund SIPs"].map((s) => (
-                <a key={s} href="#services" className="block text-primary-foreground/60 hover:text-gold transition-colors">{s}</a>
-              ))}
+              <Link to="/mulund-mumbai-loans" className="block text-primary-foreground/60 hover:text-gold transition-colors">Loans in Mulund & Mumbai</Link>
+              <a href="#services" className="block text-primary-foreground/60 hover:text-gold transition-colors">Home Loans</a>
+              <a href="#services" className="block text-primary-foreground/60 hover:text-gold transition-colors">Loan Against Property</a>
+              <a href="#services" className="block text-primary-foreground/60 hover:text-gold transition-colors">Health Insurance</a>
+              <a href="#services" className="block text-primary-foreground/60 hover:text-gold transition-colors">Mutual Fund SIPs</a>
             </div>
           </div>
 

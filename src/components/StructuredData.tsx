@@ -12,12 +12,42 @@ interface VideoItem {
 const StructuredData = () => {
   const siteUrl = "https://jupiterfastfinance.com";
   const latestVideos = (videos as VideoItem[]).slice(0, 4);
+  const serviceAreas = ["Mulund", "Mumbai", "Thane", "Bhandup", "Ghatkopar", "Powai", "Navi Mumbai", "Central Mumbai"];
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Jupiter Fast Finance",
     url: siteUrl,
     telephone: "+91-9757190200",
+    email: "info@jupiterfastfinance.com",
+    areaServed: serviceAreas,
+    sameAs: ["https://www.youtube.com/@JuptierFinance8654"],
+  };
+
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "FinancialService",
+    name: "Jupiter Fast Finance",
+    url: siteUrl,
+    telephone: "+91-9757190200",
+    email: "info@jupiterfastfinance.com",
+    areaServed: serviceAreas,
+    serviceType: [
+      "Home Loans",
+      "Loan Against Property",
+      "Loan Against Mutual Funds",
+      "Health Insurance",
+      "Life Insurance",
+      "Mutual Fund SIP",
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      telephone: "+91-9757190200",
+      email: "info@jupiterfastfinance.com",
+      areaServed: serviceAreas,
+      availableLanguage: ["en", "hi"],
+    },
     sameAs: ["https://www.youtube.com/@JuptierFinance8654"],
   };
 
@@ -56,7 +86,9 @@ const StructuredData = () => {
     name: "Jupiter Fast Finance",
     url: siteUrl,
     telephone: "+91-9757190200",
+    email: "info@jupiterfastfinance.com",
     areaServed: "IN",
+    availableLanguage: ["en", "hi"],
     serviceType: [
       "Home Loans",
       "Loan Against Property",
@@ -82,18 +114,26 @@ const StructuredData = () => {
       },
       {
         "@type": "Question",
-        name: "Do you provide mutual fund investment guidance?",
+        name: "Do you help customers in Mulund and nearby Mumbai suburbs?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes, we provide practical mutual fund SIP guidance aligned to goals, risk profile, and investment horizon for long-term wealth building.",
+          text: "Yes, we support borrowers across Mulund, Mumbai, Thane, Bhandup, Ghatkopar, Powai, and nearby suburbs with home loans, loan against property, and related financial services.",
         },
       },
       {
         "@type": "Question",
-        name: "What health insurance support do you provide?",
+        name: "What financial products do you provide beyond loans?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "We help identify suitable health insurance plans based on coverage, premium, and hospital network so families can secure reliable financial protection.",
+          text: "We also help with health insurance, life insurance, and mutual fund SIP planning so customers can manage protection, savings, and borrowing in one place.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can you help with home loan and loan against property options?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, we compare lenders, explain eligibility, and guide customers through home loan, balance transfer, top-up, and loan against property options to find the right fit.",
         },
       },
     ],
@@ -105,6 +145,7 @@ const StructuredData = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoGraph) }} />
       <script

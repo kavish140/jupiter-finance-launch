@@ -42,8 +42,12 @@ const ServicesSection = () => {
             What We Offer
           </p>
           <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
-            Our Financial Services
+            Our Financial Services in Mulund & Mumbai
           </h2>
+          <p className="mt-4 text-muted-foreground max-w-3xl mx-auto">
+            Practical lending, insurance, and investment support for customers across Mulund,
+            Mumbai, and nearby suburbs.
+          </p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

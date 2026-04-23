@@ -1,4 +1,4 @@
-import { MessageCircle } from "lucide-react";
+import { SiWhatsapp } from "@icons-pack/react-simple-icons";
 
 const WhatsAppButton = () => {
   const whatsappUrl = `https://wa.me/919757190200?text=${encodeURIComponent("Hi, I'd like to know more about your financial services.")}`;
@@ -11,7 +11,7 @@ const WhatsAppButton = () => {
       className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-success flex items-center justify-center shadow-lg hover:scale-110 transition-transform animate-float"
       aria-label="Chat on WhatsApp"
     >
-      <MessageCircle className="w-8 h-8 text-primary-foreground" />
+      <SiWhatsapp className="w-8 h-8 text-primary-foreground" />
     </a>
   );
 };

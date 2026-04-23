@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
+import emailjs from "@emailjs/browser";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -20,11 +21,20 @@ const services = [
   "Mutual Fund SIP",
 ];
 
-const ContactSection = () => {
-  const [form, setForm] = useState({ name: "", phone: "", email: "", service: "", message: "" });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+type ContactForm = {
+  name: string;
+  phone: string;
+  email: string;
+  service: string;
+  message: string;
+};
 
-  const handleSubmit = (e: React.FormEvent) => {
+const ContactSection = () => {
+  const [form, setForm] = useState<ContactForm>({ name: "", phone: "", email: "", service: "", message: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = contactSchema.safeParse(form);
     if (!result.success) {
@@ -35,12 +45,47 @@ const ContactSection = () => {
       setErrors(fieldErrors);
       return;
     }
+
     setErrors({});
-    toast.success("Thank you! We'll get back to you shortly.");
-    setForm({ name: "", phone: "", email: "", service: "", message: "" });
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID?.trim();
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID?.trim();
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY?.trim();
+
+    if (!serviceId || !templateId || !publicKey) {
+      toast.error("Contact form is not configured yet. Please call or WhatsApp us directly.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: form.name,
+          phone: form.phone,
+          email: form.email || "Not provided",
+          service: form.service,
+          message: form.message || "No message added.",
+          page_url: window.location.href,
+          submitted_at: new Date().toISOString(),
+        },
+        publicKey,
+      );
+
+      toast.success("Thanks. Your enquiry has been sent successfully.");
+      setForm({ name: "", phone: "", email: "", service: "", message: "" });
+    } catch (error) {
+      console.error("EmailJS submit failed", error);
+      toast.error("We could not send your enquiry. Please try again or call us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const update = (key: string, value: string) => {
+  const update = (key: keyof ContactForm, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: "" }));
   };
@@ -66,7 +111,7 @@ const ContactSection = () => {
               </div>
               <div>
                 <p className="font-semibold text-foreground">Call / WhatsApp</p>
-                <a href="tel:9757190200" className="text-lg font-bold text-primary hover:text-gold transition-colors">
+                <a href="tel:+919757190200" className="text-lg font-bold text-primary hover:text-gold transition-colors">
                   9757190200
                 </a>
                 <p className="text-sm text-muted-foreground mt-1">
@@ -156,10 +201,11 @@ const ContactSection = () => {
             </div>
             <button
               type="submit"
-              className="flex items-center gap-2 gradient-gold text-accent-foreground font-bold px-8 py-3.5 rounded-lg hover:opacity-90 transition-opacity w-full justify-center text-lg"
+              disabled={isSubmitting}
+              className="flex items-center gap-2 gradient-gold text-accent-foreground font-bold px-8 py-3.5 rounded-lg hover:opacity-90 transition-opacity w-full justify-center text-lg disabled:cursor-not-allowed disabled:opacity-70"
             >
               <Send className="w-5 h-5" />
-              Submit Inquiry
+              {isSubmitting ? "Sending..." : "Submit Inquiry"}
             </button>
           </form>
         </div>

@@ -27,9 +27,11 @@ const SeoMeta = ({
   canonicalUrl,
   robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
   ogType = "website",
-  ogImage = "https://jupiterfastfinance.com/og-jupiter-fast-finance.jpg",
+  ogImage = "/og-jupiter-fast-finance.jpg",
 }: SeoMetaProps) => {
   useEffect(() => {
+    const resolvedOgImage = new URL(ogImage, canonicalUrl).toString();
+
     document.title = title;
 
     setMetaTag('meta[name="description"]', { name: "description" }, description);
@@ -39,13 +41,13 @@ const SeoMeta = ({
     setMetaTag('meta[property="og:description"]', { property: "og:description" }, description);
     setMetaTag('meta[property="og:type"]', { property: "og:type" }, ogType);
     setMetaTag('meta[property="og:url"]', { property: "og:url" }, canonicalUrl);
-    setMetaTag('meta[property="og:image"]', { property: "og:image" }, ogImage);
+    setMetaTag('meta[property="og:image"]', { property: "og:image" }, resolvedOgImage);
     setMetaTag('meta[property="og:site_name"]', { property: "og:site_name" }, "Jupiter Fast Finance");
     setMetaTag('meta[name="twitter:title"]', { name: "twitter:title" }, title);
     setMetaTag('meta[name="twitter:description"]', { name: "twitter:description" }, description);
-    setMetaTag('meta[name="twitter:image"]', { name: "twitter:image" }, ogImage);
+    setMetaTag('meta[name="twitter:image"]', { name: "twitter:image" }, resolvedOgImage);
     setMetaTag('meta[name="twitter:card"]', { name: "twitter:card" }, "summary_large_image");
-    setMetaTag('meta[name="twitter:site"]', { name: "twitter:site" }, "@JuptierFinance8654");
+    setMetaTag('meta[name="twitter:site"]', { name: "twitter:site" }, "@JupiterFinance8654");
 
     let canonicalTag = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (!canonicalTag) {

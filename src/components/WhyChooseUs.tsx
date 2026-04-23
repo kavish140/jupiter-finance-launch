@@ -23,6 +23,12 @@ const reasons = [
   },
 ];
 
+const proofPoints = [
+  { value: "8", label: "localities covered" },
+  { value: "6", label: "service categories" },
+  { value: "4", label: "content touchpoints" },
+];
+
 const WhyChooseUs = () => {
   return (
     <section id="why-us" className="py-24 gradient-navy">
@@ -51,6 +57,19 @@ const WhyChooseUs = () => {
             </div>
           ))}
         </div>
+
+        <div className="mt-16 grid gap-4 md:grid-cols-3">
+          {proofPoints.map((point) => (
+            <div key={point.label} className="rounded-2xl border border-primary-foreground/10 bg-primary-foreground/5 p-5 text-center">
+              <p className="text-3xl font-display font-bold text-primary-foreground">{point.value}</p>
+              <p className="mt-1 text-sm text-primary-foreground/70">{point.label}</p>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-6 text-center text-sm text-primary-foreground/60">
+          Built around borrowers in Mulund, Mumbai, Thane, Bhandup, Ghatkopar, Powai, Navi Mumbai, and Central Mumbai.
+        </p>
       </div>
     </section>
   );

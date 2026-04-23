@@ -31,7 +31,7 @@ const HeroSection = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up [animation-delay:0.3s]">
           <a
-            href="tel:9757190200"
+            href="tel:+919757190200"
             className="flex items-center gap-3 gradient-gold text-accent-foreground font-bold px-8 py-4 rounded-lg text-lg hover:opacity-90 transition-opacity shadow-lg"
           >
             <Phone className="w-5 h-5" />
@@ -43,11 +43,14 @@ const HeroSection = () => {
           >
             Explore Local Loan Services
           </a>
+        </div>
+
+        <div className="mt-5 animate-fade-in-up [animation-delay:0.35s]">
           <a
             href="#services"
-            className="flex items-center gap-2 border-2 border-primary-foreground/30 text-primary-foreground font-semibold px-8 py-4 rounded-lg text-lg hover:bg-primary-foreground/10 transition-colors"
+            className="text-sm font-semibold text-primary-foreground/80 underline underline-offset-4 decoration-primary-foreground/30 hover:text-primary-foreground"
           >
-            Explore Services
+            Explore services for home loans, insurance, and investments
           </a>
         </div>
 

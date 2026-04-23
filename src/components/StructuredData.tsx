@@ -21,7 +21,7 @@ const StructuredData = () => {
     telephone: "+91-9757190200",
     email: "info@jupiterfastfinance.com",
     areaServed: serviceAreas,
-    sameAs: ["https://www.youtube.com/@JuptierFinance8654"],
+    sameAs: ["https://www.youtube.com/@JupiterFinance8654"],
   };
 
   const localBusinessSchema = {
@@ -48,7 +48,7 @@ const StructuredData = () => {
       areaServed: serviceAreas,
       availableLanguage: ["en", "hi"],
     },
-    sameAs: ["https://www.youtube.com/@JuptierFinance8654"],
+    sameAs: ["https://www.youtube.com/@JupiterFinance8654"],
   };
 
   const websiteSchema = {
@@ -97,7 +97,7 @@ const StructuredData = () => {
       "Life Insurance",
       "Mutual Fund SIP",
     ],
-    sameAs: ["https://www.youtube.com/@JuptierFinance8654"],
+    sameAs: ["https://www.youtube.com/@JupiterFinance8654"],
   };
 
   const faqSchema = {

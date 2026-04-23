@@ -26,6 +26,7 @@ const formatDate = (isoDate?: string) => {
 
 const VideoGallery = () => {
   const latestVideos = (videos as VideoItem[]).slice(0, 4);
+  const youtubeChannelUrl = "https://www.youtube.com/@JupiterFinance8654";
 
   return (
     <section id="videos" className="py-16 bg-background">
@@ -80,6 +81,17 @@ const VideoGallery = () => {
             ))}
           </div>
         )}
+
+        <div className="mt-10 flex justify-center">
+          <a
+            href={youtubeChannelUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-3 text-sm font-semibold text-foreground hover:bg-card transition-colors"
+          >
+            View all on YouTube
+          </a>
+        </div>
       </div>
     </section>
   );

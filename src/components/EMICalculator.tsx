@@ -47,8 +47,7 @@ const EMICalculator = () => {
           <p className="text-sm font-semibold tracking-widest uppercase text-gold mb-3">Plan Better</p>
           <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">Home Loan EMI Calculator</h2>
           <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
-            Formula used: E = P * r * ((1 + r)^n / ((1 + r)^n - 1)), where P is principal, r is monthly interest rate,
-            and n is total monthly installments.
+            Adjust the sliders to estimate your monthly EMI, total interest, and repayment split before you apply.
           </p>
         </div>
 

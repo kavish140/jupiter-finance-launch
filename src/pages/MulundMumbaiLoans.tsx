@@ -58,7 +58,7 @@ const MulundMumbaiLoans = () => {
             Jupiter<span className="text-gradient-gold"> Fast Finance</span>
           </Link>
           <a
-            href="tel:9757190200"
+            href="tel:+919757190200"
             className="gradient-gold text-accent-foreground font-semibold px-4 py-2 rounded-lg text-sm hover:opacity-90 transition-opacity"
           >
             Call: 9757190200
@@ -79,7 +79,7 @@ const MulundMumbaiLoans = () => {
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
-              href="tel:9757190200"
+              href="tel:+919757190200"
               className="gradient-gold text-accent-foreground font-semibold px-5 py-2.5 rounded-lg text-sm hover:opacity-90 transition-opacity"
             >
               Talk to an Advisor

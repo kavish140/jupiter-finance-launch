@@ -61,21 +61,48 @@ const ContactSection = () => {
 
     try {
       const safeEmail = form.email?.trim() || "noreply@jupiterfastfinance.com";
-
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: form.name,
-          phone: form.phone,
-          email: safeEmail,
-          service: form.service,
-          message: form.message || "No message added.",
-          page_url: window.location.href,
-          submitted_at: new Date().toISOString(),
-        },
-        { publicKey },
+      const baseTemplateId = templateId;
+      const templateCandidates = Array.from(
+        new Set([
+          baseTemplateId,
+          baseTemplateId.charAt(0).toUpperCase() + baseTemplateId.slice(1),
+          baseTemplateId.charAt(0).toLowerCase() + baseTemplateId.slice(1),
+        ]),
       );
+
+      const templateParams = {
+        from_name: form.name,
+        phone: form.phone,
+        email: safeEmail,
+        service: form.service,
+        message: form.message || "No message added.",
+        page_url: window.location.href,
+        submitted_at: new Date().toISOString(),
+      };
+
+      let sent = false;
+      let lastError: unknown = null;
+
+      for (const candidateTemplateId of templateCandidates) {
+        try {
+          await emailjs.send(serviceId, candidateTemplateId, templateParams, { publicKey });
+          sent = true;
+          break;
+        } catch (error: unknown) {
+          lastError = error;
+          const details = typeof error === "object" && error !== null && "text" in error
+            ? String((error as { text: string }).text)
+            : "";
+
+          if (!details.toLowerCase().includes("template id not found")) {
+            throw error;
+          }
+        }
+      }
+
+      if (!sent) {
+        throw lastError;
+      }
 
       toast.success("Thanks. Your enquiry has been sent successfully.");
       setForm({ name: "", phone: "", email: "", service: "", message: "" });

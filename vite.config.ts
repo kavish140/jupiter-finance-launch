@@ -32,7 +32,6 @@ export default defineConfig(({ mode }) => ({
           "vendor-react": ["react", "react-dom"],
           "vendor-ui": ["@radix-ui/react-accordion", "@radix-ui/react-dialog"],
           "vendor-router": ["react-router-dom"],
-          "vendor-forms": ["react-hook-form", "@hookform/resolvers", "zod"],
         },
       },
     },

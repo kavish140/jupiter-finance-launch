@@ -60,13 +60,15 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
+      const safeEmail = form.email?.trim() || "noreply@jupiterfastfinance.com";
+
       await emailjs.send(
         serviceId,
         templateId,
         {
           from_name: form.name,
           phone: form.phone,
-          email: form.email || "Not provided",
+          email: safeEmail,
           service: form.service,
           message: form.message || "No message added.",
           page_url: window.location.href,
@@ -77,9 +79,16 @@ const ContactSection = () => {
 
       toast.success("Thanks. Your enquiry has been sent successfully.");
       setForm({ name: "", phone: "", email: "", service: "", message: "" });
-    } catch (error) {
-      console.error("EmailJS submit failed", error);
-      toast.error("We could not send your enquiry. Please try again or call us directly.");
+    } catch (error: unknown) {
+      const status = typeof error === "object" && error !== null && "status" in error
+        ? String((error as { status: number | string }).status)
+        : "unknown";
+      const details = typeof error === "object" && error !== null && "text" in error
+        ? String((error as { text: string }).text)
+        : "Unknown error";
+
+      console.error("EmailJS submit failed", { status, details, error });
+      toast.error(`Could not send enquiry (${status}). ${details}`);
     } finally {
       setIsSubmitting(false);
     }

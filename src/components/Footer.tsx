@@ -50,7 +50,7 @@ const Footer = () => {
             <span className="uppercase tracking-[0.24em] text-[10px] sm:text-xs text-primary-foreground/45">
               Website by
             </span>
-            <span className="font-semibold tracking-wide">SitNova</span>
+            <span className="font-semibold tracking-wide">Sitenova</span>
             <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
             <span className="text-primary-foreground/60">sitenova.dev</span>
           </a>

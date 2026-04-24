@@ -5,7 +5,7 @@ from pathlib import Path
 from googleapiclient.discovery import build
 
 MAX_RESULTS = 4
-DEFAULT_CHANNEL_HANDLE = "@JuptierFinance8654"
+DEFAULT_CHANNEL_HANDLE = "@JupiterFinance8654"
 OUTPUT_PATH = Path("src/data/videos.json")
 
 

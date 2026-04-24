@@ -59,7 +59,7 @@ jobs:
           fetch-depth: 0
 
       - name: Validate admin credentials
-        if: ${{ github.event_name == 'workflow_dispatch' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.operation != 'sync_latest' }}
         run: |
           if [ -z "${{ inputs.admin_credentials }}" ]; then
             echo "Missing admin credentials input."
@@ -84,7 +84,7 @@ jobs:
         if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.operation == 'sync_latest') }}
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-          YOUTUBE_CHANNEL_HANDLE: "@JuptierFinance8654"
+          YOUTUBE_CHANNEL_HANDLE: "@JupiterFinance8654"
           YOUTUBE_CHANNEL_ID: ${{ vars.YOUTUBE_CHANNEL_ID }}
         run: python scripts/fetch_videos.py
 

@@ -39,6 +39,26 @@ const Footer = () => {
           </div>
         </div>
 
+        <div className="mt-10 flex flex-col items-center gap-3 text-center">
+          <a
+            href="https://sitenova.dev"
+            target="_blank"
+            rel="sponsored noopener noreferrer"
+            className="inline-flex items-center gap-3 rounded-full border border-primary-foreground/15 bg-primary-foreground/5 px-4 py-2 text-xs sm:text-sm text-primary-foreground/75 transition-colors hover:border-gold/40 hover:text-gold"
+            aria-label="Visit SitNova, the website partner behind this site"
+          >
+            <span className="uppercase tracking-[0.24em] text-[10px] sm:text-xs text-primary-foreground/45">
+              Website by
+            </span>
+            <span className="font-semibold tracking-wide">SitNova</span>
+            <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+            <span className="text-primary-foreground/60">sitenova.dev</span>
+          </a>
+          <p className="max-w-2xl text-xs sm:text-sm text-primary-foreground/40">
+            Built with a light promotional credit for the studio behind the site.
+          </p>
+        </div>
+
         <div className="mt-10 pt-6 border-t border-primary-foreground/10 text-center text-primary-foreground/40 text-sm">
           © {new Date().getFullYear()} Jupiter Fast Finance. All rights reserved.
         </div>

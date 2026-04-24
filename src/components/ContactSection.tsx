@@ -72,7 +72,7 @@ const ContactSection = () => {
           page_url: window.location.href,
           submitted_at: new Date().toISOString(),
         },
-        publicKey,
+        { publicKey },
       );
 
       toast.success("Thanks. Your enquiry has been sent successfully.");

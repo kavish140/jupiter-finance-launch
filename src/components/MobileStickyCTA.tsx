@@ -17,7 +17,7 @@ const MobileStickyCTA = () => {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex-1 flex items-center justify-center gap-2 py-4 bg-success text-primary-foreground font-bold text-sm"
+        className="flex-1 flex items-center justify-center gap-2 py-4 bg-success text-white font-bold text-sm"
       >
         <SiWhatsapp className="w-5 h-5" />
         WhatsApp

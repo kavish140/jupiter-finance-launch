@@ -8,6 +8,10 @@ import { lazy, Suspense } from "react";
 const Index = lazy(() => import("./pages/Index"));
 const HomeLoan = lazy(() => import("./pages/HomeLoan"));
 const MulundMumbaiLoans = lazy(() => import("./pages/MulundMumbaiLoans"));
+const ThaneLoans = lazy(() => import("./pages/ThaneLoans"));
+const BhandupLoans = lazy(() => import("./pages/BhandupLoans"));
+const GhatkoparLoans = lazy(() => import("./pages/GhatkoparLoans"));
+const PowaiLoans = lazy(() => import("./pages/PowaiLoans"));
 const Admin = lazy(() => import("./pages/Admin"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -37,6 +41,10 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/home_loan" element={<HomeLoan />} />
             <Route path="/mulund-mumbai-loans" element={<MulundMumbaiLoans />} />
+            <Route path="/loans-in-thane" element={<ThaneLoans />} />
+            <Route path="/loans-in-bhandup" element={<BhandupLoans />} />
+            <Route path="/loans-in-ghatkopar" element={<GhatkoparLoans />} />
+            <Route path="/loans-in-powai" element={<PowaiLoans />} />
             <Route path="/admin" element={<Admin />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

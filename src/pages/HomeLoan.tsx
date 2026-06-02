@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import MobileStickyCTA from "@/components/MobileStickyCTA";
 import SeoMeta from "@/components/SeoMeta";
 import { Link } from "react-router-dom";
 
@@ -108,6 +109,7 @@ const HomeLoan = () => {
 
       <Footer />
       <WhatsAppButton />
+      <MobileStickyCTA />
     </div>
   );
 };

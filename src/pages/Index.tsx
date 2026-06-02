@@ -9,6 +9,7 @@ import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import MobileStickyCTA from "@/components/MobileStickyCTA";
 import StructuredData from "@/components/StructuredData";
 import SeoMeta from "@/components/SeoMeta";
 
@@ -33,6 +34,7 @@ const Index = () => {
       <ContactSection />
       <Footer />
       <WhatsAppButton />
+      <MobileStickyCTA />
     </div>
   );
 };

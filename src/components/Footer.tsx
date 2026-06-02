@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="gradient-navy py-12">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-8 items-start">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 items-start">
           <div>
             <h3 className="text-xl font-display font-bold text-primary-foreground mb-3">
               Jupiter<span className="text-gradient-gold"> Fast Finance</span>
@@ -16,9 +16,19 @@ const Footer = () => {
           </div>
 
           <div>
+            <h4 className="font-semibold text-primary-foreground mb-3">Areas We Serve</h4>
+            <div className="space-y-2 text-sm">
+              <Link to="/mulund-mumbai-loans" className="block text-primary-foreground/60 hover:text-gold transition-colors">Mulund & Mumbai</Link>
+              <Link to="/loans-in-thane" className="block text-primary-foreground/60 hover:text-gold transition-colors">Thane</Link>
+              <Link to="/loans-in-bhandup" className="block text-primary-foreground/60 hover:text-gold transition-colors">Bhandup</Link>
+              <Link to="/loans-in-ghatkopar" className="block text-primary-foreground/60 hover:text-gold transition-colors">Ghatkopar</Link>
+              <Link to="/loans-in-powai" className="block text-primary-foreground/60 hover:text-gold transition-colors">Powai</Link>
+            </div>
+          </div>
+
+          <div>
             <h4 className="font-semibold text-primary-foreground mb-3">Quick Links</h4>
             <div className="space-y-2 text-sm">
-              <Link to="/mulund-mumbai-loans" className="block text-primary-foreground/60 hover:text-gold transition-colors">Loans in Mulund & Mumbai</Link>
               <a href="#services" className="block text-primary-foreground/60 hover:text-gold transition-colors">Home Loans</a>
               <a href="#services" className="block text-primary-foreground/60 hover:text-gold transition-colors">Loan Against Property</a>
               <a href="#services" className="block text-primary-foreground/60 hover:text-gold transition-colors">Health Insurance</a>

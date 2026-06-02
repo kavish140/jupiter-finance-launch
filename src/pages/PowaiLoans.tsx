@@ -6,50 +6,48 @@ import MobileStickyCTA from "@/components/MobileStickyCTA";
 import { Link } from "react-router-dom";
 
 const serviceAreas = [
-  "Mulund East",
-  "Mulund West",
-  "Bhandup",
-  "Ghatkopar",
   "Powai",
-  "Thane",
-  "Central Mumbai",
-  "Navi Mumbai",
+  "Hiranandani Gardens",
+  "Chandivali",
+  "Saki Naka",
+  "Rambaug",
+  "IIT Bombay Area",
 ];
 
 const loanTypes = [
-  "Home loan guidance for first-time buyers and property purchases",
-  "Loan against property for business and personal liquidity needs",
-  "Loan against mutual funds for fast access to funds without redeeming investments",
-  "Home loan balance transfer and top-up guidance",
-  "Support for salaried and self-employed borrowers",
+  "Home loan guidance for first-time buyers in Powai",
+  "Loan against property for business expansion or liquidity",
+  "Loan against mutual funds without liquidating investments",
+  "Balance transfer and top-up options for existing loans",
+  "Tailored support for salaried and self-employed professionals",
 ];
 
 const localFaqs = [
   {
-    question: "Do you help with loans in Mulund and nearby Mumbai suburbs?",
+    question: "Do you help with home loans in Powai?",
     answer:
-      "Yes. We support customers across Mulund, Mumbai, Thane, and nearby suburbs with home loans, loan against property, and related financial services.",
+      "Yes. We specialize in helping customers across Powai, Hiranandani Gardens, and Chandivali secure the best home loan rates from top banks and NBFCs.",
   },
   {
-    question: "Can you help compare lenders and improve eligibility?",
+    question: "What is the process for loan against property in Powai?",
     answer:
-      "Yes. We compare lenders, explain the documents required, and help you understand the eligibility profile so you can choose the most practical loan option.",
+      "We compare lenders, assess the property valuation, and guide you through the documentation to ensure a fast and transparent loan against property disbursal.",
   },
   {
-    question: "Do you support other financial products too?",
+    question: "Do you offer doorstep document collection in Powai?",
     answer:
-      "We also help with mutual fund SIP planning, health insurance, and life insurance so customers can manage borrowing and financial protection in one place.",
+      "Yes, our team can arrange for doorstep document pickup to make your loan application process entirely stress-free in Powai.",
   },
 ];
 
-const MulundMumbaiLoans = () => {
+const PowaiLoans = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoMeta
-        title="Loans in Mulund & Mumbai | Jupiter Fast Finance"
-        description="Looking for home loan, loan against property, or loan against mutual funds in Mulund, Mumbai, and nearby suburbs? Jupiter Fast Finance helps you compare lenders and get guided support."
-        keywords="loans in mulund, loans in mumbai, home loan mulund, loan against property mumbai, loan consultant mulund, loan against mutual funds mumbai, jupiter fast finance"
-        canonicalUrl="https://jupiterfastfinance.com/mulund-mumbai-loans"
+        title="Home Loans & Loan Against Property in Powai | Jupiter Fast Finance"
+        description="Looking for a reliable loan consultant in Powai? Jupiter Fast Finance provides expert guidance for home loans, loan against property, and mutual funds across Powai."
+        keywords="home loan powai, loan against property powai, loan consultant powai, financial services powai, loans in hiranandani gardens, chandivali loans, jupiter fast finance powai"
+        canonicalUrl="https://jupiterfastfinance.com/loans-in-powai"
       />
       <StructuredData />
 
@@ -69,14 +67,14 @@ const MulundMumbaiLoans = () => {
 
       <main className="container mx-auto px-4 py-12 space-y-10">
         <section className="space-y-5">
-          <p className="text-sm font-semibold tracking-wider text-primary uppercase">Local Loan Services</p>
+          <p className="text-sm font-semibold tracking-wider text-primary uppercase">Local Loan Services in Powai</p>
           <h1 className="text-3xl md:text-5xl font-display font-bold leading-tight max-w-4xl">
-            Home Loans and Loan Advice for Mulund, Mumbai, and Nearby Areas
+            Expert Home Loans and Financial Guidance in Powai
           </h1>
           <p className="text-muted-foreground max-w-3xl">
-            Jupiter Fast Finance helps borrowers across Mulund and the wider Mumbai region with
-            home loans, loan against property, and loan against mutual funds. We keep the process
-            simple, transparent, and focused on lender options that match your profile.
+            Whether you are buying a new home in Powai, seeking a loan against property for your business,
+            or exploring loan against mutual funds, Jupiter Fast Finance is your trusted local partner.
+            We simplify the complex loan process, ensuring transparency and competitive rates.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
@@ -96,10 +94,9 @@ const MulundMumbaiLoans = () => {
 
         <section className="grid md:grid-cols-2 gap-6">
           <article className="rounded-xl border border-border bg-card p-6 space-y-4">
-            <h2 className="text-2xl font-semibold">Areas we serve</h2>
+            <h2 className="text-2xl font-semibold">Powai Areas We Serve</h2>
             <p className="text-muted-foreground">
-              We focus on customer searches and loan enquiries from the eastern and central Mumbai
-              corridor, especially around Mulund.
+              We provide fast, reliable financial consulting to residents and businesses across the Powai region.
             </p>
             <div className="flex flex-wrap gap-2">
               {serviceAreas.map((area) => (
@@ -114,7 +111,7 @@ const MulundMumbaiLoans = () => {
           </article>
 
           <article className="rounded-xl border border-border bg-card p-6 space-y-4">
-            <h2 className="text-2xl font-semibold">What we help with</h2>
+            <h2 className="text-2xl font-semibold">Our Local Services</h2>
             <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
               {loanTypes.map((item) => (
                 <li key={item}>{item}</li>
@@ -124,17 +121,15 @@ const MulundMumbaiLoans = () => {
         </section>
 
         <section className="rounded-xl border border-border bg-card p-6 md:p-8 space-y-4">
-          <h2 className="text-2xl md:text-3xl font-semibold">Why local searchers should find us</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold">Why Powai Residents Trust Us</h2>
           <p className="text-muted-foreground max-w-4xl">
-            This page is built for people searching for loan help in Mulund, Mumbai, and nearby
-            suburbs. The combination of location-focused page copy, structured data, internal links,
-            and a dedicated sitemap entry gives search engines a clear signal that Jupiter Fast
-            Finance is relevant for local loan intent.
+            Finding the right loan in a premium suburb like Powai can be overwhelming. We partner with
+            major banks and NBFCs to ensure our customers get the best terms possible. From the initial
+            eligibility check to the final loan disbursal, we offer dedicated end-to-end support.
           </p>
           <p className="text-muted-foreground max-w-4xl">
-            If you are comparing lenders, looking for a home loan consultant, or checking loan
-            against property options in the Mumbai region, this is the fastest way to connect with
-            our team.
+            By choosing a local financial expert, you save time, reduce paperwork friction, and gain
+            clarity on all hidden charges or complex loan terms.
           </p>
         </section>
 
@@ -155,4 +150,4 @@ const MulundMumbaiLoans = () => {
   );
 };
 
-export default MulundMumbaiLoans;
+export default PowaiLoans;

@@ -54,6 +54,7 @@
   }
 
   .dark {
+    color-scheme: dark;
     --background: 220 40% 8%;
     --foreground: 220 20% 95%;
     --card: 220 40% 12%;
@@ -108,10 +109,10 @@
   }
 
   .shadow-card {
-    box-shadow: 0 4px 24px -4px hsl(220 60% 20% / 0.08);
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.4);
   }
 
   .shadow-card-hover {
-    box-shadow: 0 12px 40px -8px hsl(220 60% 20% / 0.15);
+    box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.6);
   }
 }

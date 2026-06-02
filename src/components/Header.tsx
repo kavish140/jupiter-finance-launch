@@ -32,7 +32,7 @@ const Header = () => {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-card/90 backdrop-blur-md border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-2xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] transition-all">
       <div className="container mx-auto flex items-center justify-between py-3 px-4">
         <a href="/#home" className="flex items-center gap-2">
           <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />

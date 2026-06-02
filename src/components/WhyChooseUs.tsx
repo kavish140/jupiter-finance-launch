@@ -1,4 +1,5 @@
 import { CheckCircle2, Clock, Users, Award } from "lucide-react";
+import { motion } from "framer-motion";
 
 const reasons = [
   {
@@ -29,47 +30,102 @@ const proofPoints = [
   { value: "4", label: "content touchpoints" },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, scale: 0.9, y: 20 },
+  visible: { 
+    opacity: 1, 
+    scale: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  },
+};
+
 const WhyChooseUs = () => {
   return (
-    <section id="why-us" className="py-24 gradient-navy">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+    <section id="why-us" className="py-24 relative overflow-hidden bg-navy-dark">
+      {/* Background gradient map overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-dark to-black opacity-90" />
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+      
+      {/* Glowing accents */}
+      <motion.div 
+        animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+        transition={{ duration: 5, repeat: Infinity }}
+        className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-gold/10 rounded-full blur-[120px] pointer-events-none"
+      />
+
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <p className="text-sm font-semibold tracking-widest uppercase text-gold mb-3">
             Why Jupiter Fast Finance
           </p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground">
+          <h2 className="text-3xl md:text-5xl font-display font-bold text-white">
             Your Trust, Our Commitment
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
           {reasons.map((r) => (
-            <div key={r.title} className="text-center">
-              <div className="w-16 h-16 rounded-full gradient-gold mx-auto flex items-center justify-center mb-5">
-                <r.icon className="w-8 h-8 text-accent-foreground" />
+            <motion.div variants={itemVariants} key={r.title} className="text-center group">
+              <div className="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm mx-auto flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-all duration-300 relative overflow-hidden shadow-lg shadow-black/20">
+                <div className="absolute inset-0 bg-gradient-to-br from-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <r.icon className="w-10 h-10 text-gold group-hover:scale-110 transition-transform duration-300" />
               </div>
-              <h3 className="text-lg font-display font-bold text-primary-foreground mb-2">
+              <h3 className="text-xl font-display font-bold text-white mb-2">
                 {r.title}
               </h3>
-              <p className="text-primary-foreground/70 text-sm leading-relaxed">
+              <p className="text-white/60 text-sm leading-relaxed max-w-xs mx-auto">
                 {r.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-16 grid gap-4 md:grid-cols-3">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-20 grid gap-6 md:grid-cols-3"
+        >
           {proofPoints.map((point) => (
-            <div key={point.label} className="rounded-2xl border border-primary-foreground/10 bg-primary-foreground/5 p-5 text-center">
-              <p className="text-3xl font-display font-bold text-primary-foreground">{point.value}</p>
-              <p className="mt-1 text-sm text-primary-foreground/70">{point.label}</p>
+            <div key={point.label} className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-8 text-center overflow-hidden hover:bg-white/10 transition-colors duration-300 group">
+              <div className="absolute top-0 left-0 w-full h-1 gradient-gold opacity-50 group-hover:opacity-100 transition-opacity" />
+              <p className="text-5xl font-display font-bold text-transparent bg-clip-text gradient-gold mb-2">{point.value}</p>
+              <p className="text-sm font-medium tracking-wide text-white/80 uppercase">{point.label}</p>
             </div>
           ))}
-        </div>
+        </motion.div>
 
-        <p className="mt-6 text-center text-sm text-primary-foreground/60">
+        <motion.p 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.8 }}
+          className="mt-8 text-center text-sm text-white/40 max-w-2xl mx-auto"
+        >
           Built around borrowers in Mulund, Mumbai, Thane, Bhandup, Ghatkopar, Powai, Navi Mumbai, and Central Mumbai.
-        </p>
+        </motion.p>
       </div>
     </section>
   );

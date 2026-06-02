@@ -5,10 +5,10 @@ const MobileStickyCTA = () => {
   const whatsappUrl = `https://wa.me/919757190200?text=${encodeURIComponent("Hi, I'd like to know more about your financial services.")}`;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden flex shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+    <div className="fixed bottom-4 left-4 right-4 z-50 md:hidden flex shadow-[0_8px_30px_rgba(0,0,0,0.3)] rounded-xl overflow-hidden border border-white/10 backdrop-blur-md">
       <a
         href="tel:+919757190200"
-        className="flex-1 flex items-center justify-center gap-2 py-4 gradient-gold text-accent-foreground font-bold text-sm"
+        className="flex-1 flex items-center justify-center gap-2 py-3.5 gradient-gold text-accent-foreground font-bold text-sm hover:opacity-90 transition-opacity"
       >
         <Phone className="w-5 h-5" />
         Call Now

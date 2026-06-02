@@ -35,6 +35,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/90 backdrop-blur-md border-b border-border">
       <div className="container mx-auto flex items-center justify-between py-3 px-4">
         <a href="/#home" className="flex items-center gap-2">
+          <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />
           <span className="text-2xl font-display font-bold text-primary">
             Jupiter<span className="text-gradient-gold"> Fast Finance</span>
           </span>
@@ -112,8 +113,9 @@ const Header = () => {
 
           <SheetContent side="right" className="w-[88vw] sm:max-w-sm px-0">
             <SheetHeader className="px-6 pb-4 text-left">
-              <SheetTitle className="text-2xl font-display">
-                Jupiter<span className="text-gradient-gold"> Fast Finance</span>
+              <SheetTitle className="text-2xl font-display flex items-center gap-2">
+                <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-6 h-6 rounded-full" />
+                <span>Jupiter<span className="text-gradient-gold"> Fast Finance</span></span>
               </SheetTitle>
               <p className="text-sm text-muted-foreground">Quick access to your main pages and support links.</p>
             </SheetHeader>

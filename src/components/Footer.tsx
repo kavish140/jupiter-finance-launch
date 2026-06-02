@@ -7,9 +7,12 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 items-start">
           <div>
-            <h3 className="text-xl font-display font-bold text-primary-foreground mb-3">
-              Jupiter<span className="text-gradient-gold"> Fast Finance</span>
-            </h3>
+            <div className="flex items-center gap-2 mb-3">
+              <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />
+              <h3 className="text-xl font-display font-bold text-primary-foreground">
+                Jupiter<span className="text-gradient-gold"> Fast Finance</span>
+              </h3>
+            </div>
             <p className="text-primary-foreground/60 text-sm leading-relaxed">
               Your trusted partner for loans, insurance, and investments in Mulund, Mumbai, and nearby suburbs.
             </p>

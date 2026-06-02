@@ -53,8 +53,9 @@ const GhatkoparLoans = () => {
 
       <header className="border-b border-border bg-card/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link to="/" className="text-2xl font-display font-bold text-primary">
-            Jupiter<span className="text-gradient-gold"> Fast Finance</span>
+          <Link to="/" className="text-2xl font-display font-bold text-primary flex items-center gap-2">
+            <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />
+            <span>Jupiter<span className="text-gradient-gold"> Fast Finance</span></span>
           </Link>
           <a
             href="tel:+919757190200"

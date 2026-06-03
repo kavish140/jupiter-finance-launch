@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import BackToTop from "@/components/BackToTop";
 
 const Index = lazy(() => import("./pages/Index"));
 const HomeLoan = lazy(() => import("./pages/HomeLoan"));
@@ -40,6 +41,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <BackToTop />
       <BrowserRouter>
         <Suspense fallback={<LoadingFallback />}>
           <Routes>

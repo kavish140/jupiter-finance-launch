@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "id": "home-loan-eligibility",
+    "title": "Home Loan Eligibility — How Much Can You Borrow on Your Salary?",
+    "excerpt": "Your home loan eligibility depends on your monthly income, existing EMIs, age, and CIBIL score. As a general rule, banks allow an EMI of up to 50–60% of your net monthly income. For example, if you earn ₹60,000/month with no existing EMIs, you could be eligible for an EMI of ₹30,000–₹36,000 — translating to a loan of roughly ₹30–35 lakh over 20 years at current rates. Self-employed applicants are assessed on ITR income, while salaried individuals benefit from simpler documentation. At Jupiter Fast Finance, we evaluate your full profile across 11+ partner banks to find the lender offering you the highest eligible amount at the best rate. Call us for a free eligibility check.",
+    "category": "Home Loans",
+    "publishedAt": "2026-05-20T10:00:00.000Z"
+  },
+  {
+    "id": "best-home-loan-rates-mumbai",
+    "title": "Best Home Loan Interest Rates in Mumbai (2026)",
+    "excerpt": "Home loan interest rates in Mumbai currently range from 8.25% to 9.50% p.a. depending on the lender, loan amount, and your credit profile. SBI and LIC Housing Finance typically offer the most competitive rates for salaried applicants with a CIBIL score above 750. HDFC Bank and ICICI Bank provide quick processing but may have slightly higher rates. For self-employed borrowers or those with lower CIBIL scores, NBFCs like Bajaj Finserv and Tata Capital are more flexible on eligibility. Rather than approaching each bank individually, Jupiter Fast Finance compares offers from all major lenders in one place — saving you time and ensuring you get the best deal available for your profile.",
+    "category": "Home Loans",
+    "publishedAt": "2026-05-15T10:00:00.000Z"
+  },
+  {
+    "id": "lap-vs-home-loan",
+    "title": "Loan Against Property vs Home Loan — Which Is Right for You?",
+    "excerpt": "Both products use your property as collateral, but they serve different purposes. A home loan is specifically for purchasing or constructing a residential property, with interest rates starting around 8.25% and tenure up to 30 years. A Loan Against Property (LAP) lets you borrow against an existing property you already own — residential or commercial — for any purpose: business expansion, education, medical expenses, or debt consolidation. LAP rates are slightly higher (9–12%) but offer higher loan amounts (up to 60–70% of property value). At Jupiter Fast Finance, we help you evaluate which option suits your financial goals and connect you with the right lender from our panel of 11+ banks and NBFCs.",
+    "category": "Loans",
+    "publishedAt": "2026-05-10T10:00:00.000Z"
+  },
+  {
+    "id": "documents-required-home-loan",
+    "title": "Documents Required for Home Loan in Mumbai — Complete Checklist",
+    "excerpt": "Applying for a home loan in Mumbai? Here's what you'll need: For salaried applicants — PAN card, Aadhaar card, last 3 months' salary slips, last 6 months' bank statements, Form 16 or ITR for the last 2 years, and property documents (agreement copy, title deed, approved plan). For self-employed applicants — add your business registration, last 3 years' ITR with computation, audited financials, and GST returns. Property documents typically include the sale agreement, title search report, encumbrance certificate, and NOC from the society. Missing or incomplete documentation is the #1 reason for loan delays. Our team at Jupiter Fast Finance offers doorstep document collection and pre-checks your file before submission to avoid rejections.",
+    "category": "Home Loans",
+    "publishedAt": "2026-05-05T10:00:00.000Z"
+  },
+  {
+    "id": "improve-cibil-score",
+    "title": "How to Improve Your CIBIL Score for Loan Approval",
+    "excerpt": "A CIBIL score of 750 or above significantly improves your chances of loan approval at the best interest rates. To improve your score: (1) Pay all EMIs and credit card bills on time — even one missed payment can drop your score by 50–100 points. (2) Keep your credit utilization below 30% of your total credit limit. (3) Avoid applying for multiple loans or cards simultaneously, as each inquiry impacts your score. (4) Maintain a healthy mix of secured and unsecured credit. (5) Check your CIBIL report regularly for errors and dispute any inaccuracies. At Jupiter Fast Finance, we also work with lenders who consider applications with lower CIBIL scores — so even if your score isn't perfect, reach out for a free assessment.",
+    "category": "Financial Tips",
+    "publishedAt": "2026-04-28T10:00:00.000Z"
+  },
+  {
+    "id": "health-insurance-families-mumbai",
+    "title": "Health Insurance for Families in Mumbai — What You Need to Know",
+    "excerpt": "Medical costs in Mumbai are among the highest in India — a single hospitalisation can easily cost ₹2–5 lakh. A family floater health insurance plan covers your entire family (spouse, children, and sometimes parents) under a single sum insured, making it more affordable than individual policies. Key features to look for: cashless treatment at network hospitals, no-claim bonus (your sum insured increases if you don't make a claim), coverage for pre-existing conditions after the waiting period, maternity benefits, and day-care procedures. At Jupiter Fast Finance, we compare plans from top insurers and help you select the right coverage based on your family's age, health history, and budget. We also assist with claim settlement when you need it most.",
+    "category": "Insurance",
+    "publishedAt": "2026-04-20T10:00:00.000Z"
+  }
+]

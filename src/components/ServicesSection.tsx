@@ -62,7 +62,7 @@ const cardVariants = {
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="py-24 bg-background relative overflow-hidden">
+    <section id="services" className="py-14 md:py-24 bg-background relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
       
@@ -72,15 +72,15 @@ const ServicesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <p className="text-sm font-semibold tracking-widest uppercase text-gold mb-3">
             What We Offer
           </p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
+          <h2 className="text-2xl md:text-5xl font-display font-bold text-foreground">
             Our Financial Services in Mulund &amp; Mumbai
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-3xl mx-auto text-lg">
+          <p className="mt-3 text-muted-foreground max-w-3xl mx-auto text-sm md:text-lg">
             Practical lending, insurance, and investment support for customers across Mulund,
             Mumbai, and nearby suburbs.
           </p>
@@ -97,7 +97,7 @@ const ServicesSection = () => {
             <motion.div
               variants={cardVariants}
               key={service.title}
-              className="group relative bg-card/60 backdrop-blur-sm rounded-2xl p-8 transition-all duration-300 border border-border/60 hover:border-gold/40 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgba(245,158,11,0.15)] hover:-translate-y-1 overflow-hidden flex flex-col"
+              className="group relative bg-card/60 backdrop-blur-sm rounded-2xl p-5 md:p-8 transition-all duration-300 border border-border/60 hover:border-gold/40 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgba(245,158,11,0.15)] hover:-translate-y-1 overflow-hidden flex flex-col"
             >
               {/* Hover glow effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />

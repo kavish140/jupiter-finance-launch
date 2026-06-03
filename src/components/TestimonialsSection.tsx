@@ -47,7 +47,7 @@ const itemVariants = {
 
 const TestimonialsSection = () => {
   return (
-    <section id="testimonials" className="py-24 relative overflow-hidden bg-navy-dark">
+    <section id="testimonials" className="py-14 md:py-24 relative overflow-hidden bg-navy-dark">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-dark to-black opacity-90" />
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
@@ -66,12 +66,12 @@ const TestimonialsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <p className="text-sm font-semibold tracking-widest uppercase text-gold mb-3">
             What Our Customers Say
           </p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold text-white">
+          <h2 className="text-2xl md:text-5xl font-display font-bold text-white">
             Trusted by 1000+ Families
           </h2>
         </motion.div>
@@ -82,13 +82,13 @@ const TestimonialsSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
         >
-          {testimonials.map((t) => (
+          {testimonials.map((t, i) => (
             <motion.div
               variants={itemVariants}
               key={t.name}
-              className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 flex flex-col hover:bg-white/10 transition-all duration-300 group overflow-hidden"
+              className={`relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-5 md:p-6 flex flex-col hover:bg-white/10 transition-all duration-300 group overflow-hidden ${i >= 2 ? "hidden md:flex" : ""}`}
             >
               {/* Top gold accent bar */}
               <div className="absolute top-0 left-0 w-full h-1 gradient-gold opacity-50 group-hover:opacity-100 transition-opacity" />

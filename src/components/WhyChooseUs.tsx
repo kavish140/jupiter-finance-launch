@@ -51,7 +51,7 @@ const itemVariants = {
 
 const WhyChooseUs = () => {
   return (
-    <section id="why-us" className="py-24 relative overflow-hidden bg-navy-dark">
+    <section id="why-us" className="py-14 md:py-24 relative overflow-hidden bg-navy-dark">
       {/* Background gradient map overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-dark to-black opacity-90" />
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
@@ -69,12 +69,12 @@ const WhyChooseUs = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <p className="text-sm font-semibold tracking-widest uppercase text-gold mb-3">
             Why Jupiter Fast Finance
           </p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold text-white">
+          <h2 className="text-2xl md:text-5xl font-display font-bold text-white">
             Your Trust, Our Commitment
           </h2>
         </motion.div>
@@ -84,18 +84,18 @@ const WhyChooseUs = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8"
         >
           {reasons.map((r) => (
             <motion.div variants={itemVariants} key={r.title} className="text-center group">
-              <div className="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm mx-auto flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-all duration-300 relative overflow-hidden shadow-lg shadow-black/20">
+              <div className="w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm mx-auto flex items-center justify-center mb-3 md:mb-6 group-hover:-translate-y-2 transition-all duration-300 relative overflow-hidden shadow-lg shadow-black/20">
                 <div className="absolute inset-0 bg-gradient-to-br from-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <r.icon className="w-10 h-10 text-gold group-hover:scale-110 transition-transform duration-300" />
+                <r.icon className="w-7 h-7 md:w-10 md:h-10 text-gold group-hover:scale-110 transition-transform duration-300" />
               </div>
-              <h3 className="text-xl font-display font-bold text-white mb-2">
+              <h3 className="text-sm md:text-xl font-display font-bold text-white mb-1 md:mb-2">
                 {r.title}
               </h3>
-              <p className="text-white/60 text-sm leading-relaxed max-w-xs mx-auto">
+              <p className="text-white/60 text-xs md:text-sm leading-relaxed max-w-xs mx-auto hidden md:block">
                 {r.description}
               </p>
             </motion.div>
@@ -107,13 +107,13 @@ const WhyChooseUs = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-20 grid gap-6 grid-cols-2 md:grid-cols-4"
+          className="mt-10 md:mt-20 grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-4"
         >
           {proofPoints.map((point) => (
-            <div key={point.label} className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-8 text-center overflow-hidden hover:bg-white/10 transition-colors duration-300 group">
+            <div key={point.label} className="relative rounded-xl md:rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-4 md:p-8 text-center overflow-hidden hover:bg-white/10 transition-colors duration-300 group">
               <div className="absolute top-0 left-0 w-full h-1 gradient-gold opacity-50 group-hover:opacity-100 transition-opacity" />
-              <p className="text-5xl font-display font-bold text-gradient-gold mb-2">{point.value}</p>
-              <p className="text-sm font-medium tracking-wide text-white/80 uppercase">{point.label}</p>
+              <p className="text-2xl md:text-5xl font-display font-bold text-gradient-gold mb-1 md:mb-2">{point.value}</p>
+              <p className="text-xs md:text-sm font-medium tracking-wide text-white/80 uppercase">{point.label}</p>
             </div>
           ))}
         </motion.div>

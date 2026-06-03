@@ -112,7 +112,7 @@ const WhyChooseUs = () => {
           {proofPoints.map((point) => (
             <div key={point.label} className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-8 text-center overflow-hidden hover:bg-white/10 transition-colors duration-300 group">
               <div className="absolute top-0 left-0 w-full h-1 gradient-gold opacity-50 group-hover:opacity-100 transition-opacity" />
-              <p className="text-5xl font-display font-bold text-transparent bg-clip-text gradient-gold mb-2">{point.value}</p>
+              <p className="text-5xl font-display font-bold text-gradient-gold mb-2">{point.value}</p>
               <p className="text-sm font-medium tracking-wide text-white/80 uppercase">{point.label}</p>
             </div>
           ))}

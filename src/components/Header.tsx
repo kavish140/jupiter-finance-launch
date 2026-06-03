@@ -9,9 +9,17 @@ const Header = () => {
 
   const primaryLinks = [
     { label: "Home", href: "/#home" },
-    { label: "Services", href: "/#services" },
     { label: "Why Us", href: "/#why-us" },
     { label: "Contact", href: "/#contact" },
+  ];
+
+  const serviceLinks = [
+    { label: "Home Loans", href: "/home_loan" },
+    { label: "Loan Against Property", href: "/loan-against-property" },
+    { label: "Loan Against Mutual Funds", href: "/loan-against-mutual-funds" },
+    { label: "Health Insurance", href: "/health-insurance" },
+    { label: "Life Insurance", href: "/life-insurance" },
+    { label: "Mutual Fund SIPs", href: "/mutual-fund-sip" },
   ];
 
   const locationLinks = [
@@ -24,9 +32,7 @@ const Header = () => {
 
   const secondaryLinks = [
     { label: "Videos", href: "/#videos" },
-    { label: "Posts", href: "/#posts" },
     { label: "EMI Calculator", href: "/#emi-calculator" },
-    { label: "Home Loan", href: "/home_loan", isRoute: true },
   ];
 
   const closeMenu = () => setMenuOpen(false);
@@ -53,6 +59,26 @@ const Header = () => {
             </a>
           ))}
 
+          {/* Services Dropdown */}
+          <div className="relative group">
+            <button className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2">
+              Services <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
+            </button>
+            <div className="absolute top-full left-0 w-56 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+              <div className="bg-card border border-border rounded-xl shadow-lg overflow-hidden py-2">
+                {serviceLinks.map((l) => (
+                  <Link
+                    key={l.href}
+                    to={l.href}
+                    className="block px-4 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                  >
+                    {l.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* Locations Dropdown */}
           <div className="relative group">
             <button className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2">
@@ -73,25 +99,15 @@ const Header = () => {
             </div>
           </div>
 
-          {secondaryLinks.map((l) =>
-            l.isRoute ? (
-              <Link
-                key={l.href}
-                to={l.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {l.label}
-              </Link>
-            ) : (
-              <a
-                key={l.href}
-                href={l.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {l.label}
-              </a>
-            )
-          )}
+          {secondaryLinks.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {l.label}
+            </a>
+          ))}
         </nav>
 
         <a
@@ -133,6 +149,23 @@ const Header = () => {
               ))}
 
               <Accordion type="single" collapsible className="rounded-lg border border-border bg-muted/30 px-4">
+                <AccordionItem value="services" className="border-b-border">
+                  <AccordionTrigger className="py-3 text-sm font-medium text-foreground hover:no-underline">
+                    Services
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-3 pt-0 space-y-2">
+                    {serviceLinks.map((l) => (
+                      <Link
+                        key={l.href}
+                        to={l.href}
+                        onClick={closeMenu}
+                        className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-background hover:text-foreground"
+                      >
+                        {l.label}
+                      </Link>
+                    ))}
+                  </AccordionContent>
+                </AccordionItem>
                 <AccordionItem value="locations" className="border-b-border">
                   <AccordionTrigger className="py-3 text-sm font-medium text-foreground hover:no-underline">
                     Locations
@@ -155,27 +188,16 @@ const Header = () => {
                     More
                   </AccordionTrigger>
                   <AccordionContent className="pb-3 pt-0 space-y-2">
-                    {secondaryLinks.map((l) =>
-                      l.isRoute ? (
-                        <Link
-                          key={l.href}
-                          to={l.href}
-                          onClick={closeMenu}
-                          className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-background hover:text-foreground"
-                        >
-                          {l.label}
-                        </Link>
-                      ) : (
-                        <a
-                          key={l.href}
-                          href={l.href}
-                          onClick={closeMenu}
-                          className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-background hover:text-foreground"
-                        >
-                          {l.label}
-                        </a>
-                      )
-                    )}
+                    {secondaryLinks.map((l) => (
+                      <a
+                        key={l.href}
+                        href={l.href}
+                        onClick={closeMenu}
+                        className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-background hover:text-foreground"
+                      >
+                        {l.label}
+                      </a>
+                    ))}
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>

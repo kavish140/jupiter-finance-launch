@@ -33,10 +33,12 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-white mb-3">Quick Links</h4>
             <div className="space-y-2 text-sm">
-              <a href="#services" className="block text-white/60 hover:text-gold transition-colors">Home Loans</a>
-              <a href="#services" className="block text-white/60 hover:text-gold transition-colors">Loan Against Property</a>
-              <a href="#services" className="block text-white/60 hover:text-gold transition-colors">Health Insurance</a>
-              <a href="#services" className="block text-white/60 hover:text-gold transition-colors">Mutual Fund SIPs</a>
+              <Link to="/home_loan" className="block text-white/60 hover:text-gold transition-colors">Home Loans</Link>
+              <Link to="/loan-against-property" className="block text-white/60 hover:text-gold transition-colors">Loan Against Property</Link>
+              <Link to="/loan-against-mutual-funds" className="block text-white/60 hover:text-gold transition-colors">Loan Against Mutual Funds</Link>
+              <Link to="/health-insurance" className="block text-white/60 hover:text-gold transition-colors">Health Insurance</Link>
+              <Link to="/life-insurance" className="block text-white/60 hover:text-gold transition-colors">Life Insurance</Link>
+              <Link to="/mutual-fund-sip" className="block text-white/60 hover:text-gold transition-colors">Mutual Fund SIPs</Link>
             </div>
           </div>
 

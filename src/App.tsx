@@ -12,6 +12,11 @@ const ThaneLoans = lazy(() => import("./pages/ThaneLoans"));
 const BhandupLoans = lazy(() => import("./pages/BhandupLoans"));
 const GhatkoparLoans = lazy(() => import("./pages/GhatkoparLoans"));
 const PowaiLoans = lazy(() => import("./pages/PowaiLoans"));
+const LoanAgainstProperty = lazy(() => import("./pages/LoanAgainstProperty"));
+const LoanAgainstMutualFunds = lazy(() => import("./pages/LoanAgainstMutualFunds"));
+const HealthInsurance = lazy(() => import("./pages/HealthInsurance"));
+const LifeInsurance = lazy(() => import("./pages/LifeInsurance"));
+const MutualFundSIP = lazy(() => import("./pages/MutualFundSIP"));
 const Admin = lazy(() => import("./pages/Admin"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -40,6 +45,11 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/home_loan" element={<HomeLoan />} />
+            <Route path="/loan-against-property" element={<LoanAgainstProperty />} />
+            <Route path="/loan-against-mutual-funds" element={<LoanAgainstMutualFunds />} />
+            <Route path="/health-insurance" element={<HealthInsurance />} />
+            <Route path="/life-insurance" element={<LifeInsurance />} />
+            <Route path="/mutual-fund-sip" element={<MutualFundSIP />} />
             <Route path="/mulund-mumbai-loans" element={<MulundMumbaiLoans />} />
             <Route path="/loans-in-thane" element={<ThaneLoans />} />
             <Route path="/loans-in-bhandup" element={<BhandupLoans />} />

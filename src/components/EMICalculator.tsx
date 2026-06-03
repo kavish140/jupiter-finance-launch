@@ -42,11 +42,11 @@ const EMICalculator = () => {
   }, [principal, annualRate, tenureYears]);
 
   return (
-    <section id="emi-calculator" className="py-16 bg-muted/40">
+    <section id="emi-calculator" className="py-10 md:py-16 bg-muted/40">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-14">
+        <div className="text-center mb-8 md:mb-14">
           <p className="text-sm font-semibold tracking-widest uppercase text-gold mb-3">Plan Better</p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">Home Loan EMI Calculator</h2>
+          <h2 className="text-2xl md:text-5xl font-display font-bold text-foreground">Home Loan EMI Calculator</h2>
           <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
             Adjust the sliders to estimate your monthly EMI, total interest, and repayment split before you apply.
           </p>

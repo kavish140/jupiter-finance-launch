@@ -129,13 +129,13 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-muted">
+    <section id="contact" className="py-10 md:py-24 bg-muted">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <p className="text-sm font-semibold tracking-widest uppercase text-gold mb-3">
             Get In Touch
           </p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
+          <h2 className="text-2xl md:text-5xl font-display font-bold text-foreground">
             Start Your Financial Journey
           </h2>
         </div>
@@ -178,7 +178,7 @@ const ContactSection = () => {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="lg:col-span-3 bg-card rounded-xl p-8 shadow-card border border-border space-y-5">
+          <form onSubmit={handleSubmit} className="lg:col-span-3 bg-card rounded-xl p-5 md:p-8 shadow-card border border-border space-y-4 md:space-y-5">
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1.5">Full Name *</label>

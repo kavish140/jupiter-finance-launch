@@ -121,7 +121,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden"
+      className="relative min-h-[70vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 bg-background">
@@ -145,7 +145,7 @@ const HeroSection = () => {
         className="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary/30 rounded-full blur-[120px]"
       />
 
-      <div className="relative z-10 container mx-auto px-4 py-24 md:py-28">
+      <div className="relative z-10 container mx-auto px-4 py-16 md:py-28">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center max-w-7xl mx-auto">
           {/* Left Content */}
           <motion.div 

@@ -138,6 +138,33 @@ const EMICalculator = () => {
             </div>
           </article>
         </div>
+
+        {/* Conversion CTA */}
+        <div className="mt-10 max-w-2xl mx-auto text-center rounded-2xl border border-gold/20 bg-card p-6 md:p-8 shadow-card">
+          <p className="text-lg font-display font-bold text-foreground mb-2">
+            Want this rate or better?
+          </p>
+          <p className="text-sm text-muted-foreground mb-5">
+            Our experts negotiate the best deals from 11+ partner banks &amp; NBFCs. Get a personalized quote in minutes.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <a
+              href="tel:+919757190200"
+              className="gradient-gold text-accent-foreground font-semibold px-6 py-3 rounded-lg text-sm hover:opacity-90 transition-opacity inline-flex items-center gap-2"
+            >
+              📞 Talk to an Advisor
+            </a>
+            <a
+              href="https://wa.me/919757190200?text=Hi%2C%20I%20just%20used%20the%20EMI%20calculator%20and%20would%20like%20to%20discuss%20home%20loan%20options."
+              target="_blank"
+              rel="noreferrer"
+              className="border border-border bg-card text-foreground font-semibold px-6 py-3 rounded-lg text-sm hover:bg-muted transition-colors inline-flex items-center gap-2"
+            >
+              💬 WhatsApp Us
+            </a>
+          </div>
+          <p className="text-xs text-muted-foreground mt-4">Free consultation • No obligations • 25+ years of expertise</p>
+        </div>
       </div>
     </section>
   );

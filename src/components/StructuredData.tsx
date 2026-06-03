@@ -13,25 +13,35 @@ const StructuredData = () => {
   const siteUrl = "https://jupiterfastfinance.com";
   const latestVideos = (videos as VideoItem[]).slice(0, 4);
   const serviceAreas = ["Mulund", "Mumbai", "Thane", "Bhandup", "Ghatkopar", "Powai", "Navi Mumbai", "Central Mumbai"];
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Jupiter Fast Finance",
     url: siteUrl,
+    logo: `${siteUrl}/favicon.png`,
     telephone: "+91-9757190200",
     email: "info@jupiterfastfinance.com",
+    foundingDate: "2000",
     areaServed: serviceAreas,
     sameAs: ["https://www.youtube.com/@JupiterFinance8654"],
   };
 
-  const localBusinessSchema = {
+  const financialServiceSchema = {
     "@context": "https://schema.org",
     "@type": "FinancialService",
     name: "Jupiter Fast Finance",
     url: siteUrl,
+    logo: `${siteUrl}/favicon.png`,
+    image: `${siteUrl}/og-jupiter-fast-finance.jpg`,
     telephone: "+91-9757190200",
     email: "info@jupiterfastfinance.com",
+    foundingDate: "2000",
+    description:
+      "Trusted financial partner in Mulund & Mumbai offering home loans, loan against property, loan against mutual funds, health insurance, life insurance, and mutual fund SIP advisory. 25+ years of experience, 1000+ happy customers.",
+    priceRange: "Free Consultation",
     areaServed: serviceAreas,
+    availableLanguage: ["en", "hi"],
     serviceType: [
       "Home Loans",
       "Loan Against Property",
@@ -48,6 +58,70 @@ const StructuredData = () => {
       areaServed: serviceAreas,
       availableLanguage: ["en", "hi"],
     },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Mulund",
+      addressRegion: "Maharashtra",
+      addressCountry: "IN",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      bestRating: "5",
+      worstRating: "1",
+      ratingCount: "4",
+      reviewCount: "4",
+    },
+    review: [
+      {
+        "@type": "Review",
+        author: { "@type": "Person", name: "Vimal Gosar" },
+        datePublished: "2023-07",
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: "5",
+          bestRating: "5",
+        },
+        reviewBody:
+          "When you talk about Health Insurance, you need to have someone who can GUIDE you perfectly as per your needs with the minute details in every scheme. Jupiter Insurance Consultants are those \"Someone\" who will not only guide you but also help you in every bit of Insurance process. Cheers!",
+      },
+      {
+        "@type": "Review",
+        author: { "@type": "Person", name: "Asif Khan" },
+        datePublished: "2023-07",
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: "5",
+          bestRating: "5",
+        },
+        reviewBody:
+          "Mr. Jignesh Ganatra, Owner of Jupiter, is like a MENTOR for every consumer. He always gives full detail about the policy, suggests good policies with reasonable prices, and ensures we get full benefits. Jupiter is now a single point of contact for my family.",
+      },
+      {
+        "@type": "Review",
+        author: { "@type": "Person", name: "Vinod Unni" },
+        datePublished: "2023-06",
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: "5",
+          bestRating: "5",
+        },
+        reviewBody:
+          "I recently availed insurance claim for a medical treatment and thanks to Jupiter Insurance, the entire process was smooth and hassle free. Highly recommended!",
+      },
+      {
+        "@type": "Review",
+        author: { "@type": "Person", name: "Milind Thakker" },
+        datePublished: "2023-06",
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: "5",
+          bestRating: "5",
+        },
+        reviewBody:
+          "Excellent service and professional guidance. Very satisfied with the support received from the Jupiter team.",
+      },
+    ],
     sameAs: ["https://www.youtube.com/@JupiterFinance8654"],
   };
 
@@ -78,26 +152,6 @@ const StructuredData = () => {
         name: "Jupiter Fast Finance",
       },
     })),
-  };
-
-  const financialServiceSchema = {
-    "@context": "https://schema.org",
-    "@type": "FinancialService",
-    name: "Jupiter Fast Finance",
-    url: siteUrl,
-    telephone: "+91-9757190200",
-    email: "info@jupiterfastfinance.com",
-    areaServed: "IN",
-    availableLanguage: ["en", "hi"],
-    serviceType: [
-      "Home Loans",
-      "Loan Against Property",
-      "Loan Against Mutual Funds",
-      "Health Insurance",
-      "Life Insurance",
-      "Mutual Fund SIP",
-    ],
-    sameAs: ["https://www.youtube.com/@JupiterFinance8654"],
   };
 
   const faqSchema = {
@@ -145,13 +199,12 @@ const StructuredData = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoGraph) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(financialServiceSchema) }}
       />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoGraph) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
     </>
   );

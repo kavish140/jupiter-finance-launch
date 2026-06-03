@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { trackEvent } from "@/hooks/useAnalytics";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -112,6 +113,7 @@ const Header = () => {
 
         <a
           href="tel:+919757190200"
+          onClick={() => trackEvent("phone_click", { location: "header" })}
           className="hidden md:flex items-center gap-2 gradient-gold text-accent-foreground font-semibold px-5 py-2.5 rounded-lg text-sm hover:opacity-90 transition-opacity"
         >
           <Phone className="w-4 h-4" />

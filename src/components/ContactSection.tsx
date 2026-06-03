@@ -3,6 +3,7 @@ import emailjs from "@emailjs/browser";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
+import { trackEvent } from "@/hooks/useAnalytics";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -104,6 +105,7 @@ const ContactSection = () => {
         throw lastError;
       }
 
+      trackEvent("form_submit", { form: "contact", service: form.service });
       toast.success("Thanks. Your enquiry has been sent successfully.");
       setForm({ name: "", phone: "", email: "", service: "", message: "" });
     } catch (error: unknown) {

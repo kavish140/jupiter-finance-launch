@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import heroBg from "@/assets/hero-bg.jpg";
 import { motion } from "framer-motion";
+import { trackEvent } from "@/hooks/useAnalytics";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -101,6 +102,7 @@ const HeroSection = () => {
         throw lastError;
       }
 
+      trackEvent("form_submit", { form: "hero_callback", service: form.service });
       toast.success("Thanks! We will call you back shortly.");
       setForm({ name: "", phone: "", service: "" });
     } catch (error: unknown) {
@@ -188,6 +190,7 @@ const HeroSection = () => {
             >
               <a
                 href="tel:+919757190200"
+                onClick={() => trackEvent("phone_click", { location: "hero" })}
                 className="flex items-center gap-3 gradient-gold text-accent-foreground font-bold px-8 py-4 rounded-lg text-lg hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] hover:-translate-y-1 transition-all duration-300"
               >
                 <Phone className="w-5 h-5" />

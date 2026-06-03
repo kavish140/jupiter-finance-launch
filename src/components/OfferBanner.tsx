@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
+import { trackEvent } from "@/hooks/useAnalytics";
 
 const BANNER_KEY = "offer_banner_dismissed";
 
@@ -32,6 +33,7 @@ const OfferBanner = () => {
         <span className="mx-1 hidden sm:inline">|</span>
         <a
           href="tel:+919757190200"
+          onClick={() => trackEvent("phone_click", { location: "offer_banner" })}
           className="underline underline-offset-2 font-bold hover:opacity-80 transition-opacity"
         >
           Call 9757190200

@@ -1,4 +1,5 @@
 import { SiWhatsapp } from "@icons-pack/react-simple-icons";
+import { trackEvent } from "@/hooks/useAnalytics";
 
 const WhatsAppButton = () => {
   const whatsappUrl = `https://wa.me/919757190200?text=${encodeURIComponent("Hi, I'd like to know more about your financial services.")}`;
@@ -8,6 +9,7 @@ const WhatsAppButton = () => {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackEvent("whatsapp_click", { location: "desktop_floating" })}
       className="hidden md:flex fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-success items-center justify-center shadow-lg hover:scale-110 transition-transform animate-float"
       aria-label="Chat on WhatsApp"
     >

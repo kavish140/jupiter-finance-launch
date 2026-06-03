@@ -1,5 +1,6 @@
 import { Phone } from "lucide-react";
 import { SiWhatsapp } from "@icons-pack/react-simple-icons";
+import { trackEvent } from "@/hooks/useAnalytics";
 
 const MobileStickyCTA = () => {
   const whatsappUrl = `https://wa.me/919757190200?text=${encodeURIComponent("Hi, I'd like to know more about your financial services.")}`;
@@ -8,6 +9,7 @@ const MobileStickyCTA = () => {
     <div className="fixed bottom-4 left-4 right-4 z-50 md:hidden flex shadow-[0_8px_30px_rgba(0,0,0,0.3)] rounded-xl overflow-hidden border border-white/10 backdrop-blur-md">
       <a
         href="tel:+919757190200"
+        onClick={() => trackEvent("phone_click", { location: "mobile_sticky" })}
         className="flex-1 flex items-center justify-center gap-2 py-3.5 gradient-gold text-accent-foreground font-bold text-sm hover:opacity-90 transition-opacity"
       >
         <Phone className="w-5 h-5" />
@@ -17,6 +19,7 @@ const MobileStickyCTA = () => {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackEvent("whatsapp_click", { location: "mobile_sticky" })}
         className="flex-1 flex items-center justify-center gap-2 py-4 bg-success text-white font-bold text-sm"
       >
         <SiWhatsapp className="w-5 h-5" />

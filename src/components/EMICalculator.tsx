@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { trackEvent } from "@/hooks/useAnalytics";
 
 const formatCurrency = (amount: number) =>
   new Intl.NumberFormat("en-IN", {
@@ -150,6 +151,7 @@ const EMICalculator = () => {
           <div className="flex flex-wrap justify-center gap-3">
             <a
               href="tel:+919757190200"
+              onClick={() => trackEvent("phone_click", { location: "emi_calculator" })}
               className="gradient-gold text-accent-foreground font-semibold px-6 py-3 rounded-lg text-sm hover:opacity-90 transition-opacity inline-flex items-center gap-2"
             >
               📞 Talk to an Advisor
@@ -158,6 +160,7 @@ const EMICalculator = () => {
               href="https://wa.me/919757190200?text=Hi%2C%20I%20just%20used%20the%20EMI%20calculator%20and%20would%20like%20to%20discuss%20home%20loan%20options."
               target="_blank"
               rel="noreferrer"
+              onClick={() => trackEvent("whatsapp_click", { location: "emi_calculator" })}
               className="border border-border bg-card text-foreground font-semibold px-6 py-3 rounded-lg text-sm hover:bg-muted transition-colors inline-flex items-center gap-2"
             >
               💬 WhatsApp Us

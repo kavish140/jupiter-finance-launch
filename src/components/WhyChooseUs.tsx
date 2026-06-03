@@ -25,9 +25,10 @@ const reasons = [
 ];
 
 const proofPoints = [
-  { value: "8", label: "localities covered" },
-  { value: "6", label: "service categories" },
-  { value: "4", label: "content touchpoints" },
+  { value: "25+", label: "Years of Experience" },
+  { value: "1000+", label: "Happy Customers" },
+  { value: "₹1000Cr+", label: "Loans Facilitated" },
+  { value: "11+", label: "Partner Banks & NBFCs" },
 ];
 
 const containerVariants = {
@@ -106,7 +107,7 @@ const WhyChooseUs = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-20 grid gap-6 md:grid-cols-3"
+          className="mt-20 grid gap-6 grid-cols-2 md:grid-cols-4"
         >
           {proofPoints.map((point) => (
             <div key={point.label} className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-8 text-center overflow-hidden hover:bg-white/10 transition-colors duration-300 group">
@@ -124,7 +125,7 @@ const WhyChooseUs = () => {
           transition={{ delay: 0.8 }}
           className="mt-8 text-center text-sm text-white/40 max-w-2xl mx-auto"
         >
-          Built around borrowers in Mulund, Mumbai, Thane, Bhandup, Ghatkopar, Powai, Navi Mumbai, and Central Mumbai.
+          25+ years of trusted financial guidance across Mulund, Mumbai, Thane, Bhandup, Ghatkopar, Powai, and nearby suburbs.
         </motion.p>
       </div>
     </section>

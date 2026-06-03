@@ -1,7 +1,9 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import PartnerBanks from "@/components/PartnerBanks";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import VideoGallery from "@/components/VideoGallery";
 import EMICalculator from "@/components/EMICalculator";
 import PostSection from "@/components/PostSection";
@@ -25,11 +27,13 @@ const Index = () => {
       <StructuredData />
       <Header />
       <HeroSection />
+      <PartnerBanks />
       <VideoGallery />
       <EMICalculator />
       <PostSection />
       <ServicesSection />
       <WhyChooseUs />
+      <TestimonialsSection />
       <FAQSection />
       <ContactSection />
       <Footer />
@@ -40,3 +44,4 @@ const Index = () => {
 };
 
 export default Index;
+

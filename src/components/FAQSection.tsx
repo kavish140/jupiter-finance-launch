@@ -25,7 +25,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section id="faq" className="py-10 md:py-16 bg-muted/30" itemScope itemType="https://schema.org/FAQPage">
+    <section id="faq" className="py-10 md:py-16 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-12">
           <p className="text-sm font-semibold tracking-widest uppercase text-gold mb-3">Frequently Asked Questions</p>
@@ -36,12 +36,12 @@ const FAQSection = () => {
 
         <Accordion type="single" collapsible className="max-w-4xl mx-auto rounded-2xl border border-border bg-card px-6">
           {faqs.map((item, index) => (
-            <AccordionItem key={item.question} value={`faq-${index}`} itemScope itemType="https://schema.org/Question">
+            <AccordionItem key={item.question} value={`faq-${index}`}>
               <AccordionTrigger className="text-left text-base md:text-lg font-semibold text-foreground hover:no-underline py-4 md:py-5">
-                <span itemProp="name">{item.question}</span>
+                <span>{item.question}</span>
               </AccordionTrigger>
-              <AccordionContent className="pb-6 text-muted-foreground leading-relaxed" itemScope itemType="https://schema.org/Answer">
-                <p itemProp="text">{item.answer}</p>
+              <AccordionContent className="pb-6 text-muted-foreground leading-relaxed">
+                <p>{item.answer}</p>
               </AccordionContent>
             </AccordionItem>
           ))}

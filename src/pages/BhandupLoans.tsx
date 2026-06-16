@@ -49,7 +49,15 @@ const BhandupLoans = () => {
         keywords="home loan bhandup, loan against property bhandup, loan consultant bhandup, financial services bhandup, loans in bhandup west, nahur loans, jupiter fast finance bhandup"
         canonicalUrl="https://jupiterfastfinance.com/loans-in-bhandup"
       />
-      <StructuredData />
+      <StructuredData
+        location="Bhandup"
+        serviceType="Home Loans, Loan Against Property"
+        customFaqs={localFaqs}
+        breadcrumbItems={[
+          { name: "Home", url: "https://jupiterfastfinance.com/" },
+          { name: "Loans in Bhandup", url: "https://jupiterfastfinance.com/loans-in-bhandup" }
+        ]}
+      />
 
       <header className="border-b border-border bg-card/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">

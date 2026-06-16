@@ -245,6 +245,11 @@ const ContactSection = () => {
               <Send className="w-5 h-5" />
               {isSubmitting ? "Sending..." : "Submit Inquiry"}
             </button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-muted-foreground mt-4">
+              <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-green-500"></span> 100% Secure & Confidential</span>
+              <span className="hidden sm:inline">•</span>
+              <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-green-500"></span> No Hidden Fees</span>
+            </div>
           </form>
         </div>
       </div>

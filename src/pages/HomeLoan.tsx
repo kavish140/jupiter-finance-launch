@@ -2,6 +2,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import SeoMeta from "@/components/SeoMeta";
+import StructuredData from "@/components/StructuredData";
 import { Link } from "react-router-dom";
 
 const HomeLoan = () => {
@@ -13,6 +14,13 @@ const HomeLoan = () => {
         keywords="home loan mulund, home loan mumbai, mortgage loan india, home loan advisor, jupiter fast finance, home loan consultant mulund"
         canonicalUrl="https://jupiterfastfinance.com/home_loan"
         ogType="article"
+      />
+      <StructuredData
+        serviceType="Home Loans"
+        breadcrumbItems={[
+          { name: "Home", url: "https://jupiterfastfinance.com/" },
+          { name: "Home Loan", url: "https://jupiterfastfinance.com/home_loan" }
+        ]}
       />
       <header className="border-b border-border bg-card/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">

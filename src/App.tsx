@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense } from "react";
 import BackToTop from "@/components/BackToTop";
 
@@ -37,34 +38,36 @@ const LoadingFallback = () => (
 );
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BackToTop />
-      <BrowserRouter>
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/home_loan" element={<HomeLoan />} />
-            <Route path="/loan-against-property" element={<LoanAgainstProperty />} />
-            <Route path="/loan-against-mutual-funds" element={<LoanAgainstMutualFunds />} />
-            <Route path="/health-insurance" element={<HealthInsurance />} />
-            <Route path="/life-insurance" element={<LifeInsurance />} />
-            <Route path="/mutual-fund-sip" element={<MutualFundSIP />} />
-            <Route path="/mulund-mumbai-loans" element={<MulundMumbaiLoans />} />
-            <Route path="/loans-in-thane" element={<ThaneLoans />} />
-            <Route path="/loans-in-bhandup" element={<BhandupLoans />} />
-            <Route path="/loans-in-ghatkopar" element={<GhatkoparLoans />} />
-            <Route path="/loans-in-powai" element={<PowaiLoans />} />
-            <Route path="/admin" element={<Admin />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BackToTop />
+        <BrowserRouter>
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/home_loan" element={<HomeLoan />} />
+              <Route path="/loan-against-property" element={<LoanAgainstProperty />} />
+              <Route path="/loan-against-mutual-funds" element={<LoanAgainstMutualFunds />} />
+              <Route path="/health-insurance" element={<HealthInsurance />} />
+              <Route path="/life-insurance" element={<LifeInsurance />} />
+              <Route path="/mutual-fund-sip" element={<MutualFundSIP />} />
+              <Route path="/mulund-mumbai-loans" element={<MulundMumbaiLoans />} />
+              <Route path="/loans-in-thane" element={<ThaneLoans />} />
+              <Route path="/loans-in-bhandup" element={<BhandupLoans />} />
+              <Route path="/loans-in-ghatkopar" element={<GhatkoparLoans />} />
+              <Route path="/loans-in-powai" element={<PowaiLoans />} />
+              <Route path="/admin" element={<Admin />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;

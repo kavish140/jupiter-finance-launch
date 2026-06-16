@@ -51,7 +51,15 @@ const ThaneLoans = () => {
         keywords="home loan thane, loan against property thane, loan consultant thane, financial services thane, loans in thane west, ghodbunder road loans, jupiter fast finance thane"
         canonicalUrl="https://jupiterfastfinance.com/loans-in-thane"
       />
-      <StructuredData />
+      <StructuredData
+        location="Thane"
+        serviceType="Home Loans, Loan Against Property"
+        customFaqs={localFaqs}
+        breadcrumbItems={[
+          { name: "Home", url: "https://jupiterfastfinance.com/" },
+          { name: "Loans in Thane", url: "https://jupiterfastfinance.com/loans-in-thane" }
+        ]}
+      />
 
       <header className="border-b border-border bg-card/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">

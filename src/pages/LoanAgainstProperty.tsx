@@ -2,6 +2,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import SeoMeta from "@/components/SeoMeta";
+import StructuredData from "@/components/StructuredData";
 import { Link } from "react-router-dom";
 
 const LoanAgainstProperty = () => {
@@ -12,6 +13,13 @@ const LoanAgainstProperty = () => {
         description="Get a loan against your residential or commercial property in Mulund, Mumbai, and nearby areas. Quick approvals, competitive rates, and expert guidance from Jupiter Fast Finance."
         keywords="loan against property mulund, LAP mumbai, property loan mumbai, mortgage loan mumbai, jupiter fast finance, LAP consultant mulund"
         canonicalUrl="https://jupiterfastfinance.com/loan-against-property"
+      />
+      <StructuredData
+        serviceType="Loan Against Property"
+        breadcrumbItems={[
+          { name: "Home", url: "https://jupiterfastfinance.com/" },
+          { name: "Loan Against Property", url: "https://jupiterfastfinance.com/loan-against-property" }
+        ]}
       />
 
       <header className="border-b border-border bg-card/90 backdrop-blur-md">

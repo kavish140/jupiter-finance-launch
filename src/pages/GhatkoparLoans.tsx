@@ -49,7 +49,15 @@ const GhatkoparLoans = () => {
         keywords="home loan ghatkopar, loan against property ghatkopar, loan consultant ghatkopar, financial services ghatkopar, loans in ghatkopar east, vidyavihar loans, jupiter fast finance ghatkopar"
         canonicalUrl="https://jupiterfastfinance.com/loans-in-ghatkopar"
       />
-      <StructuredData />
+      <StructuredData
+        location="Ghatkopar"
+        serviceType="Home Loans, Loan Against Property"
+        customFaqs={localFaqs}
+        breadcrumbItems={[
+          { name: "Home", url: "https://jupiterfastfinance.com/" },
+          { name: "Loans in Ghatkopar", url: "https://jupiterfastfinance.com/loans-in-ghatkopar" }
+        ]}
+      />
 
       <header className="border-b border-border bg-card/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">

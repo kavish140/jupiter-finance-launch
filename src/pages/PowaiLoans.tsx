@@ -49,7 +49,15 @@ const PowaiLoans = () => {
         keywords="home loan powai, loan against property powai, loan consultant powai, financial services powai, loans in hiranandani gardens, chandivali loans, jupiter fast finance powai"
         canonicalUrl="https://jupiterfastfinance.com/loans-in-powai"
       />
-      <StructuredData />
+      <StructuredData
+        location="Powai"
+        serviceType="Home Loans, Loan Against Property"
+        customFaqs={localFaqs}
+        breadcrumbItems={[
+          { name: "Home", url: "https://jupiterfastfinance.com/" },
+          { name: "Loans in Powai", url: "https://jupiterfastfinance.com/loans-in-powai" }
+        ]}
+      />
 
       <header className="border-b border-border bg-card/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">

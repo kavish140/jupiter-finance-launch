@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import videos from "@/data/videos.json";
 
 interface VideoItem {
@@ -9,7 +10,19 @@ interface VideoItem {
   url?: string;
 }
 
-const StructuredData = () => {
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface StructuredDataProps {
+  location?: string;
+  serviceType?: string;
+  customFaqs?: FaqItem[];
+  breadcrumbItems?: { name: string; url: string }[];
+}
+
+const StructuredData = ({ location, serviceType, customFaqs, breadcrumbItems }: StructuredDataProps) => {
   const siteUrl = "https://jupiterfastfinance.com";
   const latestVideos = (videos as VideoItem[]).slice(0, 4);
   const serviceAreas = ["Mulund", "Mumbai", "Thane", "Bhandup", "Ghatkopar", "Powai", "Navi Mumbai", "Central Mumbai"];
@@ -27,40 +40,46 @@ const StructuredData = () => {
     sameAs: ["https://www.youtube.com/@JupiterFinance8654"],
   };
 
+  const dynamicAreaServed = location ? [location] : serviceAreas;
+  const dynamicServiceType = serviceType
+    ? [serviceType]
+    : [
+        "Home Loans",
+        "Loan Against Property",
+        "Loan Against Mutual Funds",
+        "Health Insurance",
+        "Life Insurance",
+        "Mutual Fund SIP",
+      ];
+
   const financialServiceSchema = {
     "@context": "https://schema.org",
     "@type": "FinancialService",
-    name: "Jupiter Fast Finance",
+    name: `Jupiter Fast Finance${location ? ` in ${location}` : ""}`,
     url: siteUrl,
     logo: `${siteUrl}/favicon.png`,
     image: `${siteUrl}/og-jupiter-fast-finance.jpg`,
     telephone: "+91-9757190200",
     email: "info@jupiterfastfinance.com",
     foundingDate: "2000",
-    description:
-      "Trusted financial partner in Mulund & Mumbai offering home loans, loan against property, loan against mutual funds, health insurance, life insurance, and mutual fund SIP advisory. 25+ years of experience, 1000+ happy customers.",
+    description: `Trusted financial partner${
+      location ? ` in ${location}` : " in Mulund & Mumbai"
+    } offering home loans, loan against property, loan against mutual funds, health insurance, life insurance, and mutual fund SIP advisory. 25+ years of experience.`,
     priceRange: "Free Consultation",
-    areaServed: serviceAreas,
+    areaServed: dynamicAreaServed,
     availableLanguage: ["en", "hi"],
-    serviceType: [
-      "Home Loans",
-      "Loan Against Property",
-      "Loan Against Mutual Funds",
-      "Health Insurance",
-      "Life Insurance",
-      "Mutual Fund SIP",
-    ],
+    serviceType: dynamicServiceType,
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
       telephone: "+91-9757190200",
       email: "info@jupiterfastfinance.com",
-      areaServed: serviceAreas,
+      areaServed: dynamicAreaServed,
       availableLanguage: ["en", "hi"],
     },
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Mulund",
+      addressLocality: location || "Mulund",
       addressRegion: "Maharashtra",
       addressCountry: "IN",
     },
@@ -77,52 +96,17 @@ const StructuredData = () => {
         "@type": "Review",
         author: { "@type": "Person", name: "Vimal Gosar" },
         datePublished: "2023-07",
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: "5",
-          bestRating: "5",
-        },
-        reviewBody:
-          "When you talk about Health Insurance, you need to have someone who can GUIDE you perfectly as per your needs with the minute details in every scheme. Jupiter Insurance Consultants are those \"Someone\" who will not only guide you but also help you in every bit of Insurance process. Cheers!",
+        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        reviewBody: "When you talk about Health Insurance, you need to have someone who can GUIDE you perfectly...",
       },
       {
         "@type": "Review",
         author: { "@type": "Person", name: "Asif Khan" },
         datePublished: "2023-07",
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: "5",
-          bestRating: "5",
-        },
-        reviewBody:
-          "Mr. Jignesh Ganatra, Owner of Jupiter, is like a MENTOR for every consumer. He always gives full detail about the policy, suggests good policies with reasonable prices, and ensures we get full benefits. Jupiter is now a single point of contact for my family.",
-      },
-      {
-        "@type": "Review",
-        author: { "@type": "Person", name: "Vinod Unni" },
-        datePublished: "2023-06",
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: "5",
-          bestRating: "5",
-        },
-        reviewBody:
-          "I recently availed insurance claim for a medical treatment and thanks to Jupiter Insurance, the entire process was smooth and hassle free. Highly recommended!",
-      },
-      {
-        "@type": "Review",
-        author: { "@type": "Person", name: "Milind Thakker" },
-        datePublished: "2023-06",
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: "5",
-          bestRating: "5",
-        },
-        reviewBody:
-          "Excellent service and professional guidance. Very satisfied with the support received from the Jupiter team.",
+        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        reviewBody: "Mr. Jignesh Ganatra, Owner of Jupiter, is like a MENTOR for every consumer...",
       },
     ],
-    sameAs: ["https://www.youtube.com/@JupiterFinance8654"],
   };
 
   const websiteSchema = {
@@ -147,66 +131,60 @@ const StructuredData = () => {
       thumbnailUrl: video.thumbnailUrl,
       embedUrl: `https://www.youtube.com/embed/${video.videoId}`,
       contentUrl: video.url || `https://www.youtube.com/watch?v=${video.videoId}`,
-      publisher: {
-        "@type": "Organization",
-        name: "Jupiter Fast Finance",
-      },
+      publisher: { "@type": "Organization", name: "Jupiter Fast Finance" },
     })),
   };
+
+  const defaultFaqs = [
+    {
+      question: "How can Jupiter Fast Finance help with home loan approval?",
+      answer: "We compare offers from multiple banks and NBFCs, support documentation, and guide borrowers from application to disbursal.",
+    },
+    {
+      question: "Do you help customers in Mulund and nearby Mumbai suburbs?",
+      answer: "Yes, we support borrowers across Mulund, Mumbai, Thane, Bhandup, Ghatkopar, Powai, and nearby suburbs.",
+    },
+    {
+      question: "Can you help with loan against property options?",
+      answer: "Yes, we compare lenders, explain eligibility, and guide customers through home loan and loan against property options to find the right fit.",
+    },
+  ];
+
+  const faqsToUse = customFaqs && customFaqs.length > 0 ? customFaqs : defaultFaqs;
 
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "How can Jupiter Fast Finance help with home loan approval?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Jupiter Fast Finance compares offers from multiple banks and NBFCs, supports documentation, and guides borrowers from application to disbursal for a smoother home loan process.",
-        },
+    mainEntity: faqsToUse.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
       },
-      {
-        "@type": "Question",
-        name: "Do you help customers in Mulund and nearby Mumbai suburbs?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, we support borrowers across Mulund, Mumbai, Thane, Bhandup, Ghatkopar, Powai, and nearby suburbs with home loans, loan against property, and related financial services.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "What financial products do you provide beyond loans?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "We also help with health insurance, life insurance, and mutual fund SIP planning so customers can manage protection, savings, and borrowing in one place.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Can you help with home loan and loan against property options?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, we compare lenders, explain eligibility, and guide customers through home loan, balance transfer, top-up, and loan against property options to find the right fit.",
-        },
-      },
-    ],
+    })),
   };
 
+  const breadcrumbSchema = breadcrumbItems ? {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbItems.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  } : null;
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(financialServiceSchema) }}
-      />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoGraph) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-    </>
+    <Helmet>
+      <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(financialServiceSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(videoGraph)}</script>
+      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      {breadcrumbSchema && <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>}
+    </Helmet>
   );
 };
 

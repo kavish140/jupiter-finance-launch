@@ -51,7 +51,15 @@ const MulundMumbaiLoans = () => {
         keywords="loans in mulund, loans in mumbai, home loan mulund, loan against property mumbai, loan consultant mulund, loan against mutual funds mumbai, jupiter fast finance"
         canonicalUrl="https://jupiterfastfinance.com/mulund-mumbai-loans"
       />
-      <StructuredData />
+      <StructuredData
+        location="Mulund"
+        serviceType="Home Loans, Loan Against Property"
+        customFaqs={localFaqs}
+        breadcrumbItems={[
+          { name: "Home", url: "https://jupiterfastfinance.com/" },
+          { name: "Loans in Mulund & Mumbai", url: "https://jupiterfastfinance.com/mulund-mumbai-loans" }
+        ]}
+      />
 
       <header className="border-b border-border bg-card/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">

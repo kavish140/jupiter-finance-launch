@@ -114,11 +114,6 @@ const StructuredData = ({ location, serviceType, customFaqs, breadcrumbItems }: 
     "@type": "WebSite",
     name: "Jupiter Fast Finance",
     url: siteUrl,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${siteUrl}/?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
   };
 
   const videoGraph = {

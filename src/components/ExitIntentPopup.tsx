@@ -55,7 +55,7 @@ const ExitIntentPopup = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || phone.trim().length < 10) {
+    if (!name.trim() || !/^[6-9]\d{9}$/.test(phone.trim())) {
       toast.error("Please enter your name and a valid 10-digit phone number.");
       return;
     }

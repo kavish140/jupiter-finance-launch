@@ -9,7 +9,7 @@ import { trackEvent } from "@/hooks/useAnalytics";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
-  phone: z.string().trim().min(10, "Enter a valid phone number").max(15),
+  phone: z.string().trim().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit phone number"),
   service: z.string().min(1, "Select a service"),
 });
 

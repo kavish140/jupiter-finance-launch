@@ -11,11 +11,12 @@ const Header = () => {
   const primaryLinks = [
     { label: "Home", href: "/#home" },
     { label: "Why Us", href: "/#why-us" },
+    { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/#contact" },
   ];
 
   const serviceLinks = [
-    { label: "Home Loans", href: "/home_loan" },
+    { label: "Home Loans", href: "/home-loan" },
     { label: "Loan Against Property", href: "/loan-against-property" },
     { label: "Loan Against Mutual Funds", href: "/loan-against-mutual-funds" },
     { label: "Health Insurance", href: "/health-insurance" },

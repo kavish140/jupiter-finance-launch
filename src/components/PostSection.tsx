@@ -1,10 +1,12 @@
 import { useState } from "react";
 import posts from "@/data/posts.json";
-import { motion, AnimatePresence } from "framer-motion";
-import { CalendarDays, ArrowRight, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
+import { CalendarDays, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface PostItem {
   id: string;
+  slug: string;
   title: string;
   excerpt?: string;
   content?: string;
@@ -42,8 +44,7 @@ const cardVariants = {
 };
 
 const PostCard = ({ post }: { post: PostItem }) => {
-  const [expanded, setExpanded] = useState(false);
-  const text = post.excerpt || post.content || "";
+  const text = post.excerpt || "";
 
   return (
     <motion.article
@@ -68,27 +69,19 @@ const PostCard = ({ post }: { post: PostItem }) => {
       </h3>
 
       <div className="flex-1 mb-4">
-        <p
-          className={`text-muted-foreground text-sm leading-relaxed ${
-            expanded ? "" : "line-clamp-3"
-          }`}
-        >
+        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
           {text}
         </p>
       </div>
 
       <div className="mt-auto pt-3 border-t border-border/50">
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-gold hover:text-gold/80 transition-colors"
+        <Link
+          to={`/blog/${post.slug}`}
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-gold hover:text-gold/80 transition-colors group-hover:gap-2.5"
         >
-          {expanded ? "Show Less" : "Read More"}
-          {expanded ? (
-            <ChevronDown className="w-4 h-4 rotate-180 transition-transform" />
-          ) : (
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          )}
-        </button>
+          Read More
+          <ArrowRight className="w-4 h-4 transition-transform" />
+        </Link>
       </div>
     </motion.article>
   );
@@ -169,12 +162,20 @@ const PostSection = () => {
           <p className="text-muted-foreground mb-3 text-sm md:text-base">
             Have questions about loans or insurance? Our experts are here to help.
           </p>
-          <a
-            href="tel:+919757190200"
-            className="gradient-gold text-accent-foreground font-semibold px-5 py-2.5 md:px-6 md:py-3 rounded-lg text-sm hover:opacity-90 transition-opacity inline-flex items-center gap-2"
-          >
-            📞 Talk to an Expert — Free Consultation
-          </a>
+          <div className="flex flex-wrap justify-center gap-3">
+            <a
+              href="tel:+919757190200"
+              className="gradient-gold text-accent-foreground font-semibold px-5 py-2.5 md:px-6 md:py-3 rounded-lg text-sm hover:opacity-90 transition-opacity inline-flex items-center gap-2"
+            >
+              📞 Talk to an Expert — Free Consultation
+            </a>
+            <Link
+              to="/blog"
+              className="border border-border bg-card text-foreground font-semibold px-5 py-2.5 md:px-6 md:py-3 rounded-lg text-sm hover:bg-muted transition-colors"
+            >
+              View All Articles →
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>

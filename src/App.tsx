@@ -9,6 +9,8 @@ import BackToTop from "@/components/BackToTop";
 
 const Index = lazy(() => import("./pages/Index"));
 const HomeLoan = lazy(() => import("./pages/HomeLoan"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
 const MulundMumbaiLoans = lazy(() => import("./pages/MulundMumbaiLoans"));
 const ThaneLoans = lazy(() => import("./pages/ThaneLoans"));
 const BhandupLoans = lazy(() => import("./pages/BhandupLoans"));
@@ -48,7 +50,13 @@ const App = () => (
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/home_loan" element={<HomeLoan />} />
+              {/* Home Loan — canonical URL uses hyphen (SEO best practice) */}
+              <Route path="/home-loan" element={<HomeLoan />} />
+              {/* Legacy underscore URL — redirect to hyphenated version */}
+              <Route path="/home_loan" element={<Navigate to="/home-loan" replace />} />
+              {/* Blog */}
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/loan-against-property" element={<LoanAgainstProperty />} />
               <Route path="/loan-against-mutual-funds" element={<LoanAgainstMutualFunds />} />
               <Route path="/health-insurance" element={<HealthInsurance />} />

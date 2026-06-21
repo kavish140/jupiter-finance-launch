@@ -41,7 +41,7 @@ const HealthInsurance = () => {
       <header className="border-b border-border bg-card/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="text-2xl font-display font-bold text-primary flex items-center gap-2">
-            <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />
+            <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" width={32} height={32} />
             <span>Jupiter<span className="text-gradient-gold"> Finance</span></span>
           </Link>
           <a href="tel:+919757190200" className="gradient-gold text-accent-foreground font-semibold px-4 py-2 rounded-lg text-sm hover:opacity-90 transition-opacity">Call: 9757190200</a>

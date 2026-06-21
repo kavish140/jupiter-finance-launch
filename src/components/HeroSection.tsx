@@ -129,6 +129,8 @@ const HeroSection = () => {
           src={heroBg}
           alt="Financial growth abstract"
           className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-30"
+          fetchPriority="high"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-navy-dark via-navy to-background opacity-95" />
       </div>

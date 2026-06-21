@@ -37,6 +37,13 @@ const StructuredData = ({ location, serviceType, customFaqs, breadcrumbItems }: 
     email: "info@jupiterfastfinance.com",
     foundingDate: "2000",
     areaServed: serviceAreas,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Mulund",
+      addressRegion: "Maharashtra",
+      postalCode: "400080",
+      addressCountry: "IN"
+    },
     sameAs: ["https://www.youtube.com/@JupiterFinance8654"],
   };
 

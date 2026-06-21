@@ -6,7 +6,6 @@ import Sitemap from "vite-plugin-sitemap";
 import posts from "./src/data/posts.json";
 
 const dynamicRoutes = [
-  "/",
   "/home-loan", // Use the correct hyphenated one
   "/blog",
   ...posts.map((post) => `/blog/${post.slug}`),

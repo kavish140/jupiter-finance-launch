@@ -46,6 +46,9 @@ function generate() {
     }
   }
 
+  let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+  sitemapContent += `  <url>\n    <loc>https://jupiterfastfinance.com/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n`;
+
   allRoutes.forEach(route => {
     // Remove leading slash if any
     const cleanRoute = route.startsWith('/') ? route.slice(1) : route;
@@ -60,7 +63,16 @@ function generate() {
     // Write the index.html copy
     fs.writeFileSync(targetHtmlPath, indexHtmlContent);
     console.log(`Generated HTML for route: /${cleanRoute}`);
+
+    // Add to sitemap
+    if (cleanRoute !== 'home_loan') { // Ignore legacy route in sitemap
+      sitemapContent += `  <url>\n    <loc>https://jupiterfastfinance.com/${cleanRoute}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
+    }
   });
+
+  sitemapContent += `</urlset>`;
+  fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemapContent);
+  console.log('Generated sitemap.xml');
 
   console.log(`Successfully generated ${allRoutes.length} physical SPA route files for GitHub Pages.`);
 }

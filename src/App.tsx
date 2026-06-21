@@ -39,6 +39,8 @@ const LoadingFallback = () => (
   </div>
 );
 
+import ScrollToTop from "@/components/ScrollToTop";
+
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
@@ -47,6 +49,7 @@ const App = () => (
         <Sonner />
         <BackToTop />
         <BrowserRouter>
+          <ScrollToTop />
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
               <Route path="/" element={<Index />} />

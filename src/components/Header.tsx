@@ -42,23 +42,23 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-2xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] transition-all">
       <div className="container mx-auto flex items-center justify-between py-3 px-4">
-        <a href="/#home" className="flex items-center gap-2">
+        <Link to="/#home" className="flex items-center gap-2">
           <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />
           <span className="text-2xl font-display font-bold text-primary">
             Jupiter<span className="text-gradient-gold"> Fast Finance</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
           {primaryLinks.map((l) => (
-            <a
+            <Link
               key={l.href}
-              href={l.href}
+              to={l.href}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
 
           {/* Services Dropdown */}
@@ -102,13 +102,13 @@ const Header = () => {
           </div>
 
           {secondaryLinks.map((l) => (
-            <a
+            <Link
               key={l.href}
-              href={l.href}
+              to={l.href}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -141,14 +141,14 @@ const Header = () => {
 
             <div className="space-y-2 px-4 overflow-y-auto max-h-[calc(100vh-120px)] pb-20">
               {primaryLinks.map((l) => (
-                <a
+                <Link
                   key={l.href}
-                  href={l.href}
+                  to={l.href}
                   onClick={closeMenu}
                   className="block rounded-lg px-4 py-3 text-sm font-medium text-foreground hover:bg-muted"
                 >
                   {l.label}
-                </a>
+                </Link>
               ))}
 
               <Accordion type="single" collapsible className="rounded-lg border border-border bg-muted/30 px-4">
@@ -192,14 +192,14 @@ const Header = () => {
                   </AccordionTrigger>
                   <AccordionContent className="pb-3 pt-0 space-y-2">
                     {secondaryLinks.map((l) => (
-                      <a
+                      <Link
                         key={l.href}
-                        href={l.href}
+                        to={l.href}
                         onClick={closeMenu}
                         className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-background hover:text-foreground"
                       >
                         {l.label}
-                      </a>
+                      </Link>
                     ))}
                   </AccordionContent>
                 </AccordionItem>

@@ -46,9 +46,9 @@ const ThaneLoans = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoMeta
-        title="Home Loans & Loan Against Property in Thane | Jupiter Fast Finance"
-        description="Looking for a reliable loan consultant in Thane? Jupiter Fast Finance provides expert guidance for home loans, loan against property, and mutual funds across Thane."
-        keywords="home loan thane, loan against property thane, loan consultant thane, financial services thane, loans in thane west, ghodbunder road loans, jupiter fast finance thane"
+        title="Home Loans & Loan Against Property in Thane | Jupiter Finance"
+        description="Looking for a reliable loan consultant in Thane? Jupiter Finance provides expert guidance for home loans, loan against property, and mutual funds across Thane."
+        keywords="home loan thane, loan against property thane, loan consultant thane, financial services thane, loans in thane west, ghodbunder road loans, jupiter finance thane"
         canonicalUrl="https://jupiterfastfinance.com/loans-in-thane"
       />
       <StructuredData
@@ -65,7 +65,7 @@ const ThaneLoans = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="text-2xl font-display font-bold text-primary flex items-center gap-2">
             <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />
-            <span>Jupiter<span className="text-gradient-gold"> Fast Finance</span></span>
+            <span>Jupiter<span className="text-gradient-gold"> Finance</span></span>
           </Link>
           <a
             href="tel:+919757190200"
@@ -84,7 +84,7 @@ const ThaneLoans = () => {
           </h1>
           <p className="text-muted-foreground max-w-3xl">
             Whether you are buying a new home in Thane, seeking a loan against property for your business,
-            or exploring loan against mutual funds, Jupiter Fast Finance is your trusted local partner.
+            or exploring loan against mutual funds, Jupiter Finance is your trusted local partner.
             We simplify the complex loan process, ensuring transparency and competitive rates.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
@@ -95,7 +95,7 @@ const ThaneLoans = () => {
               Talk to an Advisor
             </a>
             <Link
-              to="/home_loan"
+              to="/home-loan"
               className="border border-border px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-card transition-colors"
             >
               View Home Loan Page

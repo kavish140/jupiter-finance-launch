@@ -33,7 +33,7 @@ const SeoMeta = ({
       <meta property="og:type" content={ogType} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={resolvedOgImage} />
-      <meta property="og:site_name" content="Jupiter Fast Finance" />
+      <meta property="og:site_name" content="Jupiter Finance" />
 
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />

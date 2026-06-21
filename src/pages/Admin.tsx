@@ -256,8 +256,8 @@ const Admin = () => {
     return (
       <div className="min-h-screen bg-background text-foreground py-12 px-4">
         <SeoMeta
-          title="Admin | Jupiter Fast Finance"
-          description="Private admin panel for Jupiter Fast Finance"
+          title="Admin | Jupiter Finance"
+          description="Private admin panel for Jupiter Finance"
           keywords="admin"
           canonicalUrl="https://jupiterfastfinance.com/admin"
           robots="noindex,nofollow"
@@ -315,8 +315,8 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-background text-foreground py-12 px-4">
       <SeoMeta
-        title="Admin | Jupiter Fast Finance"
-        description="Private admin panel for Jupiter Fast Finance"
+        title="Admin | Jupiter Finance"
+        description="Private admin panel for Jupiter Finance"
         keywords="admin"
         canonicalUrl="https://jupiterfastfinance.com/admin"
         robots="noindex,nofollow"

@@ -46,9 +46,9 @@ const MulundMumbaiLoans = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoMeta
-        title="Loans in Mulund & Mumbai | Jupiter Fast Finance"
-        description="Looking for home loan, loan against property, or loan against mutual funds in Mulund, Mumbai, and nearby suburbs? Jupiter Fast Finance helps you compare lenders and get guided support."
-        keywords="loans in mulund, loans in mumbai, home loan mulund, loan against property mumbai, loan consultant mulund, loan against mutual funds mumbai, jupiter fast finance"
+        title="Loans in Mulund & Mumbai | Jupiter Finance"
+        description="Looking for home loan, loan against property, or loan against mutual funds in Mulund, Mumbai, and nearby suburbs? Jupiter Finance helps you compare lenders and get guided support."
+        keywords="loans in mulund, loans in mumbai, home loan mulund, loan against property mumbai, loan consultant mulund, loan against mutual funds mumbai, jupiter finance"
         canonicalUrl="https://jupiterfastfinance.com/mulund-mumbai-loans"
       />
       <StructuredData
@@ -65,7 +65,7 @@ const MulundMumbaiLoans = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="text-2xl font-display font-bold text-primary flex items-center gap-2">
             <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />
-            <span>Jupiter<span className="text-gradient-gold"> Fast Finance</span></span>
+            <span>Jupiter<span className="text-gradient-gold"> Finance</span></span>
           </Link>
           <a
             href="tel:+919757190200"
@@ -83,7 +83,7 @@ const MulundMumbaiLoans = () => {
             Home Loans and Loan Advice for Mulund, Mumbai, and Nearby Areas
           </h1>
           <p className="text-muted-foreground max-w-3xl">
-            Jupiter Fast Finance helps borrowers across Mulund and the wider Mumbai region with
+            Jupiter Finance helps borrowers across Mulund and the wider Mumbai region with
             home loans, loan against property, and loan against mutual funds. We keep the process
             simple, transparent, and focused on lender options that match your profile.
           </p>
@@ -95,7 +95,7 @@ const MulundMumbaiLoans = () => {
               Talk to an Advisor
             </a>
             <Link
-              to="/home_loan"
+              to="/home-loan"
               className="border border-border px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-card transition-colors"
             >
               View Home Loan Page

@@ -30,7 +30,7 @@ const StructuredData = ({ location, serviceType, customFaqs, breadcrumbItems }: 
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Jupiter Fast Finance",
+    name: "Jupiter Finance",
     url: siteUrl,
     logo: `${siteUrl}/favicon.png`,
     telephone: "+91-9757190200",
@@ -55,7 +55,7 @@ const StructuredData = ({ location, serviceType, customFaqs, breadcrumbItems }: 
   const financialServiceSchema = {
     "@context": "https://schema.org",
     "@type": "FinancialService",
-    name: `Jupiter Fast Finance${location ? ` in ${location}` : ""}`,
+    name: `Jupiter Finance${location ? ` in ${location}` : ""}`,
     url: siteUrl,
     logo: `${siteUrl}/favicon.png`,
     image: `${siteUrl}/og-jupiter-fast-finance.jpg`,
@@ -112,7 +112,7 @@ const StructuredData = ({ location, serviceType, customFaqs, breadcrumbItems }: 
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Jupiter Fast Finance",
+    name: "Jupiter Finance",
     url: siteUrl,
   };
 
@@ -126,13 +126,13 @@ const StructuredData = ({ location, serviceType, customFaqs, breadcrumbItems }: 
       thumbnailUrl: video.thumbnailUrl,
       embedUrl: `https://www.youtube.com/embed/${video.videoId}`,
       contentUrl: video.url || `https://www.youtube.com/watch?v=${video.videoId}`,
-      publisher: { "@type": "Organization", name: "Jupiter Fast Finance" },
+      publisher: { "@type": "Organization", name: "Jupiter Finance" },
     })),
   };
 
   const defaultFaqs = [
     {
-      question: "How can Jupiter Fast Finance help with home loan approval?",
+      question: "How can Jupiter Finance help with home loan approval?",
       answer: "We compare offers from multiple banks and NBFCs, support documentation, and guide borrowers from application to disbursal.",
     },
     {

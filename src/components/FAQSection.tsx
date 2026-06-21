@@ -2,7 +2,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const faqs = [
   {
-    question: "How can Jupiter Fast Finance help with home loan approval?",
+    question: "How can Jupiter Finance help with home loan approval?",
     answer:
       "We compare offers from multiple banks and NBFCs, help with documentation, and guide you through eligibility and disbursal so your home loan process is faster and clearer.",
   },
@@ -17,7 +17,7 @@ const faqs = [
       "We also help with health insurance, life insurance, and mutual fund SIP planning so customers can manage protection, savings, and borrowing in one place.",
   },
   {
-    question: "Why choose Jupiter Fast Finance for financial services?",
+    question: "Why choose Jupiter Finance for financial services?",
     answer:
       "Clients choose us for transparent guidance, multiple lender and insurer options, practical advisory support, and end-to-end assistance across loans, insurance, and mutual funds in the Mumbai region.",
   },

@@ -21,9 +21,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <SeoMeta
-        title="Jupiter Fast Finance | Loans in Mulund, Mumbai & Nearby Areas"
-        description="Jupiter Fast Finance helps customers in Mulund, Mumbai, Thane, and nearby suburbs with home loans, loan against property, loan against mutual funds, mutual fund SIP planning, and health insurance support."
-        keywords="home loan mulund, home loan mumbai, loan against property mulund, loan consultant mumbai, loans in mulund, loans in mumbai, jupiter fast finance, financial services mulund"
+        title="Jupiter Finance | Loans in Mulund, Mumbai & Nearby Areas"
+        description="Jupiter Finance helps customers in Mulund, Mumbai, Thane, and nearby suburbs with home loans, loan against property, loan against mutual funds, mutual fund SIP planning, and health insurance support."
+        keywords="home loan mulund, home loan mumbai, loan against property mulund, loan consultant mumbai, loans in mulund, loans in mumbai, jupiter finance, financial services mulund"
         canonicalUrl="https://jupiterfastfinance.com/"
       />
       <StructuredData />

@@ -2,8 +2,8 @@
   "name": "jupiter-finance-launch",
   "private": true,
   "version": "1.0.0",
-  "description": "Jupiter Fast Finance - Your Trusted Financial Partner",
-  "author": "Jupiter Fast Finance",
+  "description": "Jupiter Finance - Your Trusted Financial Partner",
+  "author": "Jupiter Finance",
   "license": "MIT",
   "type": "module",
   "scripts": {

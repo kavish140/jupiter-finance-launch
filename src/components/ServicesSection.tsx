@@ -7,7 +7,7 @@ const services = [
     icon: Home,
     title: "Home Loans",
     description: "Competitive rates and flexible repayment options to make your dream home a reality.",
-    href: "/home_loan",
+    href: "/home-loan",
   },
   {
     icon: Building2,

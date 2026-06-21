@@ -44,7 +44,7 @@ New enquiry: {{service}} from {{from_name}}
 ## 5) Suggested EmailJS template body
 
 ```txt
-You received a new enquiry from Jupiter Fast Finance website.
+You received a new enquiry from Jupiter Finance website.
 
 Name: {{from_name}}
 Phone: {{phone}}
@@ -63,7 +63,7 @@ You can create a second template for customer acknowledgment.
 Subject:
 
 ```txt
-We received your enquiry - Jupiter Fast Finance
+We received your enquiry - Jupiter Finance
 ```
 
 Body:
@@ -71,14 +71,14 @@ Body:
 ```txt
 Hi {{from_name}},
 
-Thank you for contacting Jupiter Fast Finance.
+Thank you for contacting Jupiter Finance.
 We have received your enquiry for {{service}}.
 Our team will get in touch with you shortly.
 
 If urgent, call us on +91 97571 90200.
 
 Regards,
-Jupiter Fast Finance
+Jupiter Finance
 ```
 
 ## 7) Test checklist

@@ -44,9 +44,9 @@ const PowaiLoans = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoMeta
-        title="Home Loans & Loan Against Property in Powai | Jupiter Fast Finance"
-        description="Looking for a reliable loan consultant in Powai? Jupiter Fast Finance provides expert guidance for home loans, loan against property, and mutual funds across Powai."
-        keywords="home loan powai, loan against property powai, loan consultant powai, financial services powai, loans in hiranandani gardens, chandivali loans, jupiter fast finance powai"
+        title="Home Loans & Loan Against Property in Powai | Jupiter Finance"
+        description="Looking for a reliable loan consultant in Powai? Jupiter Finance provides expert guidance for home loans, loan against property, and mutual funds across Powai."
+        keywords="home loan powai, loan against property powai, loan consultant powai, financial services powai, loans in hiranandani gardens, chandivali loans, jupiter finance powai"
         canonicalUrl="https://jupiterfastfinance.com/loans-in-powai"
       />
       <StructuredData
@@ -63,7 +63,7 @@ const PowaiLoans = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="text-2xl font-display font-bold text-primary flex items-center gap-2">
             <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />
-            <span>Jupiter<span className="text-gradient-gold"> Fast Finance</span></span>
+            <span>Jupiter<span className="text-gradient-gold"> Finance</span></span>
           </Link>
           <a
             href="tel:+919757190200"
@@ -82,7 +82,7 @@ const PowaiLoans = () => {
           </h1>
           <p className="text-muted-foreground max-w-3xl">
             Whether you are buying a new home in Powai, seeking a loan against property for your business,
-            or exploring loan against mutual funds, Jupiter Fast Finance is your trusted local partner.
+            or exploring loan against mutual funds, Jupiter Finance is your trusted local partner.
             We simplify the complex loan process, ensuring transparency and competitive rates.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
@@ -93,7 +93,7 @@ const PowaiLoans = () => {
               Talk to an Advisor
             </a>
             <Link
-              to="/home_loan"
+              to="/home-loan"
               className="border border-border px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-card transition-colors"
             >
               View Home Loan Page

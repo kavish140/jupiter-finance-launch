@@ -43,9 +43,9 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoMeta
-        title="Home Loan Tips & Financial Guides | Jupiter Fast Finance Blog"
-        description="Expert articles on home loans in Mulund and Mumbai — eligibility tips, bank comparisons, CIBIL score improvement, and more. Free guides from Jupiter Fast Finance."
-        keywords="home loan tips mumbai, home loan blog mulund, cibil score improvement, sbi vs hdfc home loan, loan against property guide, jupiter fast finance blog"
+        title="Home Loan Tips & Financial Guides | Jupiter Finance Blog"
+        description="Expert articles on home loans in Mulund and Mumbai — eligibility tips, bank comparisons, CIBIL score improvement, and more. Free guides from Jupiter Finance."
+        keywords="home loan tips mumbai, home loan blog mulund, cibil score improvement, sbi vs hdfc home loan, loan against property guide, jupiter finance blog"
         canonicalUrl="https://jupiterfastfinance.com/blog"
         ogType="website"
       />
@@ -55,7 +55,7 @@ const Blog = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="text-2xl font-display font-bold text-primary flex items-center gap-2">
             <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />
-            <span>Jupiter<span className="text-gradient-gold"> Fast Finance</span></span>
+            <span>Jupiter<span className="text-gradient-gold"> Finance</span></span>
           </Link>
           <a
             href="tel:+919757190200"
@@ -127,7 +127,7 @@ const Blog = () => {
                   <div className="md:col-span-2 bg-gradient-to-br from-navy-dark to-background flex items-center justify-center p-10 min-h-[200px]">
                     <div className="text-center space-y-2">
                       <span className="text-6xl">🏠</span>
-                      <p className="text-xs text-muted-foreground">Jupiter Fast Finance</p>
+                      <p className="text-xs text-muted-foreground">Jupiter Finance</p>
                     </div>
                   </div>
                 </div>

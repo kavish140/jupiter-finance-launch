@@ -44,9 +44,9 @@ const BhandupLoans = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoMeta
-        title="Home Loans & Loan Against Property in Bhandup | Jupiter Fast Finance"
-        description="Looking for a reliable loan consultant in Bhandup? Jupiter Fast Finance provides expert guidance for home loans, loan against property, and mutual funds across Bhandup."
-        keywords="home loan bhandup, loan against property bhandup, loan consultant bhandup, financial services bhandup, loans in bhandup west, nahur loans, jupiter fast finance bhandup"
+        title="Home Loans & Loan Against Property in Bhandup | Jupiter Finance"
+        description="Looking for a reliable loan consultant in Bhandup? Jupiter Finance provides expert guidance for home loans, loan against property, and mutual funds across Bhandup."
+        keywords="home loan bhandup, loan against property bhandup, loan consultant bhandup, financial services bhandup, loans in bhandup west, nahur loans, jupiter finance bhandup"
         canonicalUrl="https://jupiterfastfinance.com/loans-in-bhandup"
       />
       <StructuredData
@@ -63,7 +63,7 @@ const BhandupLoans = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="text-2xl font-display font-bold text-primary flex items-center gap-2">
             <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />
-            <span>Jupiter<span className="text-gradient-gold"> Fast Finance</span></span>
+            <span>Jupiter<span className="text-gradient-gold"> Finance</span></span>
           </Link>
           <a
             href="tel:+919757190200"
@@ -82,7 +82,7 @@ const BhandupLoans = () => {
           </h1>
           <p className="text-muted-foreground max-w-3xl">
             Whether you are buying a new home in Bhandup, seeking a loan against property for your business,
-            or exploring loan against mutual funds, Jupiter Fast Finance is your trusted local partner.
+            or exploring loan against mutual funds, Jupiter Finance is your trusted local partner.
             We simplify the complex loan process, ensuring transparency and competitive rates.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
@@ -93,7 +93,7 @@ const BhandupLoans = () => {
               Talk to an Advisor
             </a>
             <Link
-              to="/home_loan"
+              to="/home-loan"
               className="border border-border px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-card transition-colors"
             >
               View Home Loan Page

@@ -72,7 +72,7 @@ const WhyChooseUs = () => {
           className="text-center mb-10 md:mb-16"
         >
           <p className="text-sm font-semibold tracking-widest uppercase text-gold mb-3">
-            Why Jupiter Fast Finance
+            Why Jupiter Finance
           </p>
           <h2 className="text-2xl md:text-5xl font-display font-bold text-white">
             Your Trust, Our Commitment

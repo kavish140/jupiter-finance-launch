@@ -49,7 +49,7 @@ const faqItems = [
   },
   {
     question: "How long does home loan processing take?",
-    answer: "With complete documentation, most banks sanction a home loan in 10–25 working days. Jupiter Fast Finance pre-checks your file to avoid delays — our average is 12–15 working days.",
+    answer: "With complete documentation, most banks sanction a home loan in 10–25 working days. Jupiter Finance pre-checks your file to avoid delays — our average is 12–15 working days.",
   },
   {
     question: "Do you offer home loan services in Mulund East and Mulund West?",
@@ -126,9 +126,9 @@ const HomeLoan = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoMeta
-        title="Home Loan in Mulund & Mumbai | Best Rates | Jupiter Fast Finance"
+        title="Home Loan in Mulund & Mumbai | Best Rates | Jupiter Finance"
         description="Get the best home loan rates in Mulund and Mumbai. Compare SBI, HDFC, ICICI and 8+ lenders. Free eligibility check, doorstep document collection, and end-to-end support. Call 9757190200."
-        keywords="home loan mulund, home loan mumbai, home loan consultant mulund, best home loan rate mumbai 2025, home loan eligibility calculator, home loan advisor mulund, jupiter fast finance home loan"
+        keywords="home loan mulund, home loan mumbai, home loan consultant mulund, best home loan rate mumbai 2025, home loan eligibility calculator, home loan advisor mulund, jupiter finance home loan"
         canonicalUrl="https://jupiterfastfinance.com/home-loan"
         ogType="article"
       />
@@ -150,7 +150,7 @@ const HomeLoan = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="text-2xl font-display font-bold text-primary flex items-center gap-2">
             <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />
-            <span>Jupiter<span className="text-gradient-gold"> Fast Finance</span></span>
+            <span>Jupiter<span className="text-gradient-gold"> Finance</span></span>
           </Link>
           <a
             href="tel:+919757190200"
@@ -276,7 +276,7 @@ const HomeLoan = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-10 md:mb-14">
               <p className="text-sm font-semibold tracking-widest uppercase text-gold mb-3">Our Advantage</p>
-              <h2 className="text-2xl md:text-4xl font-display font-bold text-foreground">Why Mulund Trusts Jupiter Fast Finance</h2>
+              <h2 className="text-2xl md:text-4xl font-display font-bold text-foreground">Why Mulund Trusts Jupiter Finance</h2>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
               {whyUsPoints.map((pt, i) => (

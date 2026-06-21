@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="flex items-center gap-2 mb-3">
               <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />
               <h3 className="text-xl font-display font-bold text-white">
-                Jupiter<span className="text-gradient-gold"> Fast Finance</span>
+                Jupiter<span className="text-gradient-gold"> Finance</span>
               </h3>
             </div>
             <p className="text-white/60 text-sm leading-relaxed">
@@ -77,7 +77,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-10 pt-6 border-t border-white/10 text-center text-white/40 text-sm">
-          © {new Date().getFullYear()} Jupiter Fast Finance. All rights reserved.
+          © {new Date().getFullYear()} Jupiter Finance. All rights reserved.
         </div>
       </div>
     </footer>

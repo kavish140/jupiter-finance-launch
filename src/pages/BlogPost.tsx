@@ -94,9 +94,9 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoMeta
-        title={`${post.title} | Jupiter Fast Finance`}
-        description={post.excerpt || `Read about ${post.title} on the Jupiter Fast Finance blog.`}
-        keywords={`${post.title.toLowerCase()}, home loan mulund, loans mumbai, jupiter fast finance`}
+        title={`${post.title} | Jupiter Finance`}
+        description={post.excerpt || `Read about ${post.title} on the Jupiter Finance blog.`}
+        keywords={`${post.title.toLowerCase()}, home loan mulund, loans mumbai, jupiter finance`}
         canonicalUrl={canonicalUrl}
         ogType="article"
       />
@@ -109,10 +109,10 @@ const BlogPost = () => {
         description: post.excerpt,
         datePublished: post.publishedAt,
         dateModified: post.publishedAt,
-        author: { "@type": "Organization", name: "Jupiter Fast Finance" },
+        author: { "@type": "Organization", name: "Jupiter Finance" },
         publisher: {
           "@type": "Organization",
-          name: "Jupiter Fast Finance",
+          name: "Jupiter Finance",
           logo: { "@type": "ImageObject", url: "https://jupiterfastfinance.com/favicon.png" },
         },
         mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
@@ -123,7 +123,7 @@ const BlogPost = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="text-2xl font-display font-bold text-primary flex items-center gap-2">
             <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />
-            <span>Jupiter<span className="text-gradient-gold"> Fast Finance</span></span>
+            <span>Jupiter<span className="text-gradient-gold"> Finance</span></span>
           </Link>
           <a
             href="tel:+919757190200"

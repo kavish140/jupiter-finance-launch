@@ -3,9 +3,13 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import Sitemap from "vite-plugin-sitemap";
 
+import posts from "./src/data/posts.json";
+
 const dynamicRoutes = [
   "/",
-  "/home_loan",
+  "/home-loan", // Use the correct hyphenated one
+  "/blog",
+  ...posts.map((post) => `/blog/${post.slug}`),
   "/loan-against-property",
   "/loan-against-mutual-funds",
   "/health-insurance",

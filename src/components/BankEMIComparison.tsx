@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowUpDown, MessageCircle } from "lucide-react";
 import { bankRates, type BankRate } from "@/data/bankRates";
 import { trackEvent } from "@/hooks/useAnalytics";
+import { SiWhatsapp } from "@icons-pack/react-simple-icons";
 
 type EmploymentType = "salaried" | "self-employed";
 type SortKey = "rateMin" | "maxTenure" | "maxLoan";
@@ -234,7 +235,7 @@ const BankEMIComparison = () => {
                 onClick={() => trackEvent("whatsapp_click", { location: "bank_comparison" })}
                 className="border border-border bg-card text-foreground font-semibold px-6 py-3 rounded-xl text-sm hover:bg-muted transition-colors inline-flex items-center gap-2"
               >
-                💬 WhatsApp Us
+                <SiWhatsapp className="w-4 h-4 inline mr-2" /> WhatsApp Us
               </a>
             </div>
           </div>

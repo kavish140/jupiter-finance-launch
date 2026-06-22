@@ -15,6 +15,7 @@ import BankEMIComparison from "@/components/BankEMIComparison";
 import HomeLoanProcessSteps from "@/components/HomeLoanProcessSteps";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import { trackEvent } from "@/hooks/useAnalytics";
+import { SiWhatsapp } from "@icons-pack/react-simple-icons";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -389,7 +390,7 @@ const HomeLoan = () => {
                   rel="noreferrer"
                   className="flex items-center gap-2 border border-white/20 bg-white/5 text-white font-semibold px-8 py-4 rounded-xl text-base hover:bg-white/10 transition-all"
                 >
-                  💬 WhatsApp Us
+                  <SiWhatsapp className="w-4 h-4 inline mr-2" /> WhatsApp Us
                 </a>
               </div>
               <p className="text-white/40 text-sm mt-5">Available 10:00 AM – 7:00 PM IST, Monday – Saturday</p>

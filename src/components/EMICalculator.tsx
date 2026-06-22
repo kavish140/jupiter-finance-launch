@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { trackEvent } from "@/hooks/useAnalytics";
+import { SiWhatsapp } from "@icons-pack/react-simple-icons";
 
 const formatCurrency = (amount: number) =>
   new Intl.NumberFormat("en-IN", {
@@ -163,7 +164,7 @@ const EMICalculator = () => {
               onClick={() => trackEvent("whatsapp_click", { location: "emi_calculator" })}
               className="border border-border bg-card text-foreground font-semibold px-6 py-3 rounded-lg text-sm hover:bg-muted transition-colors inline-flex items-center gap-2"
             >
-              💬 WhatsApp Us
+              <SiWhatsapp className="w-4 h-4 inline mr-2" /> WhatsApp Us
             </a>
           </div>
           <p className="text-xs text-muted-foreground mt-4">Free consultation • No obligations • 25+ years of expertise</p>

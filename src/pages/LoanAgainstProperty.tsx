@@ -4,6 +4,7 @@ import MobileStickyCTA from "@/components/MobileStickyCTA";
 import SeoMeta from "@/components/SeoMeta";
 import StructuredData from "@/components/StructuredData";
 import { Link } from "react-router-dom";
+import { SiWhatsapp } from "@icons-pack/react-simple-icons";
 
 const LoanAgainstProperty = () => {
   return (
@@ -42,7 +43,7 @@ const LoanAgainstProperty = () => {
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a href="tel:+919757190200" className="gradient-gold text-accent-foreground font-semibold px-5 py-2.5 rounded-lg text-sm hover:opacity-90 transition-opacity">Talk to an Advisor</a>
-            <a href="https://wa.me/919757190200" target="_blank" rel="noreferrer" className="border border-border px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-card transition-colors">WhatsApp Us</a>
+            <a href="https://wa.me/919757190200" target="_blank" rel="noreferrer" className="border border-border px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-card transition-colors"><SiWhatsapp className="w-4 h-4 inline mr-2 text-[#25D366]" /> WhatsApp Us</a>
           </div>
         </section>
 

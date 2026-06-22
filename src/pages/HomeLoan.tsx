@@ -271,6 +271,21 @@ const HomeLoan = () => {
           </div>
         </section>
 
+        {/* ── Executive Summary ───────────────────────── */}
+        <section className="py-10 bg-background border-b border-border">
+          <div className="container mx-auto px-4 max-w-4xl text-center">
+            <h2 className="text-xl md:text-2xl font-semibold mb-4 text-foreground">
+              Key Takeaways: Home Loans in Mulund & Mumbai
+            </h2>
+            <ul className="text-left md:text-center text-muted-foreground list-disc md:list-none space-y-2 md:space-y-0 md:flex md:justify-center md:gap-6 flex-wrap">
+              <li><strong>Zero Fees:</strong> Our consulting and documentation services are completely free.</li>
+              <li><strong>11+ Bank Partners:</strong> Compare SBI, HDFC, ICICI, and more for the best rates.</li>
+              <li><strong>Doorstep Service:</strong> We collect documents from your home or office.</li>
+              <li><strong>Fast Sanction:</strong> Approvals in 12–15 working days with our pre-checked files.</li>
+            </ul>
+          </div>
+        </section>
+
         {/* ── Why Choose Us ───────────────────────── */}
         <section className="py-12 md:py-20 bg-muted/30">
           <div className="container mx-auto px-4">

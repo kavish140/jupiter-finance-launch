@@ -62,6 +62,17 @@ const MutualFundSIP = () => {
           </div>
         </section>
 
+        {/* Executive Summary */}
+        <section className="bg-muted/30 p-6 rounded-xl border border-border">
+          <h2 className="text-xl font-display font-semibold mb-3">Key Takeaways: Mutual Fund SIP Advisor in Mulund & Mumbai</h2>
+          <ul className="text-muted-foreground list-disc list-inside space-y-2">
+            <li><strong>Low Minimum Investment:</strong> Start building wealth with a Systematic Investment Plan (SIP) from just ₹500/month.</li>
+            <li><strong>Tax Savings:</strong> Invest in ELSS funds to save up to ₹1.5 Lakh under Section 80C.</li>
+            <li><strong>Custom Portfolios:</strong> Get data-backed recommendations across Large Cap, Mid Cap, and Multi-Asset funds.</li>
+            <li><strong>Goal-Based Tracking:</strong> Dedicated advisory to align investments with retirement, child education, or home-buying goals.</li>
+          </ul>
+        </section>
+
         {/* Section 2: Two-column content */}
         <section className="grid md:grid-cols-2 gap-6">
           <article className="rounded-xl border border-border bg-card p-6 space-y-4">

@@ -62,6 +62,17 @@ const HealthInsurance = () => {
           </div>
         </section>
 
+        {/* Executive Summary */}
+        <section className="bg-muted/30 p-6 rounded-xl border border-border">
+          <h2 className="text-xl font-display font-semibold mb-3">Key Takeaways: Health Insurance in Mulund & Mumbai</h2>
+          <ul className="text-muted-foreground list-disc list-inside space-y-2">
+            <li><strong>Expert Advice:</strong> We compare plans from Star Health, HDFC Ergo, Niva Bupa, and more.</li>
+            <li><strong>Cashless Networks:</strong> Access to 10,000+ top-tier network hospitals in Mumbai and pan-India.</li>
+            <li><strong>Claims Support:</strong> End-to-end help with cashless authorizations and reimbursements.</li>
+            <li><strong>Customized Plans:</strong> Options for family floaters, senior citizens, and maternity coverage.</li>
+          </ul>
+        </section>
+
         {/* Section 2: Two-column content */}
         <section className="grid md:grid-cols-2 gap-6">
           <article className="rounded-xl border border-border bg-card p-6 space-y-4">

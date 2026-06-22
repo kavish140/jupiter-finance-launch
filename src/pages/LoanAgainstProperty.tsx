@@ -3,6 +3,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import SeoMeta from "@/components/SeoMeta";
 import StructuredData from "@/components/StructuredData";
+import LAPCalculator from "@/components/LAPCalculator";
 import { Link } from "react-router-dom";
 import { SiWhatsapp } from "@icons-pack/react-simple-icons";
 
@@ -46,6 +47,9 @@ const LoanAgainstProperty = () => {
             <a href="https://wa.me/919757190200" target="_blank" rel="noreferrer" className="border border-border px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-card transition-colors"><SiWhatsapp className="w-4 h-4 inline mr-2 text-[#25D366]" /> WhatsApp Us</a>
           </div>
         </section>
+
+        {/* LAP Calculator */}
+        <LAPCalculator />
 
         {/* Section 2: Two-column content */}
         <section className="grid md:grid-cols-2 gap-6">

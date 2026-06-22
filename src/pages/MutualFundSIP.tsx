@@ -3,6 +3,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import SeoMeta from "@/components/SeoMeta";
 import StructuredData from "@/components/StructuredData";
+import SIPCalculator from "@/components/SIPCalculator";
 import { Link } from "react-router-dom";
 import { SiWhatsapp } from "@icons-pack/react-simple-icons";
 
@@ -73,6 +74,9 @@ const MutualFundSIP = () => {
             <li><strong>Goal-Based Tracking:</strong> Dedicated advisory to align investments with retirement, child education, or home-buying goals.</li>
           </ul>
         </section>
+
+        {/* SIP Calculator */}
+        <SIPCalculator />
 
         {/* Section 2: Two-column content */}
         <section className="grid md:grid-cols-2 gap-6">

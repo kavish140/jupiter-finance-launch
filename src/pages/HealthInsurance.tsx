@@ -3,6 +3,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import SeoMeta from "@/components/SeoMeta";
 import StructuredData from "@/components/StructuredData";
+import HealthInsuranceCalculator from "@/components/HealthInsuranceCalculator";
 import { Link } from "react-router-dom";
 import { SiWhatsapp } from "@icons-pack/react-simple-icons";
 
@@ -73,6 +74,9 @@ const HealthInsurance = () => {
             <li><strong>Customized Plans:</strong> Options for family floaters, senior citizens, and maternity coverage.</li>
           </ul>
         </section>
+
+        {/* Health Insurance Calculator */}
+        <HealthInsuranceCalculator />
 
         {/* Section 2: Two-column content */}
         <section className="grid md:grid-cols-2 gap-6">

@@ -26,7 +26,7 @@ const HealthInsuranceCalculator = () => {
     cover = Math.ceil(cover / 100000) * 100000;
 
     // Premium: Base 6000 + 3000 per extra member
-    let basePremium = 6000 + (members - 1) * 3000;
+    const basePremium = 6000 + (members - 1) * 3000;
     
     // Age multiplier: 18-30 (1x), 31-45 (1.4x), 46-60 (2.2x), 60+ (3.5x)
     let ageMultiplier = 1;

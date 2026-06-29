@@ -69,9 +69,10 @@ const Careers = () => {
         mobile: "",
         email: "",
       });
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Error submitting application:", err);
-      toast.error(err.message || "Failed to submit application. Please try again.");
+      const errorMessage = err instanceof Error ? err.message : "Failed to submit application. Please try again.";
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }

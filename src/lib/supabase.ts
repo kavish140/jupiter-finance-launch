@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 
 // Strip any accidental quotes or whitespace that might have been pasted into GitHub Secrets
 let rawUrl = (import.meta.env.VITE_SUPABASE_URL || '').replace(/['"]/g, '').trim();
-let rawKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || '').replace(/['"]/g, '').trim();
+const rawKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || '').replace(/['"]/g, '').trim();
 
 // Ensure URL has https:// prefix if user accidentally pasted just the domain
 if (rawUrl && !rawUrl.startsWith('http')) {

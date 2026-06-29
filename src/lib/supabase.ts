@@ -1,7 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
-let rawUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+// Strip any accidental quotes or whitespace that might have been pasted into GitHub Secrets
+let rawUrl = (import.meta.env.VITE_SUPABASE_URL || '').replace(/['"]/g, '').trim();
+let rawKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || '').replace(/['"]/g, '').trim();
 
 // Ensure URL has https:// prefix if user accidentally pasted just the domain
 if (rawUrl && !rawUrl.startsWith('http')) {
@@ -9,6 +10,7 @@ if (rawUrl && !rawUrl.startsWith('http')) {
 }
 
 const supabaseUrl = rawUrl;
+const supabaseKey = rawKey;
 
 if (!supabaseUrl || !supabaseKey) {
   console.warn('Supabase credentials are not provided in environment variables.');

@@ -9,13 +9,13 @@ import { Briefcase, IndianRupee, Heart, Landmark, Send } from "lucide-react";
 
 const careersSchema = z.object({
   name: z.string().trim().min(2, "Name must be at least 2 characters"),
-  dob: z.string().min(1, "Date of Birth is required"),
+  dob: z.string().optional().or(z.literal("")),
   qualification: z.string().trim().min(2, "Qualification is required"),
   address: z.string().trim().min(5, "Address must be at least 5 characters"),
-  college: z.string().trim().min(2, "College name is required"),
-  experience: z.string().trim().min(1, "Past experience is required"),
+  college: z.string().optional().or(z.literal("")),
+  experience: z.string().optional().or(z.literal("")),
   mobile: z.string().trim().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit mobile number"),
-  email: z.string().trim().email("Enter a valid email address"),
+  email: z.string().trim().email("Enter a valid email address").optional().or(z.literal("")),
 });
 
 type CareersForm = z.infer<typeof careersSchema>;
@@ -89,7 +89,7 @@ const Careers = () => {
     <div className="min-h-screen bg-background flex flex-col">
       <SeoMeta 
         title="Careers | Jupiter Finance" 
-        description="Join our team at Jupiter Finance. Enjoy an incentive-based compensation model with unlimited earning potential."
+        description="Join our team at Jupiter Finance. Enjoy an incentive-based reward model with unlimited earning potential."
         keywords="careers, jobs, jupiter finance, financial advisor, mutual fund distributor, insurance agent"
         canonicalUrl="https://jupiterfastfinance.com/careers"
       />
@@ -103,7 +103,7 @@ const Careers = () => {
               Join <span className="text-primary">Jupiter Finance</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              We are looking for driven individuals to join our team. We offer a unique, purely incentive-based compensation structure giving you <span className="font-semibold text-primary">unlimited potential to earn</span>.
+              We are looking for driven individuals to join our team. We offer a unique, purely incentive-based reward structure giving you <span className="font-semibold text-primary">unlimited potential to earn</span>.
             </p>
           </div>
 
@@ -115,7 +115,7 @@ const Careers = () => {
                 <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-xl mb-6 text-primary">
                   <Briefcase className="w-8 h-8" />
                 </div>
-                <h2 className="text-2xl font-bold text-foreground mb-4">Compensation Structure</h2>
+                <h2 className="text-2xl font-bold text-foreground mb-4">Reward Structure</h2>
                 <p className="text-muted-foreground mb-6">
                   There is no fixed salary. Your earnings are directly tied to your performance, providing a limitless earning ceiling.
                 </p>
@@ -158,7 +158,7 @@ const Careers = () => {
               <form onSubmit={handleSubmit} className="space-y-5">
                 
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">Full Name</label>
+                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">Full Name *</label>
                   <input
                     type="text"
                     id="name"
@@ -173,7 +173,7 @@ const Careers = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="dob" className="block text-sm font-medium text-foreground mb-1">Date of Birth</label>
+                    <label htmlFor="dob" className="block text-sm font-medium text-foreground mb-1">Date of Birth <span className="text-muted-foreground font-normal text-xs">(Optional)</span></label>
                     <input
                       type="date"
                       id="dob"
@@ -186,7 +186,7 @@ const Careers = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="mobile" className="block text-sm font-medium text-foreground mb-1">Mobile Number</label>
+                    <label htmlFor="mobile" className="block text-sm font-medium text-foreground mb-1">Mobile Number *</label>
                     <input
                       type="tel"
                       id="mobile"
@@ -201,7 +201,7 @@ const Careers = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">Email Address</label>
+                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">Email Address <span className="text-muted-foreground font-normal text-xs">(Optional)</span></label>
                   <input
                     type="email"
                     id="email"
@@ -215,7 +215,7 @@ const Careers = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="qualification" className="block text-sm font-medium text-foreground mb-1">Highest Qualification</label>
+                  <label htmlFor="qualification" className="block text-sm font-medium text-foreground mb-1">Highest Qualification *</label>
                   <input
                     type="text"
                     id="qualification"
@@ -229,7 +229,7 @@ const Careers = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="college" className="block text-sm font-medium text-foreground mb-1">Name of College Attended</label>
+                  <label htmlFor="college" className="block text-sm font-medium text-foreground mb-1">Name of College Attended <span className="text-muted-foreground font-normal text-xs">(Optional)</span></label>
                   <input
                     type="text"
                     id="college"
@@ -243,7 +243,7 @@ const Careers = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="address" className="block text-sm font-medium text-foreground mb-1">Residence Address</label>
+                  <label htmlFor="address" className="block text-sm font-medium text-foreground mb-1">Residence Address *</label>
                   <textarea
                     id="address"
                     name="address"
@@ -257,7 +257,7 @@ const Careers = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="experience" className="block text-sm font-medium text-foreground mb-1">Past Experience</label>
+                  <label htmlFor="experience" className="block text-sm font-medium text-foreground mb-1">Past Experience <span className="text-muted-foreground font-normal text-xs">(Optional)</span></label>
                   <textarea
                     id="experience"
                     name="experience"

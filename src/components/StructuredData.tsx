@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
-import videos from "@/data/videos.json";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 interface VideoItem {
   videoId: string;
@@ -23,9 +24,27 @@ interface StructuredDataProps {
 }
 
 const StructuredData = ({ location, serviceType, customFaqs, breadcrumbItems }: StructuredDataProps) => {
+  const [latestVideos, setLatestVideos] = useState<VideoItem[]>([]);
   const siteUrl = "https://jupiterfastfinance.com";
-  const latestVideos = (videos as VideoItem[]).slice(0, 4);
   const serviceAreas = ["Mulund", "Mumbai", "Thane", "Bhandup", "Ghatkopar", "Powai", "Navi Mumbai", "Central Mumbai"];
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const { data } = await supabase
+          .from("videos")
+          .select("*")
+          .order("publishedAt", { ascending: false })
+          .limit(4);
+        if (data) {
+          setLatestVideos(data);
+        }
+      } catch (error) {
+        console.error("Error fetching videos for schema:", error);
+      }
+    };
+    fetchVideos();
+  }, []);
 
   const organizationSchema = {
     "@context": "https://schema.org",

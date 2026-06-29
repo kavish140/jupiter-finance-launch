@@ -1,5 +1,5 @@
-import { useState } from "react";
-import posts from "@/data/posts.json";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 import { motion } from "framer-motion";
 import { CalendarDays, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -49,7 +49,7 @@ const PostCard = ({ post }: { post: PostItem }) => {
   return (
     <motion.article
       variants={cardVariants}
-      className="group relative bg-card/60 backdrop-blur-sm rounded-2xl p-5 md:p-7 transition-all duration-300 border border-border/60 hover:border-gold/40 hover:shadow-[0_8px_30px_rgba(245,158,11,0.1)] hover:-translate-y-1 overflow-hidden flex flex-col"
+      className="group relative bg-card/60 backdrop-blur-sm rounded-2xl p-5 md:p-7 transition-all duration-300 border border-border/60 hover:border-gold/40 hover:shadow-[0_8px_30px_rgba(245,158,11,0.1)] hover:-translate-y-1 overflow-hidden flex flex-col h-full"
     >
       {/* Top accent */}
       <div className="absolute top-0 left-0 w-full h-1 gradient-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -88,9 +88,40 @@ const PostCard = ({ post }: { post: PostItem }) => {
 };
 
 const PostSection = () => {
-  const allPosts = posts as PostItem[];
+  const [allPosts, setAllPosts] = useState<PostItem[]>([]);
+  const [loading, setLoading] = useState(true);
   // Show 3 on mobile initially, all 6 on desktop
   const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("posts")
+          .select("*")
+          .order("publishedAt", { ascending: false })
+          .limit(6);
+        if (error) throw error;
+        setAllPosts(data || []);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPosts();
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="posts" className="py-14 md:py-24 bg-background relative overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <div className="w-8 h-8 border-4 border-gold/30 border-t-gold rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading posts...</p>
+        </div>
+      </section>
+    );
+  }
 
   if (allPosts.length === 0) {
     return null;

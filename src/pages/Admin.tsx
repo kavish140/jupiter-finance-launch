@@ -1,16 +1,11 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ShieldCheck, Lock, UploadCloud, Trash2, Newspaper, Briefcase } from "lucide-react";
-import videos from "@/data/videos.json";
-import posts from "@/data/posts.json";
 import SeoMeta from "@/components/SeoMeta";
 import { supabase } from "@/lib/supabase";
 
 type Status = { type: "idle" | "success" | "error"; message: string };
 
-const REPO_OWNER = "kavish140";
-const REPO_NAME = "jupiter-finance-launch";
-const WORKFLOW_FILE = "youtube_sync.yml";
 const ADMIN_SESSION_KEY = "jff_admin_unlocked";
 const ADMIN_PAGE_PASSWORD =
   import.meta.env.VITE_ADMIN_PAGE_PASSWORD?.trim() ??
@@ -20,12 +15,20 @@ const ADMIN_PAGE_PASSWORD =
 interface VideoItem {
   videoId: string;
   title: string;
+  description: string;
+  publishedAt: string;
+  thumbnailUrl: string;
+  url: string;
 }
 
 interface PostItem {
   id: string;
+  slug: string;
   title: string;
+  excerpt: string;
   category?: string;
+  publishedAt: string;
+  body: string;
 }
 
 interface JobApplication {
@@ -42,14 +45,13 @@ interface JobApplication {
 }
 
 const Admin = () => {
-  const [token, setToken] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [videoTitle, setVideoTitle] = useState("");
   const [postTitle, setPostTitle] = useState("");
   const [postExcerpt, setPostExcerpt] = useState("");
   const [postContent, setPostContent] = useState("");
   const [postCategory, setPostCategory] = useState("General");
-  const [adminCredentials, setAdminCredentials] = useState("");
+  
   const [unlockPassword, setUnlockPassword] = useState("");
   const [unlockError, setUnlockError] = useState("");
   const [isUnlocked, setIsUnlocked] = useState(() => {
@@ -58,12 +60,16 @@ const Admin = () => {
     }
     return window.sessionStorage.getItem(ADMIN_SESSION_KEY) === "true";
   });
+  
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<Status>({ type: "idle", message: "" });
+  
   const [jobApplications, setJobApplications] = useState<JobApplication[]>([]);
   const [isLoadingJobs, setIsLoadingJobs] = useState(false);
-  const currentVideos = videos as VideoItem[];
-  const currentPosts = posts as PostItem[];
+  
+  const [currentVideos, setCurrentVideos] = useState<VideoItem[]>([]);
+  const [currentPosts, setCurrentPosts] = useState<PostItem[]>([]);
+  const [isLoadingContent, setIsLoadingContent] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -73,6 +79,7 @@ const Admin = () => {
     if (isUnlocked) {
       window.sessionStorage.setItem(ADMIN_SESSION_KEY, "true");
       fetchJobApplications();
+      fetchContent();
       return;
     }
 
@@ -96,82 +103,52 @@ const Admin = () => {
     }
   };
 
+  const fetchContent = async () => {
+    setIsLoadingContent(true);
+    try {
+      const [videosRes, postsRes] = await Promise.all([
+        supabase.from("videos").select("*").order("publishedAt", { ascending: false }),
+        supabase.from("posts").select("*").order("publishedAt", { ascending: false })
+      ]);
+      
+      if (videosRes.error) throw videosRes.error;
+      if (postsRes.error) throw postsRes.error;
+      
+      setCurrentVideos(videosRes.data || []);
+      setCurrentPosts(postsRes.data || []);
+    } catch (err) {
+      console.error("Error fetching content:", err);
+    } finally {
+      setIsLoadingContent(false);
+    }
+  };
+
   const handleUnlock = (e: FormEvent) => {
     e.preventDefault();
-
     const enteredPassword = unlockPassword.trim();
-
     if (!enteredPassword) {
       setUnlockError("Enter admin password.");
       return;
     }
-
     if (!ADMIN_PAGE_PASSWORD) {
       setUnlockError("");
       setIsUnlocked(true);
-      setAdminCredentials(enteredPassword);
       setUnlockPassword("");
       return;
     }
-
     if (enteredPassword !== ADMIN_PAGE_PASSWORD) {
       setUnlockError("Incorrect admin password.");
       return;
     }
-
     setUnlockError("");
     setIsUnlocked(true);
-    setAdminCredentials(enteredPassword);
     setUnlockPassword("");
   };
 
   const handleLock = () => {
     setIsUnlocked(false);
-    setAdminCredentials("");
     setUnlockPassword("");
     setStatus({ type: "idle", message: "" });
-  };
-
-  const dispatchWorkflow = async (inputs: Record<string, string>, successMessage: string) => {
-    if (!token.trim()) {
-      throw new Error("GitHub token is required.");
-    }
-
-    if (!adminCredentials.trim()) {
-      throw new Error("Admin password is required.");
-    }
-
-    const response = await fetch(
-      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/${WORKFLOW_FILE}/dispatches`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/vnd.github+json",
-          Authorization: `Bearer ${token.trim()}`,
-          "X-GitHub-Api-Version": "2022-11-28",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ref: "main",
-          inputs: {
-            admin_credentials: adminCredentials.trim(),
-            ...inputs,
-          },
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      const message = await response.text();
-      if (response.status === 404) {
-        throw new Error(
-          "GitHub API returned 404. Check repository owner/name and verify your token has access to this repository."
-        );
-      }
-      throw new Error(message || "Failed to dispatch workflow");
-    }
-
-    setStatus({ type: "success", message: successMessage });
   };
 
   const handleAddVideo = async (e: FormEvent) => {
@@ -186,20 +163,38 @@ const Admin = () => {
     setStatus({ type: "idle", message: "" });
 
     try {
-      await dispatchWorkflow(
-        {
-          operation: "add_video",
-          manual_video_url: videoUrl.trim(),
-          manual_video_title: videoTitle.trim(),
-        },
-        "Video submitted. GitHub Action started, and site videos will refresh after workflow + deploy complete."
-      );
+      // Extract video ID from URL
+      let videoId = "";
+      const urlObj = new URL(videoUrl.trim());
+      if (videoUrl.includes("youtube.com")) {
+        videoId = urlObj.searchParams.get("v") || "";
+      } else if (videoUrl.includes("youtu.be")) {
+        videoId = urlObj.pathname.slice(1);
+      }
+      
+      if (!videoId) {
+        throw new Error("Could not extract YouTube video ID from URL.");
+      }
+
+      const { error } = await supabase.from("videos").insert([{
+        videoId,
+        title: videoTitle.trim() || `YouTube Video: ${videoId}`,
+        description: "New Video",
+        publishedAt: new Date().toISOString(),
+        thumbnailUrl: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+        url: videoUrl.trim()
+      }]);
+
+      if (error) throw error;
+
+      setStatus({ type: "success", message: "Video successfully added." });
       setVideoUrl("");
       setVideoTitle("");
+      fetchContent(); // refresh
     } catch (error) {
       setStatus({
         type: "error",
-        message: error instanceof Error ? error.message : "Something went wrong while triggering workflow.",
+        message: error instanceof Error ? error.message : "Unable to add video.",
       });
     } finally {
       setLoading(false);
@@ -218,24 +213,33 @@ const Admin = () => {
     setStatus({ type: "idle", message: "" });
 
     try {
-      await dispatchWorkflow(
-        {
-          operation: "add_post",
-          post_title: postTitle.trim(),
-          post_excerpt: postExcerpt.trim(),
-          post_content: postContent.trim(),
-          post_category: postCategory.trim() || "General",
-        },
-        "Post submitted. GitHub Action started, and posts will refresh after workflow + deploy complete."
-      );
+      const slug = postTitle
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)+/g, '');
+
+      const { error } = await supabase.from("posts").insert([{
+        id: slug,
+        slug: slug,
+        title: postTitle.trim(),
+        excerpt: postExcerpt.trim(),
+        body: postContent.trim(),
+        category: postCategory.trim() || "General",
+        publishedAt: new Date().toISOString(),
+      }]);
+
+      if (error) throw error;
+
+      setStatus({ type: "success", message: "Post successfully added." });
       setPostTitle("");
       setPostExcerpt("");
       setPostContent("");
       setPostCategory("General");
+      fetchContent(); // refresh
     } catch (error) {
       setStatus({
         type: "error",
-        message: error instanceof Error ? error.message : "Something went wrong while triggering workflow.",
+        message: error instanceof Error ? error.message : "Unable to add post.",
       });
     } finally {
       setLoading(false);
@@ -247,13 +251,11 @@ const Admin = () => {
     setStatus({ type: "idle", message: "" });
 
     try {
-      await dispatchWorkflow(
-        {
-          operation: "remove_video",
-          remove_video_id: videoId,
-        },
-        "Video removal requested. Refresh admin after deploy to verify the updated list."
-      );
+      const { error } = await supabase.from("videos").delete().eq("videoId", videoId);
+      if (error) throw error;
+      
+      setStatus({ type: "success", message: "Video removed." });
+      fetchContent(); // refresh
     } catch (error) {
       setStatus({
         type: "error",
@@ -269,13 +271,11 @@ const Admin = () => {
     setStatus({ type: "idle", message: "" });
 
     try {
-      await dispatchWorkflow(
-        {
-          operation: "remove_post",
-          remove_post_id: postId,
-        },
-        "Post removal requested. Refresh admin after deploy to verify the updated list."
-      );
+      const { error } = await supabase.from("posts").delete().eq("id", postId);
+      if (error) throw error;
+      
+      setStatus({ type: "success", message: "Post removed." });
+      fetchContent(); // refresh
     } catch (error) {
       setStatus({
         type: "error",
@@ -363,7 +363,7 @@ const Admin = () => {
             </Link>
             <h1 className="mt-3 text-3xl md:text-5xl font-display font-bold">Owner Content Admin</h1>
             <p className="mt-3 text-muted-foreground">
-              Manage videos and posts with one panel. Password validation now happens in GitHub Actions using your repository secret.
+              Manage videos, posts, and job applications with one panel. Powered by Supabase.
             </p>
             <button
               type="button"
@@ -377,40 +377,6 @@ const Admin = () => {
         </div>
 
         <div className="rounded-2xl border border-border bg-card shadow-card p-6 md:p-8 space-y-8">
-          <div className="space-y-2">
-            <label htmlFor="token" className="text-sm font-semibold flex items-center gap-2">
-              <Lock className="w-4 h-4 text-gold" />
-              GitHub Personal Access Token
-            </label>
-            <input
-              id="token"
-              type="password"
-              value={token}
-              onChange={(e) => setToken(e.target.value)}
-              placeholder="ghp_..."
-              className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-              autoComplete="off"
-            />
-            <p className="text-xs text-muted-foreground">
-              Token needs Actions write permission and repository access.
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <label htmlFor="admin-credentials" className="text-sm font-semibold flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-gold" />
-              Admin Password (validated by GitHub Secret)
-            </label>
-            <input
-              id="admin-credentials"
-              type="password"
-              value={adminCredentials}
-              onChange={(e) => setAdminCredentials(e.target.value)}
-              placeholder="Enter admin password"
-              className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-              autoComplete="off"
-            />
-          </div>
 
           <form onSubmit={handleAddVideo} className="space-y-5 border border-border rounded-xl p-5">
             <h2 className="text-xl font-display font-bold">Add Video</h2>
@@ -448,10 +414,12 @@ const Admin = () => {
 
           <div className="space-y-4 border border-border rounded-xl p-5">
             <h2 className="text-xl font-display font-bold">Remove Video</h2>
-            {currentVideos.length === 0 ? (
+            {isLoadingContent ? (
+              <p className="text-sm text-muted-foreground">Loading videos...</p>
+            ) : currentVideos.length === 0 ? (
               <p className="text-sm text-muted-foreground">No videos available to remove.</p>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-3 max-h-[300px] overflow-y-auto pr-2">
                 {currentVideos.map((video) => (
                   <div key={video.videoId} className="flex items-center justify-between gap-4 bg-background rounded-lg px-4 py-3 border border-border">
                     <div>
@@ -462,7 +430,7 @@ const Admin = () => {
                       type="button"
                       disabled={loading}
                       onClick={() => handleRemoveVideo(video.videoId)}
-                      className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-destructive/40 text-sm text-foreground hover:bg-destructive/10 disabled:opacity-60"
+                      className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-destructive/40 text-sm text-foreground hover:bg-destructive/10 disabled:opacity-60 shrink-0"
                     >
                       <Trash2 className="w-4 h-4" />
                       Remove
@@ -513,7 +481,7 @@ const Admin = () => {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="post-content" className="text-sm font-semibold">Full Content</label>
+              <label htmlFor="post-content" className="text-sm font-semibold">Full Content (Markdown)</label>
               <textarea
                 id="post-content"
                 rows={5}
@@ -536,10 +504,12 @@ const Admin = () => {
 
           <div className="space-y-4 border border-border rounded-xl p-5">
             <h2 className="text-xl font-display font-bold">Remove Post</h2>
-            {currentPosts.length === 0 ? (
+            {isLoadingContent ? (
+              <p className="text-sm text-muted-foreground">Loading posts...</p>
+            ) : currentPosts.length === 0 ? (
               <p className="text-sm text-muted-foreground">No posts available to remove.</p>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-3 max-h-[300px] overflow-y-auto pr-2">
                 {currentPosts.map((post) => (
                   <div key={post.id} className="flex items-center justify-between gap-4 bg-background rounded-lg px-4 py-3 border border-border">
                     <div>
@@ -550,7 +520,7 @@ const Admin = () => {
                       type="button"
                       disabled={loading}
                       onClick={() => handleRemovePost(post.id)}
-                      className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-destructive/40 text-sm text-foreground hover:bg-destructive/10 disabled:opacity-60"
+                      className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-destructive/40 text-sm text-foreground hover:bg-destructive/10 disabled:opacity-60 shrink-0"
                     >
                       <Trash2 className="w-4 h-4" />
                       Remove
@@ -597,11 +567,11 @@ const Admin = () => {
                       </td>
                     </tr>
                   ) : jobApplications.length === 0 ? (
-                    <tr>
-                      <td colSpan={5} className="py-8 text-center text-muted-foreground">
-                        No applications found.
-                      </td>
-                    </tr>
+                     <tr>
+                       <td colSpan={5} className="py-8 text-center text-muted-foreground">
+                         No applications found.
+                       </td>
+                     </tr>
                   ) : (
                     jobApplications.map((app) => (
                       <tr key={app.id} className="border-b border-border/50 hover:bg-muted/30 transition-colors">

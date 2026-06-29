@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CalendarDays, ArrowLeft, Phone, MessageCircle } from "lucide-react";
@@ -5,7 +6,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import SeoMeta from "@/components/SeoMeta";
-import posts from "@/data/posts.json";
+import { supabase } from "@/lib/supabase";
 
 interface PostItem {
   id: string;
@@ -80,14 +81,67 @@ const CategoryBadge = ({ category }: { category?: string }) => {
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const allPosts = posts as PostItem[];
-  const post = allPosts.find((p) => p.slug === slug);
+  const [post, setPost] = useState<PostItem | null>(null);
+  const [related, setRelated] = useState<PostItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  if (!post) return <Navigate to="/blog" replace />;
+  useEffect(() => {
+    const fetchPost = async () => {
+      setLoading(true);
+      setError(false);
+      try {
+        const { data: postData, error: postError } = await supabase
+          .from("posts")
+          .select("*")
+          .eq("slug", slug)
+          .single();
 
-  const related = allPosts
-    .filter((p) => p.slug !== slug && p.category === post.category)
-    .slice(0, 3);
+        if (postError || !postData) {
+          setError(true);
+          return;
+        }
+
+        setPost(postData);
+
+        // Fetch related posts (same category, excluding current)
+        if (postData.category) {
+          const { data: relatedData } = await supabase
+            .from("posts")
+            .select("*")
+            .eq("category", postData.category)
+            .neq("slug", slug)
+            .limit(3);
+            
+          setRelated(relatedData || []);
+        }
+      } catch (err) {
+        console.error("Error fetching post:", err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (slug) {
+      fetchPost();
+    }
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-gold/30 border-t-gold rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading article...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !post) {
+    return <Navigate to="/blog" replace />;
+  }
 
   const canonicalUrl = `https://jupiterfastfinance.com/blog/${post.slug}`;
 

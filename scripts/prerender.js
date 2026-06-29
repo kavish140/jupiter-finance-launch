@@ -39,15 +39,44 @@ async function prerender() {
 
   let allRoutes = [...baseRoutes];
 
-  // Dynamically pull blog slugs
-  if (fs.existsSync(postsJsonPath)) {
+  // Load env for local dev if missing from process.env
+  let supabaseUrl = process.env.VITE_SUPABASE_URL;
+  let supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
+  const envPath = path.resolve(__dirname, '../.env');
+  if ((!supabaseUrl || !supabaseKey) && fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    envContent.split('\n').forEach(line => {
+      const match = line.match(/^([^=]+)=(.*)$/);
+      if (match) {
+        if (match[1] === 'VITE_SUPABASE_URL') supabaseUrl = match[2].trim();
+        if (match[1] === 'VITE_SUPABASE_ANON_KEY') supabaseKey = match[2].trim();
+      }
+    });
+  }
+
+  // Dynamically pull blog slugs from Supabase
+  if (supabaseUrl && supabaseKey) {
     try {
-      const postsData = JSON.parse(fs.readFileSync(postsJsonPath, 'utf-8'));
-      const blogRoutes = postsData.map(post => `blog/${post.slug}`);
-      allRoutes = [...allRoutes, ...blogRoutes];
+      console.log('Fetching blog posts from Supabase for prerendering...');
+      const response = await fetch(`${supabaseUrl}/rest/v1/posts?select=slug`, {
+        headers: {
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`
+        }
+      });
+      if (response.ok) {
+        const postsData = await response.json();
+        const blogRoutes = postsData.map(post => `blog/${post.slug}`);
+        allRoutes = [...allRoutes, ...blogRoutes];
+        console.log(`Found ${blogRoutes.length} blog posts.`);
+      } else {
+        console.error('Failed to fetch posts from Supabase:', await response.text());
+      }
     } catch (error) {
-      console.error('Error reading posts.json:', error);
+      console.error('Error fetching posts for prerender:', error);
     }
+  } else {
+    console.warn('Supabase credentials not found. Dynamic blog routes will not be prerendered.');
   }
 
   // 1. Start a local express server to serve the SPA

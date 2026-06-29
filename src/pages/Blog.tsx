@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CalendarDays, ArrowRight } from "lucide-react";
@@ -5,7 +6,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import SeoMeta from "@/components/SeoMeta";
-import posts from "@/data/posts.json";
+import { supabase } from "@/lib/supabase";
 
 interface PostItem {
   id: string;
@@ -33,9 +34,26 @@ const categoryColors: Record<string, string> = {
 };
 
 const Blog = () => {
-  const allPosts = (posts as PostItem[]).sort(
-    (a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime()
-  );
+  const [allPosts, setAllPosts] = useState<PostItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("posts")
+          .select("*")
+          .order("publishedAt", { ascending: false });
+        if (error) throw error;
+        setAllPosts(data || []);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPosts();
+  }, []);
 
   const featured = allPosts[0];
   const rest = allPosts.slice(1);
@@ -90,8 +108,19 @@ const Blog = () => {
         </section>
 
         <div className="container mx-auto px-4 py-12 md:py-16">
-          {/* Featured Post */}
-          {featured && (
+          {loading ? (
+            <div className="py-20 text-center text-muted-foreground flex flex-col items-center justify-center">
+              <div className="w-8 h-8 border-4 border-gold/30 border-t-gold rounded-full animate-spin mb-4" />
+              <p>Loading articles...</p>
+            </div>
+          ) : allPosts.length === 0 ? (
+            <div className="py-20 text-center text-muted-foreground">
+              <p>No articles found.</p>
+            </div>
+          ) : (
+            <>
+              {/* Featured Post */}
+              {featured && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -206,6 +235,8 @@ const Blog = () => {
               </Link>
             </div>
           </motion.div>
+          </>
+          )}
         </div>
       </main>
 

@@ -1,7 +1,7 @@
 import "lite-youtube-embed/src/lite-yt-embed.css";
 import "lite-youtube-embed/src/lite-yt-embed";
-
-import videos from "@/data/videos.json";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 interface VideoItem {
   videoId: string;
@@ -25,8 +25,28 @@ const formatDate = (isoDate?: string) => {
 };
 
 const VideoGallery = () => {
-  const latestVideos = (videos as VideoItem[]).slice(0, 4);
+  const [latestVideos, setLatestVideos] = useState<VideoItem[]>([]);
+  const [loading, setLoading] = useState(true);
   const youtubeChannelUrl = "https://www.youtube.com/@JupiterFinance8654";
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("videos")
+          .select("*")
+          .order("publishedAt", { ascending: false })
+          .limit(4);
+        if (error) throw error;
+        setLatestVideos(data || []);
+      } catch (error) {
+        console.error("Error fetching videos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchVideos();
+  }, []);
 
   return (
     <section id="videos" className="py-10 md:py-16 bg-background">
@@ -43,11 +63,16 @@ const VideoGallery = () => {
           </p>
         </div>
 
-        {latestVideos.length === 0 ? (
+        {loading ? (
+          <div className="max-w-2xl mx-auto text-center border border-dashed border-border rounded-2xl p-10 bg-card flex flex-col items-center">
+            <div className="w-8 h-8 border-4 border-gold/30 border-t-gold rounded-full animate-spin mb-4" />
+            <p className="text-foreground font-semibold">Loading videos...</p>
+          </div>
+        ) : latestVideos.length === 0 ? (
           <div className="max-w-2xl mx-auto text-center border border-dashed border-border rounded-2xl p-10 bg-card">
-            <p className="text-foreground font-semibold">Video sync is in progress.</p>
+            <p className="text-foreground font-semibold">No videos found.</p>
             <p className="text-muted-foreground mt-2 text-sm">
-              Once the GitHub Action runs, your latest 4 uploads will appear here automatically.
+              Please check back later for new content.
             </p>
           </div>
         ) : (

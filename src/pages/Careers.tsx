@@ -88,7 +88,9 @@ const Careers = () => {
     <div className="min-h-screen bg-slate-50 flex flex-col">
       <SeoMeta 
         title="Careers | Jupiter Finance" 
-        description="Join our team at Jupiter Finance. Enjoy an incentive-based compensation model with unlimited earning potential." 
+        description="Join our team at Jupiter Finance. Enjoy an incentive-based compensation model with unlimited earning potential."
+        keywords="careers, jobs, jupiter finance, financial advisor, mutual fund distributor, insurance agent"
+        canonicalUrl="https://jupiterfastfinance.com/careers"
       />
       <Header />
       

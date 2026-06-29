@@ -17,6 +17,17 @@ if (!supabaseUrl || !supabaseKey) {
 }
 
 // Provide a dummy client or valid empty client to prevent fatal crash if missing
-export const supabase = supabaseUrl && supabaseKey 
-  ? createClient(supabaseUrl, supabaseKey)
-  : createClient('https://placeholder.supabase.co', 'placeholder');
+let client;
+try {
+  if (supabaseUrl && supabaseKey) {
+    client = createClient(supabaseUrl, supabaseKey);
+  } else {
+    client = createClient('https://placeholder.supabase.co', 'placeholder');
+  }
+} catch (error) {
+  console.error("Failed to initialize Supabase client. The URL provided was:", import.meta.env.VITE_SUPABASE_URL);
+  console.error("Error details:", error);
+  client = createClient('https://placeholder.supabase.co', 'placeholder');
+}
+
+export const supabase = client;

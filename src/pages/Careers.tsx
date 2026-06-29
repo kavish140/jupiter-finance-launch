@@ -52,7 +52,7 @@ const Careers = () => {
     setIsSubmitting(true);
 
     try {
-      const payload: Record<string, string | null> = { ...form, status: "pending" };
+      const payload: Record<string, string | null> = { ...form };
       
       // Clean up empty optional fields so Postgres doesn't throw type errors (e.g., date casting)
       if (!payload.dob) payload.dob = null;

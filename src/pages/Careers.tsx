@@ -52,9 +52,17 @@ const Careers = () => {
     setIsSubmitting(true);
 
     try {
+      const payload: Record<string, string | null> = { ...form, status: "pending" };
+      
+      // Clean up empty optional fields so Postgres doesn't throw type errors (e.g., date casting)
+      if (!payload.dob) payload.dob = null;
+      if (!payload.college) payload.college = null;
+      if (!payload.experience) payload.experience = null;
+      if (!payload.email) payload.email = null;
+
       const { error } = await supabase
         .from("job_applications")
-        .insert([form]);
+        .insert([payload]);
 
       if (error) throw error;
 

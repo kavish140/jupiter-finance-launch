@@ -11,6 +11,7 @@ const Header = () => {
   const primaryLinks = [
     { label: "Home", href: "/#home" },
     { label: "Why Us", href: "/#why-us" },
+    { label: "Careers", href: "/careers" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/#contact" },
   ];

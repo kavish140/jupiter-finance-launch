@@ -1,9 +1,10 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ShieldCheck, Lock, UploadCloud, Trash2, Newspaper } from "lucide-react";
+import { ShieldCheck, Lock, UploadCloud, Trash2, Newspaper, Briefcase } from "lucide-react";
 import videos from "@/data/videos.json";
 import posts from "@/data/posts.json";
 import SeoMeta from "@/components/SeoMeta";
+import { supabase } from "@/lib/supabase";
 
 type Status = { type: "idle" | "success" | "error"; message: string };
 
@@ -27,6 +28,19 @@ interface PostItem {
   category?: string;
 }
 
+interface JobApplication {
+  id: string;
+  name: string;
+  dob: string;
+  qualification: string;
+  address: string;
+  college: string;
+  experience: string;
+  mobile: string;
+  email: string;
+  created_at: string;
+}
+
 const Admin = () => {
   const [token, setToken] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
@@ -46,6 +60,8 @@ const Admin = () => {
   });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<Status>({ type: "idle", message: "" });
+  const [jobApplications, setJobApplications] = useState<JobApplication[]>([]);
+  const [isLoadingJobs, setIsLoadingJobs] = useState(false);
   const currentVideos = videos as VideoItem[];
   const currentPosts = posts as PostItem[];
 
@@ -56,11 +72,29 @@ const Admin = () => {
 
     if (isUnlocked) {
       window.sessionStorage.setItem(ADMIN_SESSION_KEY, "true");
+      fetchJobApplications();
       return;
     }
 
     window.sessionStorage.removeItem(ADMIN_SESSION_KEY);
   }, [isUnlocked]);
+
+  const fetchJobApplications = async () => {
+    setIsLoadingJobs(true);
+    try {
+      const { data, error } = await supabase
+        .from("job_applications")
+        .select("*")
+        .order("created_at", { ascending: false });
+      
+      if (error) throw error;
+      setJobApplications(data || []);
+    } catch (err) {
+      console.error("Error fetching job applications:", err);
+    } finally {
+      setIsLoadingJobs(false);
+    }
+  };
 
   const handleUnlock = (e: FormEvent) => {
     e.preventDefault();
@@ -538,6 +572,63 @@ const Admin = () => {
               {status.message}
             </p>
           )}
+
+          <div className="space-y-4 border border-border rounded-xl p-5 mt-8">
+            <h2 className="text-xl font-display font-bold flex items-center gap-2">
+              <Briefcase className="w-5 h-5 text-gold" />
+              Job Applications
+            </h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[800px]">
+                <thead>
+                  <tr className="border-b border-border text-sm text-muted-foreground">
+                    <th className="pb-3 pr-4 font-semibold">Date</th>
+                    <th className="pb-3 pr-4 font-semibold">Name</th>
+                    <th className="pb-3 pr-4 font-semibold">Contact</th>
+                    <th className="pb-3 pr-4 font-semibold">Qualification</th>
+                    <th className="pb-3 font-semibold">Experience</th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm">
+                  {isLoadingJobs ? (
+                    <tr>
+                      <td colSpan={5} className="py-8 text-center text-muted-foreground">
+                        Loading applications...
+                      </td>
+                    </tr>
+                  ) : jobApplications.length === 0 ? (
+                    <tr>
+                      <td colSpan={5} className="py-8 text-center text-muted-foreground">
+                        No applications found.
+                      </td>
+                    </tr>
+                  ) : (
+                    jobApplications.map((app) => (
+                      <tr key={app.id} className="border-b border-border/50 hover:bg-muted/30 transition-colors">
+                        <td className="py-4 pr-4 whitespace-nowrap text-muted-foreground">
+                          {new Date(app.created_at).toLocaleDateString()}
+                        </td>
+                        <td className="py-4 pr-4 font-medium text-foreground">
+                          {app.name}
+                        </td>
+                        <td className="py-4 pr-4">
+                          <div className="text-foreground">{app.mobile}</div>
+                          <div className="text-muted-foreground text-xs">{app.email}</div>
+                        </td>
+                        <td className="py-4 pr-4">
+                          <div className="text-foreground">{app.qualification}</div>
+                          <div className="text-muted-foreground text-xs">{app.college}</div>
+                        </td>
+                        <td className="py-4 text-muted-foreground max-w-[250px] truncate">
+                          {app.experience}
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -21,6 +21,7 @@ const LoanAgainstMutualFunds = lazy(() => import("./pages/LoanAgainstMutualFunds
 const HealthInsurance = lazy(() => import("./pages/HealthInsurance"));
 const LifeInsurance = lazy(() => import("./pages/LifeInsurance"));
 const MutualFundSIP = lazy(() => import("./pages/MutualFundSIP"));
+const Careers = lazy(() => import("./pages/Careers"));
 const Admin = lazy(() => import("./pages/Admin"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -70,6 +71,7 @@ const App = () => (
               <Route path="/loans-in-bhandup" element={<BhandupLoans />} />
               <Route path="/loans-in-ghatkopar" element={<GhatkoparLoans />} />
               <Route path="/loans-in-powai" element={<PowaiLoans />} />
+              <Route path="/careers" element={<Careers />} />
               <Route path="/admin" element={<Admin />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="/services" element={<Navigate to="/" replace />} />

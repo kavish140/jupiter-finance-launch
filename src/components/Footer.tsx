@@ -40,6 +40,7 @@ const Footer = () => {
               <Link to="/life-insurance" className="block text-white/60 hover:text-gold transition-colors">Life Insurance</Link>
               <Link to="/mutual-fund-sip" className="block text-white/60 hover:text-gold transition-colors">Mutual Fund SIPs</Link>
               <Link to="/blog" className="block text-white/60 hover:text-gold transition-colors">Blog</Link>
+              <Link to="/careers" className="block text-white/60 hover:text-gold transition-colors">Careers</Link>
             </div>
           </div>
 

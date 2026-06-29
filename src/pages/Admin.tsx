@@ -508,20 +508,20 @@ const Admin = () => {
                             {jobFilter !== 'hired' && (
                               <button
                                 onClick={() => handleUpdateJobStatus(app.id, 'hired')}
-                                className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg border border-success/30 text-success hover:bg-success/10 transition-colors text-xs font-semibold"
-                                title="Mark as Hired"
+                                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors text-xs font-bold shadow-sm"
+                                title="Hire Applicant"
                               >
-                                <CheckCircle className="w-3.5 h-3.5" />
-                                Hired
+                                <CheckCircle className="w-4 h-4" />
+                                Hire
                               </button>
                             )}
                             {jobFilter !== 'rejected' && (
                               <button
                                 onClick={() => handleUpdateJobStatus(app.id, 'rejected')}
-                                className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg border border-destructive/30 text-destructive hover:bg-destructive/10 transition-colors text-xs font-semibold"
-                                title="Mark as Rejected"
+                                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors text-xs font-bold shadow-sm"
+                                title="Reject Applicant"
                               >
-                                <XCircle className="w-3.5 h-3.5" />
+                                <XCircle className="w-4 h-4" />
                                 Reject
                               </button>
                             )}

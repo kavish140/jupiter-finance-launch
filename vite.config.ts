@@ -20,7 +20,7 @@ export default defineConfig(async ({ mode }) => {
       });
       if (res.ok) {
         const posts = await res.json();
-        blogSlugs = posts.map((post: any) => `/blog/${post.slug}`);
+        blogSlugs = posts.map((post: { slug: string }) => `/blog/${post.slug}`);
       }
     } catch (e) {
       console.error("Failed to fetch blog slugs for sitemap", e);

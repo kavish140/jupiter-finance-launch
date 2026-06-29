@@ -6,6 +6,7 @@ import { z } from "zod";
 import heroBg from "@/assets/hero-bg.jpg";
 import { motion } from "framer-motion";
 import { trackEvent } from "@/hooks/useAnalytics";
+import { Link } from "react-router-dom";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -198,12 +199,12 @@ const HeroSection = () => {
                 <Phone className="w-5 h-5" />
                 Call 9757190200
               </a>
-              <a
-                href="/mulund-mumbai-loans"
+              <Link
+                to="/mulund-mumbai-loans"
                 className="flex items-center gap-3 border border-white/20 bg-white/5 backdrop-blur-sm text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-white/10 hover:-translate-y-1 transition-all duration-300"
               >
                 Explore Local Services
-              </a>
+              </Link>
             </motion.div>
 
             <motion.p 

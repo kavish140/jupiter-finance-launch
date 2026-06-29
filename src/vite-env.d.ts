@@ -2,14 +2,12 @@
 
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface ImportMetaEnv {
 	readonly VITE_ADMIN_PAGE_PASSWORD?: string;
 	readonly VITE_ADMIN_CREDENTIALS?: string;
 }
 
-interface ImportMeta {
-	readonly env: ImportMetaEnv;
-}
 
 declare global {
 	namespace JSX {

@@ -83,7 +83,7 @@ const Careers = () => {
       if (err instanceof Error) {
         errorMessage = err.message;
       } else if (typeof err === "object" && err !== null && "message" in err) {
-        errorMessage = String((err as any).message);
+        errorMessage = String((err as { message: unknown }).message);
       }
       toast.error(errorMessage);
     } finally {

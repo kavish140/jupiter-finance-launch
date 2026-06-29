@@ -26,7 +26,9 @@ const baseRoutes = [
   'health-insurance',
   'life-insurance',
   'mutual-fund-sip',
-  'home_loan' // Keep legacy route for safety
+  'home_loan', // Keep legacy route for safety
+  'careers',
+  'admin'
 ];
 
 async function prerender() {

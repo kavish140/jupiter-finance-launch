@@ -19,6 +19,8 @@ const dynamicRoutes = [
   "/loans-in-bhandup",
   "/loans-in-ghatkopar",
   "/loans-in-powai",
+  "/careers",
+  "/admin",
 ];
 
 // https://vitejs.dev/config/

@@ -15,6 +15,7 @@ import MobileStickyCTA from "@/components/MobileStickyCTA";
 import StructuredData from "@/components/StructuredData";
 import SeoMeta from "@/components/SeoMeta";
 import OfferBanner from "@/components/OfferBanner";
+import HiringBanner from "@/components/HiringBanner";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 
 const Index = () => {
@@ -28,6 +29,7 @@ const Index = () => {
       />
       <StructuredData />
       <OfferBanner />
+      <HiringBanner />
       <Header />
       <HeroSection />
       <PartnerBanks />

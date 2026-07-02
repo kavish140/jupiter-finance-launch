@@ -14,8 +14,6 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import StructuredData from "@/components/StructuredData";
 import SeoMeta from "@/components/SeoMeta";
-import OfferBanner from "@/components/OfferBanner";
-import HiringBanner from "@/components/HiringBanner";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 
 const Index = () => {
@@ -28,8 +26,6 @@ const Index = () => {
         canonicalUrl="https://jupiterfastfinance.com/"
       />
       <StructuredData />
-      <OfferBanner />
-      <HiringBanner />
       <Header />
       <HeroSection />
       <PartnerBanks />

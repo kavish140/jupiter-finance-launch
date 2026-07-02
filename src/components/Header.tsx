@@ -1,12 +1,16 @@
 import { Menu, Phone, ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { trackEvent } from "@/hooks/useAnalytics";
+import OfferBanner from "@/components/OfferBanner";
+import HiringBanner from "@/components/HiringBanner";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const primaryLinks = [
     { label: "Home", href: "/#home" },
@@ -42,6 +46,12 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-2xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] transition-all">
+      {isHomePage && (
+        <div className="flex flex-col w-full">
+          <OfferBanner />
+          <HiringBanner />
+        </div>
+      )}
       <div className="container mx-auto flex items-center justify-between py-3 px-4">
         <Link to="/#home" className="flex items-center gap-2">
           <img src="/favicon.png" alt="Jupiter Finance Logo" className="w-8 h-8 rounded-full" />

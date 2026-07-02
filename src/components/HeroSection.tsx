@@ -161,15 +161,21 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.5 }}
-              className="mb-6 flex justify-center lg:justify-start"
+              className="mb-8 flex justify-center lg:justify-start"
             >
-              <Link 
-                to="/careers" 
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/10 text-gold border border-gold/20 text-sm font-semibold hover:bg-gold/20 hover:border-gold/30 transition-colors backdrop-blur-md"
+              <motion.div
+                animate={{ scale: [1, 1.05, 1], boxShadow: ["0 0 0px rgba(245,158,11,0)", "0 0 25px rgba(245,158,11,0.6)", "0 0 0px rgba(245,158,11,0)"] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="rounded-full"
               >
-                <Briefcase className="w-4 h-4" />
-                We're hiring! Join our team <ArrowRight className="w-3 h-3" />
-              </Link>
+                <Link 
+                  to="/careers" 
+                  className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full gradient-gold text-accent-foreground text-sm md:text-base font-bold shadow-[0_4px_15px_rgba(245,158,11,0.4)] hover:shadow-[0_4px_25px_rgba(245,158,11,0.7)] hover:-translate-y-1 transition-all"
+                >
+                  <Briefcase className="w-5 h-5" />
+                  We're hiring! Join our team <ArrowRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
             </motion.div>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}

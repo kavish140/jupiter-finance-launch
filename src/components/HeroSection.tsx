@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import emailjs from "@emailjs/browser";
-import { Phone, Send } from "lucide-react";
+import { Phone, Send, Briefcase, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -157,6 +157,20 @@ const HeroSection = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center lg:text-left"
           >
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+              className="mb-6 flex justify-center lg:justify-start"
+            >
+              <Link 
+                to="/careers" 
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/10 text-gold border border-gold/20 text-sm font-semibold hover:bg-gold/20 hover:border-gold/30 transition-colors backdrop-blur-md"
+              >
+                <Briefcase className="w-4 h-4" />
+                We're hiring! Join our team <ArrowRight className="w-3 h-3" />
+              </Link>
+            </motion.div>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

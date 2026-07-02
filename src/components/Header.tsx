@@ -5,7 +5,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { trackEvent } from "@/hooks/useAnalytics";
 import OfferBanner from "@/components/OfferBanner";
-import HiringBanner from "@/components/HiringBanner";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -49,7 +48,6 @@ const Header = () => {
       {isHomePage && (
         <div className="flex flex-col w-full">
           <OfferBanner />
-          <HiringBanner />
         </div>
       )}
       <div className="container mx-auto flex items-center justify-between py-3 px-4">

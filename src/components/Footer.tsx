@@ -77,8 +77,13 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-white/10 text-center text-white/40 text-sm">
-          © {new Date().getFullYear()} Jupiter Finance. All rights reserved.
+        <div className="mt-10 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 text-sm">
+          <div>© {new Date().getFullYear()} Jupiter Finance. All rights reserved.</div>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+            <Link to="/privacy-policy" className="hover:text-gold transition-colors">Privacy Policy</Link>
+            <Link to="/terms-and-conditions" className="hover:text-gold transition-colors">Terms & Conditions</Link>
+            <Link to="/disclaimer" className="hover:text-gold transition-colors">Disclaimer</Link>
+          </div>
         </div>
       </div>
     </footer>

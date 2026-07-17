@@ -28,7 +28,10 @@ const baseRoutes = [
   'mutual-fund-sip',
   'home_loan', // Keep legacy route for safety
   'careers',
-  'admin'
+  'admin',
+  'privacy-policy',
+  'terms-and-conditions',
+  'disclaimer'
 ];
 
 async function prerender() {

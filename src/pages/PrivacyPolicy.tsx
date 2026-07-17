@@ -37,13 +37,19 @@ const PrivacyPolicy = () => {
             <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">6. Data Security</h2>
             <p>Reasonable technical and organizational safeguards are used to protect your information. However, no online transmission or storage method is completely secure.</p>
             
-            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">7. Meta & WhatsApp Consent</h2>
-            <p>By submitting any enquiry through our website, Meta Lead Forms, WhatsApp or other channels, you consent to being contacted by phone, SMS, WhatsApp or email regarding your enquiry.</p>
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">7. Meta, WhatsApp & DND Consent</h2>
+            <p>By submitting any enquiry through our website, Meta Lead Forms, WhatsApp or other channels, you consent to being contacted by phone, SMS, WhatsApp or email regarding your enquiry. This authorization overrides any DND (Do Not Disturb) or NDNC registration.</p>
             
-            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">8. Your Rights</h2>
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">8. Third-Party Links</h2>
+            <p>Our website may contain links to third-party websites. We are not responsible for the privacy practices or the content of those external sites.</p>
+            
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">9. Your Rights</h2>
             <p>You may request access, correction or deletion of your personal information where permitted by applicable law.</p>
             
-            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">9. Policy Updates</h2>
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">10. Grievance Officer</h2>
+            <p>In accordance with the Information Technology Act, 2000, if you have any grievances regarding the processing of your personal data, please contact our Grievance Officer at info@jupiterfastfinance.com.</p>
+            
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">11. Policy Updates</h2>
             <p>This policy may be updated periodically.</p>
             
             <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">Contact</h2>

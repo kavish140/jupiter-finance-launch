@@ -22,28 +22,34 @@ const TermsConditions = () => {
             <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">1. Services</h2>
             <p>Jupiter Finance provides loan consultancy and facilitation services for products offered by banks and financial institutions.</p>
             
-            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">2. No Guarantee</h2>
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">2. Zero Upfront Fees</h2>
+            <p>Jupiter Finance does not charge any upfront consultation or processing fees to customers. We are remunerated directly by our partner banks and financial institutions. Please beware of fraudulent calls asking for money on our behalf.</p>
+            
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">3. Communication Consent & DND Override</h2>
+            <p>By submitting your contact details, you authorize Jupiter Finance and its partners to contact you via phone, SMS, WhatsApp, or email regarding your loan inquiry. This authorization overrides any DND (Do Not Disturb) or NDNC registration.</p>
+            
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">4. No Guarantee</h2>
             <p>Submitting an enquiry does not guarantee loan approval or loan amount. Lending decisions rest solely with the respective bank or financial institution.</p>
             
-            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">3. User Responsibilities</h2>
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">5. User Responsibilities</h2>
             <p>You agree to provide accurate and complete information. False or misleading information may result in rejection of your enquiry.</p>
             
-            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">4. Third-Party Lenders</h2>
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">6. Third-Party Lenders</h2>
             <p>Interest rates, fees, eligibility, documentation and other conditions are governed by the lender's policies.</p>
             
-            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">5. Intellectual Property</h2>
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">7. Intellectual Property</h2>
             <p>All website content, branding, graphics and text belong to Jupiter Finance unless otherwise stated.</p>
             
-            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">6. Limitation of Liability</h2>
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">8. Limitation of Liability</h2>
             <p>We are not responsible for lending decisions, delays, rejection of applications or losses arising from reliance on third-party lender decisions.</p>
             
-            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">7. Acceptable Use</h2>
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">9. Acceptable Use</h2>
             <p>You agree not to misuse the website, upload malicious content or attempt unauthorised access.</p>
             
-            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">8. Changes</h2>
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">10. Changes</h2>
             <p>These Terms may be updated without prior notice.</p>
             
-            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">9. Governing Law</h2>
+            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">11. Governing Law</h2>
             <p>These Terms are governed by the laws of India.</p>
             
             <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">Contact</h2>

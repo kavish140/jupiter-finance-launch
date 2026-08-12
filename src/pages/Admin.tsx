@@ -49,6 +49,8 @@ const Admin = () => {
   const [videoUrl, setVideoUrl] = useState("");
   const [videoTitle, setVideoTitle] = useState("");
   const [postTitle, setPostTitle] = useState("");
+  const [postSlug, setPostSlug] = useState("");
+  const [postSlugManuallyEdited, setPostSlugManuallyEdited] = useState(false);
   const [postExcerpt, setPostExcerpt] = useState("");
   const [postContent, setPostContent] = useState("");
   const [postCategory, setPostCategory] = useState("General");
@@ -226,10 +228,11 @@ const Admin = () => {
     setStatus({ type: "idle", message: "" });
 
     try {
-      const slug = postTitle
+      const autoSlug = postTitle
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/(^-|-$)+/g, '');
+      const slug = postSlug.trim() || autoSlug;
 
       const { error } = await supabase.from("posts").insert([{
         id: slug,
@@ -245,6 +248,8 @@ const Admin = () => {
 
       setStatus({ type: "success", message: "Post successfully added." });
       setPostTitle("");
+      setPostSlug("");
+      setPostSlugManuallyEdited(false);
       setPostExcerpt("");
       setPostContent("");
       setPostCategory("General");
@@ -562,7 +567,18 @@ const Admin = () => {
                   <input
                     id="post-title"
                     value={postTitle}
-                    onChange={(e) => setPostTitle(e.target.value)}
+                    onChange={(e) => {
+                      const newTitle = e.target.value;
+                      setPostTitle(newTitle);
+                      if (!postSlugManuallyEdited) {
+                        setPostSlug(
+                          newTitle
+                            .toLowerCase()
+                            .replace(/[^a-z0-9]+/g, '-')
+                            .replace(/(^-|-$)+/g, '')
+                        );
+                      }
+                    }}
                     placeholder="How to improve home loan eligibility"
                     className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold transition-shadow"
                   />
@@ -577,6 +593,56 @@ const Admin = () => {
                     className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold transition-shadow"
                   />
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="post-slug" className="text-sm font-semibold flex items-center gap-2">
+                  URL Slug
+                  <span className="text-xs font-normal text-muted-foreground">(auto-generated from title — edit to override)</span>
+                </label>
+                <div className="flex items-center gap-0 rounded-xl border border-input bg-background focus-within:ring-2 focus-within:ring-gold transition-shadow overflow-hidden">
+                  <span className="px-3 py-3 text-sm text-muted-foreground bg-muted/60 border-r border-input whitespace-nowrap select-none">/blog/</span>
+                  <input
+                    id="post-slug"
+                    value={postSlug}
+                    onChange={(e) => {
+                      const raw = e.target.value
+                        .toLowerCase()
+                        .replace(/[^a-z0-9-]/g, '')
+                        .replace(/--+/g, '-');
+                      setPostSlug(raw);
+                      setPostSlugManuallyEdited(true);
+                    }}
+                    onBlur={() => {
+                      setPostSlug(s => s.replace(/(^-|-$)+/g, ''));
+                    }}
+                    placeholder="how-to-improve-home-loan-eligibility"
+                    className="flex-1 px-3 py-3 bg-transparent focus:outline-none text-sm font-mono"
+                  />
+                  {postSlugManuallyEdited && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setPostSlugManuallyEdited(false);
+                        setPostSlug(
+                          postTitle
+                            .toLowerCase()
+                            .replace(/[^a-z0-9]+/g, '-')
+                            .replace(/(^-|-$)+/g, '')
+                        );
+                      }}
+                      className="px-3 py-2 text-xs text-muted-foreground hover:text-foreground transition-colors border-l border-input bg-muted/60 hover:bg-muted"
+                      title="Reset to auto-generated slug"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+                {postSlug && (
+                  <p className="text-xs text-muted-foreground font-mono truncate">
+                    Preview: <span className="text-gold">jupiterfastfinance.com/blog/{postSlug}</span>
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">

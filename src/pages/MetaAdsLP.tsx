@@ -56,7 +56,7 @@ const benefits = [
   {
     icon: Building2,
     title: "11+ Partner Banks",
-    desc: "SBI, HDFC, ICICI, Kotak, LIC Housing & more — we find you the lowest rate.",
+    desc: "SBI, HDFC, ICICI, Kotak, LIC Housing & more — we compare and find you the most competitive rate.",
   },
   {
     icon: Car,
@@ -99,7 +99,7 @@ const steps = [
   {
     num: "03",
     title: "Sit Back & Get Approved",
-    desc: "We handle documentation, bank follow-ups, and get you the best rate.",
+    desc: "We handle documentation, bank follow-ups, and help you get a better rate than you'd find on your own.",
   },
 ];
 
@@ -311,7 +311,7 @@ const LeadCaptureForm = ({
           Get Your Free Home Loan Quote
         </h2>
         <p className="text-sm text-muted-foreground mb-5">
-          Our advisor calls you within 2 hours — no spam, guaranteed.
+          Our advisor calls you within 2 hours — no spam, ever.
         </p>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name */}
@@ -445,7 +445,7 @@ const MetaAdsLP = () => {
     <div className="min-h-screen bg-background text-foreground">
       <SeoMeta
         title="Best Home Loan Rates in Mulund & Mumbai | Free Service | Jupiter Finance"
-        description="Compare 11+ banks. Get the lowest home loan rate in Mulund and Mumbai. Free doorstep service, fast approval in 12 days. Call 9757190200."
+        description="Compare 11+ banks and find the most competitive home loan rate for your profile in Mulund and Mumbai. Free doorstep service, fast processing in 12 days. Call 9757190200."
         keywords="home loan mulund, home loan mumbai, best home loan rate, home loan advisor mulund, jupiter finance, home loan ad, free home loan consultation"
         canonicalUrl="https://jupiterfastfinance.com/lp/home-loan-ad"
         ogType="website"
@@ -500,16 +500,16 @@ const MetaAdsLP = () => {
                   Mulund & Mumbai's Trusted Home Loan Advisor
                 </p>
                 <h1 className="text-3xl md:text-[2.75rem] lg:text-5xl font-display font-bold text-white leading-tight mb-5">
-                  Stop Paying More.{" "}
+                  Stop Overpaying.{" "}
                   <span className="text-gradient-gold">
-                    Get the Lowest Home Loan Rate
+                    We Negotiate the Lowest Rate You Qualify For
                   </span>{" "}
-                  — Guaranteed.
+                  — No Guesswork.
                 </h1>
                 <p className="text-white/75 text-lg mb-8 max-w-lg">
-                  We compare 11+ banks for you and get you a rate lower than
-                  what you'd get walking into a branch. Free service. No bank
-                  visits. 12-day approval.
+                  We compare 11+ banks and negotiate on your behalf — so you
+                  get the best rate your profile qualifies for. Free service.
+                  No bank visits. 12-day approval.
                 </p>
 
                 {/* Stats bar */}

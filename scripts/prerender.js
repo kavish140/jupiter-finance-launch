@@ -26,6 +26,7 @@ const baseRoutes = [
   'health-insurance',
   'life-insurance',
   'mutual-fund-sip',
+  'msme-loan',
   'home_loan', // Keep legacy route for safety
   'careers',
   'admin',

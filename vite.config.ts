@@ -36,6 +36,7 @@ export default defineConfig(async ({ mode }) => {
     "/health-insurance",
     "/life-insurance",
     "/mutual-fund-sip",
+    "/msme-loan",
     "/mulund-mumbai-loans",
     "/loans-in-thane",
     "/loans-in-bhandup",
@@ -59,8 +60,7 @@ export default defineConfig(async ({ mode }) => {
       Sitemap({
         hostname: "https://jupiterfastfinance.com",
         dynamicRoutes,
-        generateRobotsTxt: true,
-        robots: [{ userAgent: "*", allow: "/" }],
+        generateRobotsTxt: false,
       }),
     ].filter(Boolean),
     resolve: {

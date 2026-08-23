@@ -246,6 +246,13 @@ const LeadCaptureForm = ({
         service: "Home Loan",
         location,
       });
+      // Meta Pixel — fire Lead event on successful form submission
+      if (typeof window.fbq === "function") {
+        window.fbq("track", "Lead", {
+          content_name: "Home Loan Enquiry",
+          content_category: "Home Loan",
+        });
+      }
       toast.success("Thanks! Our advisor will call you within 2 hours.");
       setIsSubmitted(true);
     } catch (error: unknown) {

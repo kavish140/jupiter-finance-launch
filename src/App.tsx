@@ -28,6 +28,7 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsConditions = lazy(() => import("./pages/TermsConditions"));
 const Disclaimer = lazy(() => import("./pages/Disclaimer"));
 const MetaAdsLP = lazy(() => import("./pages/MetaAdsLP"));
+const MsmeLoan = lazy(() => import("./pages/MsmeLoan"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -80,7 +81,8 @@ const App = () => (
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-and-conditions" element={<TermsConditions />} />
               <Route path="/disclaimer" element={<Disclaimer />} />
-              <Route path="/lp/home-loan-ad" element={<MetaAdsLP />} />
+              <Route path="/lp/msme-loan-ad" element={<MetaAdsLP />} />
+              <Route path="/msme-loan" element={<MsmeLoan />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="/services" element={<Navigate to="/" replace />} />
               <Route path="/about" element={<Navigate to="/#about" replace />} />

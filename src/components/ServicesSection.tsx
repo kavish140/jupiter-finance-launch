@@ -1,4 +1,4 @@
-import { Home, Building2, TrendingUp, HeartPulse, Shield, BarChart3, ArrowRight } from "lucide-react";
+import { Home, Building2, TrendingUp, HeartPulse, Shield, BarChart3, Briefcase, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -39,7 +39,14 @@ const services = [
     description: "Start small, grow big. Systematic investment plans designed for long-term wealth building.",
     href: "/mutual-fund-sip",
   },
+  {
+    icon: Briefcase,
+    title: "MSME Loans",
+    description: "Tailored financing solutions for micro, small & medium enterprises. Fuel your business growth with quick approvals and competitive rates.",
+    href: "/msme-loan",
+  },
 ];
+
 
 const containerVariants = {
   hidden: { opacity: 0 },

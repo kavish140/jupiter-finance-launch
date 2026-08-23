@@ -454,7 +454,7 @@ const MetaAdsLP = () => {
         title="Best Home Loan Rates in Mulund & Mumbai | Free Service | Jupiter Finance"
         description="Compare 11+ banks and find the most competitive home loan rate for your profile in Mulund and Mumbai. Free doorstep service, fast processing in 12 days. Call 9757190200."
         keywords="home loan mulund, home loan mumbai, best home loan rate, home loan advisor mulund, jupiter finance, home loan ad, free home loan consultation"
-        canonicalUrl="https://jupiterfastfinance.com/lp/home-loan-ad"
+        canonicalUrl="https://jupiterfastfinance.com/lp/msme-loan-ad"
         ogType="website"
       />
 

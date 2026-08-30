@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState, useRef, useEffect, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import { toast } from "sonner";
@@ -156,6 +156,74 @@ const faqs = [
     a: "Yes! While we are based in Mulund, we serve all of Mumbai, Thane, Bhandup, Ghatkopar, Powai, and surrounding areas.",
   },
 ];
+
+/* ────────────────────────────────────────────── */
+/*  Custom Select (fully themed, no native UI)    */
+/* ────────────────────────────────────────────── */
+const CustomSelect = ({
+  value,
+  onChange,
+  options,
+  placeholder,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  options: string[];
+  placeholder: string;
+}) => {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-background/50 backdrop-blur-md text-foreground focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition text-left flex items-center justify-between"
+      >
+        <span className={value ? "text-foreground" : "text-muted-foreground"}>
+          {value || placeholder}
+        </span>
+        <ChevronDown
+          className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+      {open && (
+        <div className="absolute z-50 w-full mt-1 bg-card border border-white/10 rounded-xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+          {options.map((opt) => (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => {
+                onChange(opt);
+                setOpen(false);
+              }}
+              className={`w-full px-4 py-3 text-left text-sm transition-colors hover:bg-white/10 ${
+                value === opt
+                  ? "text-gold font-semibold bg-gold/10"
+                  : "text-foreground"
+              }`}
+            >
+              {opt}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 /* ────────────────────────────────────────────── */
 /*  Lead Form Component                           */
@@ -381,21 +449,12 @@ const LeadCaptureForm = ({
             <label className="block text-sm font-medium text-foreground/90 mb-1.5">
               Loan Amount Needed *
             </label>
-            <div className="relative">
-              <select
-                value={form.loanAmount}
-                onChange={(e) => update("loanAmount", e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-white/10 bg-background/50 backdrop-blur-md text-foreground focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition appearance-none"
-              >
-                <option value="">Select amount range</option>
-                {loanAmounts.map((a) => (
-                  <option key={a} value={a}>
-                    {a}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
-            </div>
+            <CustomSelect
+              value={form.loanAmount}
+              onChange={(v) => update("loanAmount", v)}
+              options={loanAmounts}
+              placeholder="Select amount range"
+            />
             {errors.loanAmount && (
               <p className="text-destructive text-xs mt-1">
                 {errors.loanAmount}
@@ -407,21 +466,12 @@ const LeadCaptureForm = ({
             <label className="block text-sm font-medium text-foreground/90 mb-1.5">
               Business Type *
             </label>
-            <div className="relative">
-              <select
-                value={form.businessType}
-                onChange={(e) => update("businessType", e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-white/10 bg-background/50 backdrop-blur-md text-foreground focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition appearance-none"
-              >
-                <option value="">Select business type</option>
-                {businessTypes.map((t) => (
-                  <option key={t} value={t}>
-                    {t}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
-            </div>
+            <CustomSelect
+              value={form.businessType}
+              onChange={(v) => update("businessType", v)}
+              options={businessTypes}
+              placeholder="Select business type"
+            />
             {errors.businessType && (
               <p className="text-destructive text-xs mt-1">
                 {errors.businessType}
@@ -433,21 +483,12 @@ const LeadCaptureForm = ({
             <label className="block text-sm font-medium text-foreground/90 mb-1.5">
               Business Vintage *
             </label>
-            <div className="relative">
-              <select
-                value={form.businessVintage}
-                onChange={(e) => update("businessVintage", e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-white/10 bg-background/50 backdrop-blur-md text-foreground focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition appearance-none"
-              >
-                <option value="">Select business vintage</option>
-                {businessVintages.map((v) => (
-                  <option key={v} value={v}>
-                    {v}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
-            </div>
+            <CustomSelect
+              value={form.businessVintage}
+              onChange={(v) => update("businessVintage", v)}
+              options={businessVintages}
+              placeholder="Select business vintage"
+            />
             {errors.businessVintage && (
               <p className="text-destructive text-xs mt-1">
                 {errors.businessVintage}

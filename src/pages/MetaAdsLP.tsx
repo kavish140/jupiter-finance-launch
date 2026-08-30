@@ -44,10 +44,10 @@ type LeadForm = {
 /*  Data                                          */
 /* ────────────────────────────────────────────── */
 const loanAmounts = [
-  "Under ₹20 Lakh",
-  "₹20 – 50 Lakh",
-  "₹50 Lakh – 1 Crore",
-  "Above ₹1 Crore",
+  "Under ₹10 Lakh",
+  "₹10 – 25 Lakh",
+  "₹25 – 50 Lakh",
+  "Above ₹50 Lakh",
 ];
 
 const employmentTypes = ["Salaried", "Self-Employed / Business"];
@@ -55,33 +55,33 @@ const employmentTypes = ["Salaried", "Self-Employed / Business"];
 const benefits = [
   {
     icon: Building2,
-    title: "11+ Partner Banks",
-    desc: "SBI, HDFC, ICICI, Kotak, LIC Housing & more — we compare and find you the most competitive rate.",
+    title: "15+ Lending Partners",
+    desc: "SBI, HDFC, ICICI, Axis, Bajaj Finserv & more — we match your business profile to the lender offering the lowest rate.",
+  },
+  {
+    icon: FileCheck,
+    title: "Collateral-Free Options",
+    desc: "Loans up to ₹50 Lakh available without mortgage under CGTMSE. We identify the right scheme for your business.",
+  },
+  {
+    icon: Clock,
+    title: "Disbursal in 7–10 Days",
+    desc: "Pre-screened applications mean faster approvals. Most MSME loans are disbursed within 7–10 working days.",
   },
   {
     icon: Car,
     title: "Doorstep Service",
-    desc: "We come to your home or office. Zero bank visits needed.",
-  },
-  {
-    icon: Clock,
-    title: "Sanction in 12 Days",
-    desc: "Pre-checked files mean faster processing. Average: 12–15 working days.",
-  },
-  {
-    icon: FileCheck,
-    title: "100% Free Service",
-    desc: "No fees, no hidden charges. We're paid by the bank, not you.",
+    desc: "We visit your business premises. Zero branch visits needed — from application to disbursal.",
   },
   {
     icon: Shield,
-    title: "CIBIL Score Guidance",
-    desc: "We'll help improve your score before applying for the best rate.",
+    title: "100% Free Advisory",
+    desc: "No consultation fees, no hidden charges. We are compensated by the lender — not by you.",
   },
   {
     icon: CheckCircle2,
     title: "Max Loan Eligibility",
-    desc: "We structure your file to get the highest possible sanction amount.",
+    desc: "We structure your ITR, GST returns, and bank statements to get you the highest possible sanction.",
   },
 ];
 
@@ -89,57 +89,57 @@ const steps = [
   {
     num: "01",
     title: "Submit Your Details",
-    desc: "Fill the form above — takes 30 seconds.",
+    desc: "Fill the form above — takes 30 seconds. Tell us your loan requirement and business type.",
   },
   {
     num: "02",
-    title: "Get a Free Callback",
-    desc: "Our advisor calls you within 2 hours with your eligibility estimate.",
+    title: "Free Eligibility Call",
+    desc: "Our MSME loan advisor calls you within 2 hours, assesses your ITR/GST profile, and tells you exactly how much you qualify for.",
   },
   {
     num: "03",
-    title: "Sit Back & Get Approved",
-    desc: "We handle documentation, bank follow-ups, and help you get a better rate than you'd find on your own.",
+    title: "Get Funded Fast",
+    desc: "We handle documentation, lender comparison, and follow-up. Most clients receive funds in 7–10 working days.",
   },
 ];
 
 const testimonials = [
   {
-    name: "Rajesh Mehta",
+    name: "Suresh Patel",
     location: "Mulund West",
-    text: "Jupiter Finance got me a rate 0.3% lower than what HDFC offered me directly. Saved me over ₹2 lakh on my home loan!",
+    text: "I needed working capital urgently. Jupiter Finance got my MSME loan of ₹18 Lakh approved in just 9 days — completely hassle-free!",
     rating: 5,
   },
   {
-    name: "Priya Sharma",
+    name: "Meena Joshi",
     location: "Thane",
-    text: "I was worried about my CIBIL score, but their team guided me step by step. Got approved in just 12 days!",
+    text: "They helped me get a collateral-free business loan under CGTMSE. I didn't even know such schemes existed. Excellent guidance!",
     rating: 5,
   },
   {
-    name: "Amit Desai",
-    location: "Mulund East",
-    text: "Completely free service with doorstep document pickup. I didn't have to visit the bank even once. Highly recommend!",
+    name: "Ravi Desai",
+    location: "Bhandup",
+    text: "The team structured my GST returns and ITR perfectly. Got sanctioned for ₹32 Lakh at a rate better than my bank offered directly.",
     rating: 5,
   },
 ];
 
 const faqs = [
   {
-    q: "Is your service really free?",
-    a: "Yes, 100%. We are paid a referral commission by the lending bank/NBFC. You pay absolutely nothing for our consultation, documentation support, or lender comparison.",
+    q: "Who is eligible for an MSME loan?",
+    a: "Any registered business — proprietorship, partnership, LLP, or Pvt Ltd — with at least 1–2 years of business vintage and ITR/GST filing history can apply. Startups may qualify under select government schemes.",
   },
   {
-    q: "What is the minimum CIBIL score needed?",
-    a: "Most banks prefer 700+. A score of 750+ gets you the best rates. We also work with select lenders who consider applications with scores as low as 620.",
+    q: "Can I get a loan without collateral?",
+    a: "Yes. Under the CGTMSE scheme, collateral-free MSME loans up to ₹50 Lakh are available from most partner banks. We identify the right scheme based on your profile.",
   },
   {
-    q: "How much home loan can I get?",
-    a: "It depends on your income, existing EMIs, and CIBIL score. On a ₹60,000/month salary with no EMIs, you can typically borrow ₹26–31 lakh over 20 years. Adding a co-applicant increases this significantly.",
+    q: "What documents are required?",
+    a: "Typically: KYC (Aadhaar + PAN), business registration proof, last 2 years ITR with computation, last 6 months bank statements, and GST returns. We guide you through the entire checklist.",
   },
   {
     q: "Do you serve areas outside Mulund?",
-    a: "Yes! While we're based in Mulund, we serve all of Mumbai, Thane, Bhandup, Ghatkopar, Powai, and surrounding areas.",
+    a: "Yes! While we are based in Mulund, we serve all of Mumbai, Thane, Bhandup, Ghatkopar, Powai, and surrounding areas.",
   },
 ];
 
@@ -209,7 +209,7 @@ const LeadCaptureForm = ({
         from_name: form.name,
         phone: form.phone,
         email: safeEmail,
-        service: "Home Loan",
+        service: "MSME Loan",
         message: `[Meta Ad Lead] Loan Amount: ${form.loanAmount} | Employment: ${form.employmentType}`,
         page_url: window.location.href,
         submitted_at: new Date().toISOString(),
@@ -243,14 +243,14 @@ const LeadCaptureForm = ({
 
       trackEvent("form_submit", {
         form: "meta_ads_lp",
-        service: "Home Loan",
+        service: "MSME Loan",
         location,
       });
       // Meta Pixel — fire Lead event on successful form submission
       if (typeof window.fbq === "function") {
         window.fbq("track", "Lead", {
-          content_name: "Home Loan Enquiry",
-          content_category: "Home Loan",
+          content_name: "MSME Loan Enquiry",
+          content_category: "MSME Loan",
         });
       }
       toast.success("Thanks! Our advisor will call you within 2 hours.");
@@ -284,7 +284,7 @@ const LeadCaptureForm = ({
           You're All Set!
         </h3>
         <p className="text-muted-foreground mb-6">
-          Our home loan advisor will call you within 2 hours with your
+          Our MSME loan advisor will call you within 2 hours with your
           personalised eligibility estimate.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -323,7 +323,7 @@ const LeadCaptureForm = ({
       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
       <div className="relative z-10">
         <h2 className="text-xl font-display font-bold text-foreground mb-1">
-          Get Your Free Home Loan Quote
+          Get Your Free MSME Loan Quote
         </h2>
         <p className="text-sm text-muted-foreground mb-5">
           Our advisor calls you within 2 hours — no spam, ever.
@@ -459,9 +459,9 @@ const MetaAdsLP = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoMeta
-        title="Best Home Loan Rates in Mulund & Mumbai | Free Service | Jupiter Finance"
-        description="Compare 11+ banks and find the most competitive home loan rate for your profile in Mulund and Mumbai. Free doorstep service, fast processing in 12 days. Call 9757190200."
-        keywords="home loan mulund, home loan mumbai, best home loan rate, home loan advisor mulund, jupiter finance, home loan ad, free home loan consultation"
+        title="MSME Business Loans in Mulund & Mumbai | Free Advisory | Jupiter Finance"
+        description="Get an MSME business loan from 15+ lenders including SBI, HDFC, ICICI & Bajaj Finserv. Collateral-free options up to ₹50 Lakh. Free doorstep service, disbursal in 7–10 days. Call 9757190200."
+        keywords="msme loan mulund, business loan mumbai, msme loan advisor, collateral free business loan, working capital loan mulund, jupiter finance msme, msme loan fast approval"
         canonicalUrl="https://jupiterfastfinance.com/lp/msme-loan-ad"
         ogType="website"
       />
@@ -512,26 +512,26 @@ const MetaAdsLP = () => {
                 transition={{ duration: 0.7 }}
               >
                 <p className="text-sm font-semibold tracking-widest uppercase text-gold mb-4">
-                  Mulund & Mumbai's Trusted Home Loan Advisor
+                  Mulund & Mumbai's Trusted MSME Loan Advisor
                 </p>
                 <h1 className="text-3xl md:text-[2.75rem] lg:text-5xl font-display font-bold text-white leading-tight mb-5">
-                  Stop Overpaying.{" "}
+                  Fund Your Business.{" "}
                   <span className="text-gradient-gold">
-                    We Negotiate the Lowest Rate You Qualify For
+                    Get the Lowest MSME Loan Rate You Qualify For
                   </span>{" "}
                   — No Guesswork.
                 </h1>
                 <p className="text-white/75 text-lg mb-8 max-w-lg">
-                  We compare 11+ banks and negotiate on your behalf — so you
-                  get the best rate your profile qualifies for. Free service.
-                  No bank visits. 12-day approval.
+                  We compare 15+ banks & NBFCs and negotiate on your behalf —
+                  collateral-free options available. Free service. No branch
+                  visits. Disbursal in 7–10 days.
                 </p>
 
                 {/* Stats bar */}
                 <div className="grid grid-cols-3 gap-4 mb-8">
                   {[
                     { value: "25+", label: "Years Experience" },
-                    { value: "11+", label: "Partner Banks" },
+                    { value: "15+", label: "Lending Partners" },
                     { value: "2,000+", label: "Happy Clients" },
                   ].map((s) => (
                     <div key={s.label} className="text-center">
@@ -546,7 +546,7 @@ const MetaAdsLP = () => {
                 {/* Trust pills */}
                 <div className="flex flex-wrap gap-2">
                   {[
-                    "Free Doorstep Collection",
+                    "Collateral-Free Options",
                     "SBI, HDFC, ICICI & More",
                     "Zero Hidden Fees",
                   ].map((t) => (
@@ -579,7 +579,7 @@ const MetaAdsLP = () => {
             <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12 text-sm text-muted-foreground">
               <span className="flex items-center gap-2 font-medium">
                 <CheckCircle2 className="w-4 h-4 text-gold" /> Trusted by
-                2,000+ families
+                2,000+ businesses
               </span>
               <span className="flex items-center gap-2 font-medium">
                 <Star className="w-4 h-4 text-gold fill-gold" /> 4.9/5 Google
@@ -587,7 +587,7 @@ const MetaAdsLP = () => {
               </span>
               <span className="flex items-center gap-2 font-medium">
                 <Building2 className="w-4 h-4 text-gold" /> SBI · HDFC · ICICI
-                · Kotak · LIC Housing
+                · Axis · Bajaj Finserv
               </span>
             </div>
           </div>
@@ -598,10 +598,10 @@ const MetaAdsLP = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-10 md:mb-14">
               <p className="text-sm font-semibold tracking-widest uppercase text-gold mb-3">
-                Why 2,000+ Families Choose Us
+                Why 2,000+ Businesses Choose Us
               </p>
               <h2 className="text-2xl md:text-4xl font-display font-bold text-foreground">
-                Your Unfair Advantage in Home Loans
+                Your Unfair Advantage in MSME Loans
               </h2>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
@@ -633,7 +633,7 @@ const MetaAdsLP = () => {
                 Simple Process
               </p>
               <h2 className="text-2xl md:text-4xl font-display font-bold text-foreground">
-                3 Steps to Your Dream Home
+                3 Steps to Fund Your Business
               </h2>
             </div>
             <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -782,14 +782,14 @@ const MetaAdsLP = () => {
                 viewport={{ once: true }}
                 className="text-center lg:text-left"
               >
-                <span className="text-5xl block mb-4">🏠</span>
+                <span className="text-5xl block mb-4">🏢</span>
                 <h2 className="text-2xl md:text-4xl font-display font-bold text-white mb-4">
-                  Your dream home is closer than you think
+                  Your business growth is one call away
                 </h2>
                 <p className="text-white/70 mb-6">
-                  One free call is all it takes. We handle the lender
-                  comparison, documentation, and follow-up — you just pick your
-                  home.
+                  One free call is all it takes. We handle lender comparison,
+                  documentation, and follow-up — you focus on running your
+                  business.
                 </p>
                 <div className="flex flex-wrap justify-center lg:justify-start gap-4">
                   <a

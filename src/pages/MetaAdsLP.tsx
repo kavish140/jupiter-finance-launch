@@ -298,6 +298,14 @@ const LeadCaptureForm = ({
             href="https://wa.me/919757190200?text=Hi%2C%20I%20just%20submitted%20an%20MSME%20loan%20enquiry%20from%20your%20ad.%20Please%20help%20me."
             target="_blank"
             rel="noreferrer"
+            onClick={() => {
+              if (typeof window.fbq === "function") {
+                window.fbq("track", "Contact", {
+                  content_name: "WhatsApp – Post Submission",
+                  content_category: "MSME Loan Ad LP",
+                });
+              }
+            }}
             className="flex items-center justify-center gap-2 border border-white/20 bg-white/5 text-foreground font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition-all"
           >
             <SiWhatsapp className="w-4 h-4" /> WhatsApp Us
@@ -799,6 +807,14 @@ const MetaAdsLP = () => {
                     href="https://wa.me/919757190200?text=Hi%2C%20I%20saw%20your%20MSME%20loan%20ad.%20Please%20help%20me%20with%20the%20best%20rate."
                     target="_blank"
                     rel="noreferrer"
+                    onClick={() => {
+                      if (typeof window.fbq === "function") {
+                        window.fbq("track", "Contact", {
+                          content_name: "WhatsApp – Bottom CTA",
+                          content_category: "MSME Loan Ad LP",
+                        });
+                      }
+                    }}
                     className="flex items-center gap-2 border border-white/20 bg-white/5 text-white font-semibold px-8 py-4 rounded-xl text-base hover:bg-white/10 transition-all"
                   >
                     <SiWhatsapp className="w-4 h-4" /> WhatsApp Us
@@ -868,9 +884,15 @@ const MetaAdsLP = () => {
           href="https://wa.me/919757190200?text=Hi%2C%20I%20saw%20your%20MSME%20loan%20ad.%20Please%20help%20me."
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() =>
-            trackEvent("whatsapp_click", { location: "meta_lp_mobile_sticky" })
-          }
+          onClick={() => {
+              trackEvent("whatsapp_click", { location: "meta_lp_mobile_sticky" });
+              if (typeof window.fbq === "function") {
+                window.fbq("track", "Contact", {
+                  content_name: "WhatsApp – Mobile Sticky",
+                  content_category: "MSME Loan Ad LP",
+                });
+              }
+            }}
           className="flex-1 flex items-center justify-center gap-2 py-4 bg-success text-white font-bold text-sm"
         >
           <SiWhatsapp className="w-5 h-5" />
@@ -883,9 +905,15 @@ const MetaAdsLP = () => {
         href="https://wa.me/919757190200?text=Hi%2C%20I%20saw%20your%20MSME%20loan%20ad.%20Please%20help%20me%20with%20the%20best%20rate."
         target="_blank"
         rel="noopener noreferrer"
-        onClick={() =>
-          trackEvent("whatsapp_click", { location: "meta_lp_desktop_floating" })
-        }
+        onClick={() => {
+          trackEvent("whatsapp_click", { location: "meta_lp_desktop_floating" });
+          if (typeof window.fbq === "function") {
+            window.fbq("track", "Contact", {
+              content_name: "WhatsApp – Desktop Floating",
+              content_category: "MSME Loan Ad LP",
+            });
+          }
+        }}
         className="hidden md:flex fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-success items-center justify-center shadow-lg hover:scale-110 transition-transform animate-float"
         aria-label="Chat on WhatsApp"
       >

@@ -295,7 +295,7 @@ const LeadCaptureForm = ({
             <Phone className="w-4 h-4" /> Call Now Instead
           </a>
           <a
-            href="https://wa.me/919757190200?text=Hi%2C%20I%20just%20submitted%20a%20home%20loan%20enquiry%20from%20your%20ad.%20Please%20help%20me."
+            href="https://wa.me/919757190200?text=Hi%2C%20I%20just%20submitted%20an%20MSME%20loan%20enquiry%20from%20your%20ad.%20Please%20help%20me."
             target="_blank"
             rel="noreferrer"
             className="flex items-center justify-center gap-2 border border-white/20 bg-white/5 text-foreground font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition-all"
@@ -796,7 +796,7 @@ const MetaAdsLP = () => {
                     <Phone className="w-5 h-5" /> Call 9757190200
                   </a>
                   <a
-                    href="https://wa.me/919757190200?text=Hi%2C%20I%20saw%20your%20home%20loan%20ad.%20Please%20help%20me%20with%20the%20best%20rate."
+                    href="https://wa.me/919757190200?text=Hi%2C%20I%20saw%20your%20MSME%20loan%20ad.%20Please%20help%20me%20with%20the%20best%20rate."
                     target="_blank"
                     rel="noreferrer"
                     className="flex items-center gap-2 border border-white/20 bg-white/5 text-white font-semibold px-8 py-4 rounded-xl text-base hover:bg-white/10 transition-all"
@@ -865,7 +865,7 @@ const MetaAdsLP = () => {
           Call Now
         </a>
         <a
-          href="https://wa.me/919757190200?text=Hi%2C%20I%20saw%20your%20home%20loan%20ad.%20Please%20help%20me."
+          href="https://wa.me/919757190200?text=Hi%2C%20I%20saw%20your%20MSME%20loan%20ad.%20Please%20help%20me."
           target="_blank"
           rel="noopener noreferrer"
           onClick={() =>
@@ -880,7 +880,7 @@ const MetaAdsLP = () => {
 
       {/* Desktop WhatsApp floating button */}
       <a
-        href="https://wa.me/919757190200?text=Hi%2C%20I%20saw%20your%20home%20loan%20ad.%20Please%20help%20me%20with%20the%20best%20rate."
+        href="https://wa.me/919757190200?text=Hi%2C%20I%20saw%20your%20MSME%20loan%20ad.%20Please%20help%20me%20with%20the%20best%20rate."
         target="_blank"
         rel="noopener noreferrer"
         onClick={() =>

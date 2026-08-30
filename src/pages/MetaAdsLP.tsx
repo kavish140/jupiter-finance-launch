@@ -30,14 +30,16 @@ const leadSchema = z.object({
     .trim()
     .regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit mobile number"),
   loanAmount: z.string().min(1, "Select a loan amount"),
-  employmentType: z.string().min(1, "Select employment type"),
+  businessType: z.string().min(1, "Select business type"),
+  businessVintage: z.string().min(1, "Select business vintage"),
 });
 
 type LeadForm = {
   name: string;
   phone: string;
   loanAmount: string;
-  employmentType: string;
+  businessType: string;
+  businessVintage: string;
 };
 
 /* ────────────────────────────────────────────── */
@@ -50,7 +52,19 @@ const loanAmounts = [
   "Above ₹50 Lakh",
 ];
 
-const employmentTypes = ["Salaried", "Self-Employed / Business"];
+const businessTypes = [
+  "Proprietorship",
+  "Partnership",
+  "Private Limited Company",
+  "LLP",
+  "Other",
+];
+
+const businessVintages = [
+  "Less than 1 year",
+  "1–3 years",
+  "3+ years",
+];
 
 const benefits = [
   {
@@ -159,7 +173,8 @@ const LeadCaptureForm = ({
     name: "",
     phone: "",
     loanAmount: "",
-    employmentType: "",
+    businessType: "",
+    businessVintage: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -210,7 +225,7 @@ const LeadCaptureForm = ({
         phone: form.phone,
         email: safeEmail,
         service: "MSME Loan",
-        message: `[Meta Ad Lead] Loan Amount: ${form.loanAmount} | Employment: ${form.employmentType}`,
+        message: `[Meta Ad Lead] Loan Amount: ${form.loanAmount} | Business Type: ${form.businessType} | Vintage: ${form.businessVintage}`,
         page_url: window.location.href,
         submitted_at: new Date().toISOString(),
       };
@@ -387,30 +402,55 @@ const LeadCaptureForm = ({
               </p>
             )}
           </div>
-          {/* Employment */}
+          {/* Business Type */}
           <div>
             <label className="block text-sm font-medium text-foreground/90 mb-1.5">
-              Employment Type *
+              Business Type *
             </label>
-            <div className="grid grid-cols-2 gap-3">
-              {employmentTypes.map((t) => (
-                <button
-                  key={t}
-                  type="button"
-                  onClick={() => update("employmentType", t)}
-                  className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
-                    form.employmentType === t
-                      ? "border-gold bg-gold/10 text-foreground ring-2 ring-gold/30"
-                      : "border-white/10 bg-background/50 text-foreground/70 hover:border-white/20"
-                  }`}
-                >
-                  {t}
-                </button>
-              ))}
+            <div className="relative">
+              <select
+                value={form.businessType}
+                onChange={(e) => update("businessType", e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-white/10 bg-background/50 backdrop-blur-md text-foreground focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition appearance-none"
+              >
+                <option value="">Select business type</option>
+                {businessTypes.map((t) => (
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
             </div>
-            {errors.employmentType && (
+            {errors.businessType && (
               <p className="text-destructive text-xs mt-1">
-                {errors.employmentType}
+                {errors.businessType}
+              </p>
+            )}
+          </div>
+          {/* Business Vintage */}
+          <div>
+            <label className="block text-sm font-medium text-foreground/90 mb-1.5">
+              Business Vintage *
+            </label>
+            <div className="relative">
+              <select
+                value={form.businessVintage}
+                onChange={(e) => update("businessVintage", e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-white/10 bg-background/50 backdrop-blur-md text-foreground focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition appearance-none"
+              >
+                <option value="">Select business vintage</option>
+                {businessVintages.map((v) => (
+                  <option key={v} value={v}>
+                    {v}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+            </div>
+            {errors.businessVintage && (
+              <p className="text-destructive text-xs mt-1">
+                {errors.businessVintage}
               </p>
             )}
           </div>

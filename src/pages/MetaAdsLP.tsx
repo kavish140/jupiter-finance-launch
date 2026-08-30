@@ -463,6 +463,7 @@ const MetaAdsLP = () => {
         description="Get an MSME business loan from 15+ lenders including SBI, HDFC, ICICI & Bajaj Finserv. Collateral-free options up to ₹50 Lakh. Free doorstep service, disbursal in 7–10 days. Call 9757190200."
         keywords="msme loan mulund, business loan mumbai, msme loan advisor, collateral free business loan, working capital loan mulund, jupiter finance msme, msme loan fast approval"
         canonicalUrl="https://jupiterfastfinance.com/lp/msme-loan-ad"
+        robots="noindex,nofollow"
         ogType="website"
       />
 

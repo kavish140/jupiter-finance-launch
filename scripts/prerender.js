@@ -32,8 +32,16 @@ const baseRoutes = [
   'admin',
   'privacy-policy',
   'terms-and-conditions',
-  'disclaimer'
+  'disclaimer',
+  'lp/msme-loan-ad', // Ad landing page — prerendered for speed but excluded from sitemap
 ];
+
+// Routes that should NOT appear in sitemap.xml
+const sitemapExcludeRoutes = new Set([
+  'home_loan',       // legacy redirect
+  'admin',           // internal
+  'lp/msme-loan-ad', // ad LP — noindex
+]);
 
 async function prerender() {
   if (!fs.existsSync(indexHtmlPath)) {
@@ -133,8 +141,8 @@ async function prerender() {
 
         fs.writeFileSync(targetHtmlPath, html);
 
-        // Add to sitemap
-        if (cleanRoute !== 'home_loan') {
+        // Add to sitemap — skip routes marked as excluded (noindex, admin, legacy)
+        if (!sitemapExcludeRoutes.has(cleanRoute)) {
           const priority = cleanRoute === '' ? '1.0' : '0.8';
           sitemapContent += `  <url>\n    <loc>https://jupiterfastfinance.com/${cleanRoute}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>${priority}</priority>\n  </url>\n`;
         }
